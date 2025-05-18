@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Calendario</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <link href="estilos_calendario_Admin.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Menú lateral -->
+    <nav class="sidebar">
+        <div class="logo">
+            <a href="admin.html">
+              <img src="logo.png" alt="Campus Connect">
+            </a>
+          </div>
+            
+            <div class="user-info">
+                <h3>Administrador del Sistema</h3>
+                <p>admin@campusconnect.edu</p>
+            </div>
+            
+            <ul class="menu">
+                <li><a href="admin.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+                <li><a href="solicitudes.html"><i class="fas fa-inbox"></i>Solicitudes</a></li>
+                <li><a href="usuarios.html"><i class="fas fa-users"></i>Usuarios</a></li>
+                <li><a href="unidades.html"><i class="fas fa-building"></i>Unidades</a></li>
+                <li><a href="reportes.html"><i class="fas fa-chart-bar"></i>Reportes</a></li>
+                <li><a href="configuracion.html"><i class="fas fa-cog"></i>Configuración</a></li>
+                <li><a href="calendarioadmin.html"><i class="fas fa-calendar-alt"></i>Calendario</a></li>
+            </ul>
+        </div>
+        <button class="logout-button" onclick="location.href='index.html'">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </button>
+          
+        <div class="udem-logo">
+            <img src="universidad.jpg" alt="Universidad de Medellín">
+          </div>
+
+    </nav>
+
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <span class="university-badge">
+            <i class="fas fa-university"></i> Universidad de Medellín
+        </span>
+  
+        <div class="header">
+            <h1><i class="fas fa-calendar-alt"></i> Calendario de Actividades</h1>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="add-event-btn">
+                    <i class="fas fa-plus"></i> Nuevo Evento
+                </button>
+            </div>
+        </div>
+
+        <!-- Calendario -->
+        <div class="calendar-container">
+            <div id="calendar"></div>
+        </div>
+    </div>
+
+    <!-- Modal de evento -->
+    <div class="event-modal" id="event-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Detalles del Evento</h3>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="event-details" id="event-details">
+                <p><strong>Tipo:</strong> <span id="event-type"></span></p>
+                <p><strong>Fecha:</strong> <span id="event-date"></span></p>
+                <p><strong>Hora:</strong> <span id="event-time"></span></p>
+                <p><strong>Descripción:</strong> <span id="event-description"></span></p>
+                <p><strong>Ubicación:</strong> <span id="event-location"></span></p>
+                <p><strong>Participantes:</strong> <span id="event-participants"></span></p>
+                <p><strong>Prioridad:</strong> <span id="event-priority"></span></p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="edit-event">
+                    <i class="fas fa-edit"></i> Editar
+                </button>
+                <button class="btn btn-primary" id="close-modal-btn">
+                    <i class="fas fa-check"></i> Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar calendario
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                firstDay: 1, 
+                navLinks: true, 
+                editable: true,
+                dayMaxEvents: true, 
+                eventDisplay: 'block',
+                events: [
+                   
+                    {
+                        title: 'Revisión solicitudes pendientes',
+                        start: new Date(new Date().setHours(10, 0, 0)),
+                        end: new Date(new Date().setHours(11, 30, 0)),
+                        className: 'fc-event-review',
+                        description: 'Revisar y responder a las solicitudes de reserva pendientes de la semana. Verificar especialmente las solicitudes de laboratorios para prácticas.',
+                        location: 'Oficina Administrativa, Edificio Principal',
+                        participants: 'Administrador del Sistema',
+                        priority: 'Alta'
+                    },
+                    {
+                        title: 'Reunión con Decanato',
+                        start: new Date(new Date().setDate(new Date().getDate() + 2)),
+                        start: new Date(new Date().setDate(new Date().getDate() + 2)),
+                        end: new Date(new Date().setDate(new Date().getDate() + 2)),
+                        startStr: new Date(new Date().setDate(new Date().getDate() + 2)).toISOString().split('T')[0] + 'T15:00:00',
+                        endStr: new Date(new Date().setDate(new Date().getDate() + 2)).toISOString().split('T')[0] + 'T16:30:00',
+                        className: 'fc-event-meeting',
+                        description: 'Presentación de informe trimestral sobre utilización de espacios académicos y necesidades de mejora en el sistema de reservas.',
+                        location: 'Oficina del Decano, 3er piso',
+                        participants: 'Decano Académico, Jefe de Infraestructura, Administrador del Sistema',
+                        priority: 'Muy Alta'
+                    },
+                    {
+                        title: 'Mantenimiento sistema',
+                        start: new Date(new Date().setDate(new Date().getDate() + 5)),
+                        startStr: new Date(new Date().setDate(new Date().getDate() + 5)).toISOString().split('T')[0] + 'T18:00:00',
+                        endStr: new Date(new Date().setDate(new Date().getDate() + 5)).toISOString().split('T')[0] + 'T20:00:00',
+                        className: 'fc-event-maintenance',
+                        description: 'Actualización programada del sistema de reservas. Se realizará backup completo de la base de datos antes de proceder.',
+                        location: 'Servidores Centrales',
+                        participants: 'Equipo de TI, Administrador del Sistema',
+                        priority: 'Crítica'
+                    },
+                    {
+                        title: 'Reserva Auditorio Principal',
+                        start: new Date(new Date().setDate(new Date().getDate() + 7)),
+                        startStr: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().split('T')[0] + 'T16:00:00',
+                        endStr: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().split('T')[0] + 'T17:00:00',
+                        className: 'fc-event-reservation',
+                        description: 'Reunión con organizadores del Congreso de Ingeniería para confirmar requerimientos técnicos y logísticos del evento.',
+                        location: 'Auditorio Principal, Edificio A',
+                        participants: 'Comité Organizador, Técnico Audiovisual, Administrador',
+                        priority: 'Alta'
+                    },
+                    {
+                        title: 'Enviar recordatorios',
+                        start: new Date(new Date().setDate(new Date().getDate() + 9)),
+                        startStr: new Date(new Date().setDate(new Date().getDate() + 9)).toISOString().split('T')[0] + 'T09:00:00',
+                        endStr: new Date(new Date().setDate(new Date().getDate() + 9)).toISOString().split('T')[0] + 'T10:00:00',
+                        className: 'fc-event-email',
+                        description: 'Enviar correos de confirmación a todos los usuarios con reservas activas para la próxima semana, incluyendo recordatorio de políticas de uso.',
+                        location: 'Oficina Administrativa',
+                        participants: 'Administrador del Sistema',
+                        priority: 'Media'
+                    },
+                    {
+                        title: 'Capacitación nuevo personal',
+                        start: new Date(new Date().setDate(new Date().getDate() + 12)),
+                        startStr: new Date(new Date().setDate(new Date().getDate() + 12)).toISOString().split('T')[0] + 'T11:00:00',
+                        endStr: new Date(new Date().setDate(new Date().getDate() + 12)).toISOString().split('T')[0] + 'T13:00:00',
+                        className: 'fc-event-meeting',
+                        description: 'Sesión de capacitación sobre el uso del sistema de reservas para los nuevos asistentes administrativos de los departamentos.',
+                        location: 'Sala de Capacitación 2, Edificio B',
+                        participants: 'Nuevo personal administrativo, Administrador del Sistema',
+                        priority: 'Alta'
+                    },
+                    {
+                        title: 'Reporte mensual',
+                        start: new Date(new Date().setDate(new Date().getDate() + 15)),
+                        startStr: new Date(new Date().setDate(new Date().getDate() + 15)).toISOString().split('T')[0] + 'T09:00:00',
+                        endStr: new Date(new Date().setDate(new Date().getDate() + 15)).toISOString().split('T')[0] + 'T10:30:00',
+                        className: 'fc-event-report',
+                        description: 'Generación y revisión del reporte mensual de utilización de espacios, incidencias reportadas y métricas de satisfacción.',
+                        location: 'Oficina Administrativa',
+                        participants: 'Administrador del Sistema, Jefe de Infraestructura',
+                        priority: 'Alta'
+                    },
+                    {
+                        title: 'Reserva Laboratorios',
+                        start: new Date(new Date().setDate(new Date().getDate() + 18)),
+                        startStr: new Date(new Date().setDate(new Date().getDate() + 18)).toISOString().split('T')[0] + 'T14:00:00',
+                        endStr: new Date(new Date().setDate(new Date().getDate() + 18)).toISOString().split('T')[0] + 'T15:30:00',
+                        className: 'fc-event-reservation',
+                        description: 'Coordinación con el Departamento de Química para la reserva especial de laboratorios durante las prácticas intensivas.',
+                        location: 'Laboratorios de Ciencias, Edificio D',
+                        participants: 'Jefe de Departamento de Química, Administrador',
+                        priority: 'Media'
+                    },
+                    {
+                        title: 'Revisión equipos audiovisuales',
+                        start: new Date(new Date().setDate(new Date().getDate() + 22)),
+                        startStr: new Date(new Date().setDate(new Date().getDate() + 22)).toISOString().split('T')[0] + 'T13:00:00',
+                        endStr: new Date(new Date().setDate(new Date().getDate() + 22)).toISOString().split('T')[0] + 'T14:30:00',
+                        className: 'fc-event-review',
+                        description: 'Verificación del estado y disponibilidad de equipos audiovisuales para eventos programados en las próximas 2 semanas.',
+                        location: 'Sala de Audiovisuales, Edificio Central',
+                        participants: 'Técnico Audiovisual, Administrador',
+                        priority: 'Media'
+                    },
+                    {
+                        title: 'Enviar encuestas satisfacción',
+                        start: new Date(new Date().setDate(new Date().getDate() + 25)),
+                        startStr: new Date(new Date().setDate(new Date().getDate() + 25)).toISOString().split('T')[0] + 'T14:00:00',
+                        endStr: new Date(new Date().setDate(new Date().getDate() + 25)).toISOString().split('T')[0] + 'T15:00:00',
+                        className: 'fc-event-email',
+                        description: 'Distribución de encuestas de satisfacción a usuarios que realizaron reservas este mes. Incluir preguntas sobre facilidad de uso y sugerencias.',
+                        location: 'Oficina Administrativa',
+                        participants: 'Administrador del Sistema',
+                        priority: 'Baja'
+                    },
+                    {
+                        title: 'Reunión Comité de Eventos',
+                        start: new Date(new Date().setDate(new Date().getDate() + 28)),
+                        startStr: new Date(new Date().setDate(new Date().getDate() + 28)).toISOString().split('T')[0] + 'T10:00:00',
+                        endStr: new Date(new Date().setDate(new Date().getDate() + 28)).toISOString().split('T')[0] + 'T12:00:00',
+                        className: 'fc-event-meeting',
+                        description: 'Planificación de eventos especiales para el próximo trimestre. Discutir requerimientos de espacios, equipos y personal de apoyo.',
+                        location: 'Sala de Juntas 3, Edificio Administrativo',
+                        participants: 'Comité de Eventos, Representantes Estudiantiles, Administrador',
+                        priority: 'Alta'
+                    }
+                ],
+                eventClick: function(info) {
+                    // Mostrar detalles del evento en el modal
+                    document.getElementById('modal-title').textContent = info.event.title;
+                    
+                    // Determinar tipo de evento basado en la clase
+                    const eventType = info.event.classNames[0].replace('fc-event-', '');
+                    const typeNames = {
+                        'meeting': 'Reunión',
+                        'review': 'Revisión',
+                        'email': 'Comunicación',
+                        'reservation': 'Reserva',
+                        'maintenance': 'Mantenimiento',
+                        'report': 'Reporte'
+                    };
+                    document.getElementById('event-type').textContent = typeNames[eventType] || 'Evento';
+                    
+                    // Formatear fecha
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    document.getElementById('event-date').textContent = info.event.start.toLocaleDateString('es-ES', options);
+                    
+                    // Formatear hora si el evento tiene hora
+                    if (info.event.start.getHours()) {
+                        document.getElementById('event-time').textContent = 
+                            info.event.start.toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'}) + ' - ' +
+                            info.event.end.toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'});
+                    } else {
+                        document.getElementById('event-time').textContent = 'Todo el día';
+                    }
+                    
+                    // Mostrar detalles extendidos
+                    document.getElementById('event-description').textContent = info.event.extendedProps.description || 'No hay descripción disponible';
+                    document.getElementById('event-location').textContent = info.event.extendedProps.location || 'No especificada';
+                    document.getElementById('event-participants').textContent = info.event.extendedProps.participants || 'No especificados';
+                    document.getElementById('event-priority').textContent = info.event.extendedProps.priority || 'No especificada';
+                    
+                    // Mostrar modal
+                    document.getElementById('event-modal').style.display = 'flex';
+                },
+                eventContent: function(arg) {
+                    // Personalizar cómo se muestran los eventos en el calendario
+                    let icon = '';
+                    switch(arg.event.classNames[0]) {
+                        case 'fc-event-meeting': icon = '<i class="fas fa-users" style="margin-right: 4px;"></i>'; break;
+                        case 'fc-event-review': icon = '<i class="fas fa-clipboard-check" style="margin-right: 4px;"></i>'; break;
+                        case 'fc-event-email': icon = '<i class="fas fa-envelope" style="margin-right: 4px;"></i>'; break;
+                        case 'fc-event-reservation': icon = '<i class="fas fa-calendar-check" style="margin-right: 4px;"></i>'; break;
+                        case 'fc-event-maintenance': icon = '<i class="fas fa-tools" style="margin-right: 4px;"></i>'; break;
+                        case 'fc-event-report': icon = '<i class="fas fa-file-alt" style="margin-right: 4px;"></i>'; break;
+                        default: icon = '<i class="fas fa-calendar-day" style="margin-right: 4px;"></i>';
+                    }
+                    
+                    return {
+                        html: icon + arg.event.title
+                    };
+                }
+            });
+
+            calendar.render();
+
+            // Manejar el modal
+            const modal = document.getElementById('event-modal');
+            const closeModal = document.getElementById('close-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            closeModalBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // Cerrar modal al hacer clic fuera del contenido
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Botón para agregar nuevo evento
+            document.getElementById('add-event-btn').addEventListener('click', function() {
+                // Crear un evento de ejemplo para demostración
+                const today = new Date();
+                const newEvent = {
+                    title: 'Nueva Reunión',
+                    start: new Date(today.setHours(today.getHours() + 24)),
+                    end: new Date(today.setHours(today.getHours() + 25)),
+                    className: 'fc-event-meeting',
+                    description: 'Esta es una nueva reunión agregada desde el botón. En una implementación real, se abriría un formulario para crear el evento.',
+                    location: 'Por definir',
+                    participants: 'Por confirmar',
+                    priority: 'Media'
+                };
+                
+                calendar.addEvent(newEvent);
+                calendar.refetchEvents();
+                
+                // Simular que se abre el modal para el nuevo evento
+                document.getElementById('modal-title').textContent = newEvent.title;
+                document.getElementById('event-type').textContent = 'Reunión';
+                
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('event-date').textContent = newEvent.start.toLocaleDateString('es-ES', options);
+                document.getElementById('event-time').textContent = 
+                    newEvent.start.toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'}) + ' - ' +
+                    newEvent.end.toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'});
+                
+                document.getElementById('event-description').textContent = newEvent.description;
+                document.getElementById('event-location').textContent = newEvent.location;
+                document.getElementById('event-participants').textContent = newEvent.participants;
+                document.getElementById('event-priority').textContent = newEvent.priority;
+                
+                modal.style.display = 'flex';
+            });
+
+            // Botón para editar evento
+            document.getElementById('edit-event').addEventListener('click', function() {
+                alert('En una implementación completa, aquí se abriría un formulario para editar el evento seleccionado.');
+            });
+        });
+    </script>
+</body>
+</html>

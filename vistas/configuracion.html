@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Configuración</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="estilo_configuracion.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Menú lateral -->
+    <nav class="sidebar">
+        <div>
+            <div class="logo">
+                <a href="admin.html">
+                  <img src="logo.png" alt="Campus Connect">
+                </a>
+              </div>
+            <div class="user-info">
+                <h3>Administrador del Sistema</h3>
+                <p>admin@campusconnect.edu</p>
+            </div>
+            
+            <ul class="menu">
+                <li><a href="admin.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+                <li><a href="solicitudes.html"><i class="fas fa-inbox"></i>Solicitudes</a></li>
+                <li><a href="usuarios.html"><i class="fas fa-users"></i>Usuarios</a></li>
+                <li><a href="unidades.html"><i class="fas fa-building"></i>Unidades</a></li>
+                <li><a href="reportes.html"><i class="fas fa-chart-bar"></i>Reportes</a></li>
+                <li><a href="configuracion.html" class="active"><i class="fas fa-cog"></i>Configuración</a></li>
+                <li><a href="calendarioadmin.html"><i class="fas fa-calendar-alt"></i>Calendario</a></li>
+            </ul>
+        </div>
+        <button class="logout-button" onclick="location.href='index.html'">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </button>
+        <div class="udem-logo">
+            <img src="universidad.jpg" alt="Universidad de Medellín">
+          </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        
+        <span class="university-badge">
+            <i class="fas fa-university"></i> Universidad de Medellín
+        </span>
+  
+        <div class="header">
+            <h1><i class="fas fa-cog"></i> Configuración del Sistema</h1>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar configuración...">
+            </div>
+        </div>
+
+        <div class="settings-container">
+            <!-- Menú de configuración -->
+            <div class="settings-menu">
+                <h3>Opciones de Configuración</h3>
+                <ul>
+                    <li><a href="#" class="active"><i class="fas fa-sliders-h"></i> General</a></li>
+                    <li><a href="#"><i class="fas fa-user-shield"></i> Permisos</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Notificaciones</a></li>
+                    <li><a href="#"><i class="fas fa-paint-brush"></i> Apariencia</a></li>
+                    <li><a href="#"><i class="fas fa-ticket-alt"></i> Tipos de Solicitudes</a></li>
+                    <li><a href="#"><i class="fas fa-tags"></i> Etiquetas</a></li>
+                    <li><a href="#"><i class="fas fa-database"></i> Copias de Seguridad</a></li>
+                    <li><a href="#"><i class="fas fa-plug"></i> Integraciones</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                </ul>
+            </div>
+
+            <!-- Contenido de configuración -->
+            <div class="settings-content">
+                <div class="settings-section">
+                    <h2>Configuración General</h2>
+                    
+                    <div class="form-group">
+                        <label for="system-name">Nombre del Sistema</label>
+                        <input type="text" id="system-name" class="form-control" value="Campus Connect">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="institution-name">Nombre de la Institución</label>
+                        <input type="text" id="institution-name" class="form-control" value="Universidad Tecnológica Ejemplo">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="timezone">Zona Horaria</label>
+                            <select id="timezone" class="form-control">
+                                <option value="-5">(GMT-05:00) Bogotá, Lima, Quito</option>
+                                <option value="-6">(GMT-06:00) Ciudad de México</option>
+                                <option value="-4">(GMT-04:00) Santiago</option>
+                                <option value="-3">(GMT-03:00) Buenos Aires</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date-format">Formato de Fecha</label>
+                            <select id="date-format" class="form-control">
+                                <option value="dd/mm/yyyy">DD/MM/AAAA</option>
+                                <option value="mm/dd/yyyy">MM/DD/AAAA</option>
+                                <option value="yyyy-mm-dd">AAAA-MM-DD</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="logo-upload">Logo de la Institución</label>
+                        <input type="file" id="logo-upload" class="form-control">
+                        <small class="text-muted">Tamaño recomendado: 300x100 px, formato PNG o JPG</small>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h2>Opciones del Sistema</h2>
+                    
+                    <table class="config-table">
+                        <thead>
+                            <tr>
+                                <th>Configuración</th>
+                                <th>Estado</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Modo de mantenimiento</td>
+                                <td>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </td>
+                                <td>Activar para realizar mantenimiento en el sistema</td>
+                            </tr>
+                            <tr>
+                                <td>Registro de usuarios</td>
+                                <td>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </td>
+                                <td>Permitir que nuevos usuarios se registren</td>
+                            </tr>
+                            <tr>
+                                <td>Notificaciones por email</td>
+                                <td>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </td>
+                                <td>Enviar notificaciones por correo electrónico</td>
+                            </tr>
+                            <tr>
+                                <td>Autenticación de dos factores</td>
+                                <td>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </td>
+                                <td>Requerir autenticación adicional para acceder</td>
+                            </tr>
+                            <tr>
+                                <td>Registro de actividades</td>
+                                <td>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </td>
+                                <td>Guardar historial de actividades del sistema</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="settings-section">
+                    <h2>Configuración de Seguridad</h2>
+                    
+                    <div class="form-group">
+                        <label>Requerimientos de contraseña</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="password-uppercase" checked>
+                            <label for="password-uppercase">Al menos una letra mayúscula</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="password-number" checked>
+                            <label for="password-number">Al menos un número</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="password-special" checked>
+                            <label for="password-special">Al menos un carácter especial</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password-length">Longitud mínima de contraseña</label>
+                            <select id="password-length" class="form-control">
+                                <option value="6">6 caracteres</option>
+                                <option value="8" selected>8 caracteres</option>
+                                <option value="10">10 caracteres</option>
+                                <option value="12">12 caracteres</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="password-expiry">Caducidad de contraseña (días)</label>
+                            <select id="password-expiry" class="form-control">
+                                <option value="30">30 días</option>
+                                <option value="60">60 días</option>
+                                <option value="90" selected>90 días</option>
+                                <option value="180">180 días</option>
+                                <option value="0">Nunca</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="session-timeout">Tiempo de inactividad para cierre de sesión (minutos)</label>
+                        <input type="number" id="session-timeout" class="form-control" value="30" min="5" max="1440">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary">Guardar Cambios</button>
+                    <button class="btn btn-secondary">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lógica para alternar entre secciones de configuración
+        document.querySelectorAll('.settings-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remover clase active de todos los enlaces
+                document.querySelectorAll('.settings-menu a').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Agregar clase active al enlace clickeado
+                this.classList.add('active');
+                
+            });
+        });
+
+        // Lógica para los interruptores de toggle
+        document.querySelectorAll('.toggle-switch input').forEach(switchInput => {
+            switchInput.addEventListener('change', function() {
+                // Aquí iría la lógica para guardar el estado del interruptor
+                console.log(`Configuración ${this.checked ? 'activada' : 'desactivada'}`);
+            });
+        });
+    </script>
+</body>
+</html>

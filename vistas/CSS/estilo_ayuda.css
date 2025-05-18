@@ -1,0 +1,419 @@
+
+:root {
+    --primary: #8e0000;
+    --primary-dark: #7bbebe;
+    --primary-light: #ff5f52;
+    --azul: #60A8A6;
+    --text: #212121;
+    --text-light: #757575;
+    --background: #fafafa;
+    --white: #ffffff;
+    --gray: #e0e0e0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+    display: flex;
+    position: relative;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: var(--gray);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    border-right: 1px solid var(--gray);
+    position: fixed;
+    box-shadow: 1px 0 10px rgba(0,0,0,0.03);
+}
+
+.logo {
+    margin: 0;
+    text-align: center;
+}
+
+.logo img {
+    height: 93px;
+    width: auto;
+    filter: brightness(0.9);
+    margin: -20px 0 0.5rem 0;
+}
+
+.udem-logo {
+    margin: 0;
+    text-align: center;
+}
+
+.udem-logo img {
+    width: 123px;
+    height: auto;
+    opacity: 0.9;
+    margin: 3px 0 0.5rem 0;
+}
+
+.admin-button {
+    background-color: var(--azul);
+    color: var(--white);
+    padding: 0.7rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 220px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    margin-top: auto;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.admin-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.menu li {
+    width: 100%;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 0.92rem;
+}
+
+.menu a:hover,
+.menu a:focus {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.menu a.active {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.menu a i {
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+.university-badge {
+    background-color: var(--secondary);
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Contenido principal */
+.main-content {
+    margin-left: 280px;
+    padding: 3rem;
+    flex-grow: 1;
+    max-width: 1200px;
+    background-color: var(--white);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0,0,0,0.05);
+    border-radius: 10px 0 0 0;
+}
+
+.help-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.help-header h1 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.university-badge {
+    background-color:#d32229;
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+.help-header h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    margin: 1rem auto 0;
+    border-radius: 2px;
+}
+
+/* Estilos del acordeón */
+.faq-section {
+    margin-bottom: 3rem;
+}
+
+.user-category {
+    color: var(--azul);
+    margin: 2rem 0 1rem;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-category i {
+    font-size: 1.2rem;
+}
+
+.faq-item {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    border-left: 4px solid var(--azul);
+    cursor: pointer;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.faq-question i {
+    transition: transform 0.3s ease;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding-top 0.4s ease;
+    color: var(--text);
+}
+
+.faq-item.active .faq-answer {
+    max-height: 2000px;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--gray);
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-answer ul, .faq-answer ol {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.faq-answer li {
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 250px;
+    }
+    
+    .main-content {
+        margin-left: 250px;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: 100;
+        width: 280px;
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 2rem 1.5rem;
+        border-radius: 0;
+    }
+    
+    .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 90;
+        background-color: var(--primary);
+        color: var(--white);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        font-size: 1.2rem;
+    }
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.chatbot-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #60A8A6;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: all 0.3s;
+}
+
+.chatbot-button:hover {
+    background-color: #4d8c8a;
+    transform: scale(1.1);
+}
+
+.chatbot-container {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 320px;
+    height: 450px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.chatbot-header {
+    background-color: #60A8A6;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.chatbot-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+}
+
+.message {
+    margin-bottom: 10px;
+    max-width: 80%;
+    padding: 8px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.bot-message {
+    background-color: #e3e3e3;
+    color: #333;
+    border-top-left-radius: 5px;
+}
+
+.user-message {
+    background-color: #60A8A6;
+    color: white;
+    border-top-right-radius: 5px;
+    margin-left: auto;
+}
+
+.menu-option {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 13px;
+}
+
+.menu-option:hover {
+    background-color: #60A8A6;
+    color: white;
+    border-color: #60A8A6;
+}
+
+.chatbot-footer input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+.icon {
+    margin-right: 5px;
+}
+

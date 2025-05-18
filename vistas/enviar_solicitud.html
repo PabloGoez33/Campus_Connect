@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Enviar Solicitud</title>
+    <link href="../vistas/CSS/estiloenviar_Solitud.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Menú lateral -->
+    <nav class="sidebar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="../vistas/SRC/logo.png" alt="Campus Connect">
+            </a>
+        </div>
+        
+        <ul class="menu">
+            <li><a href="/campus_connect/vistas/index.html"><i class="fas fa-home"></i>Inicio</a></li>
+            <li><a href="" class="active"><i class="fas fa-paper-plane"></i>Enviar Solicitud</a></li>
+            <li><a href="/campus_connect/vistas/estado_solicitud.html"><i class="fas fa-clipboard-check"></i>Estado de mi Solicitud</a></li>
+            <li><a href="/campus_connect/vistas/calendario.html"><i class="fas fa-calendar-alt"></i>Calendario Académico</a></li>
+            <li><a href="/campus_connect/vistas/directorio.html"><i class="fas fa-map-marker-alt"></i>Mapa y Directorio</a></li>
+            <li><a href="/campus_connect/vistas/ayuda.html"><i class="fas fa-comments"></i>Ayuda</a></li>
+            <li><a href="/campus_connect/vistas/respuestas.html"><i class="fas fa-inbox"></i>Mis Respuestas</a></li>
+        </ul>
+        
+        <button class="admin-button" onclick="location.href='iniciosesion.html'">
+            <i class="fas fa-user-shield"></i> Administrador
+          </button>
+          
+        
+        <!-- Logo de la Universidad de Medellín -->
+        <div class="udem-logo">
+            <img src="../vistas/SRC/universidad.jpg" alt="Universidad de Medellín">
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <div class="calendar-header">
+            <span class="university-badge">
+                <i class="fas fa-university"></i> Universidad de Medellín
+            </span>
+        <div class="form-header">
+            <h1><i class="fas fa-paper-plane"></i> Enviar Solicitud</h1>
+            <p>Complete el siguiente formulario para enviar su solicitud</p>
+        </div>
+
+        <div class="form-steps">
+            <div class="step-line"></div>
+            <div class="step active" id="step1">
+                <div class="step-number">1</div>
+                <div>Usuario y Solicitud</div>
+            </div>
+            <div class="step" id="step2">
+                <div class="step-number">2</div>
+                <div>Información</div>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-number">3</div>
+                <div>Documentos</div>
+            </div>
+            <div class="step" id="step4">
+                <div class="step-number">4</div>
+                <div>Confirmación</div>
+            </div>
+        </div>
+
+        <div class="form-content">
+            <!-- Paso 1: Selección de tipo de usuario y solicitud combinados -->
+            <div class="form-section active" id="section1">
+                <div class="user-request-container">
+                    <div>
+                        <div class="form-group">
+                            <label for="user-type">Seleccione su tipo de usuario:</label>
+                            <select id="user-type" class="form-control">
+                                <option value="">-- Seleccione --</option>
+                                <option value="student">Estudiante</option>
+                                <option value="applicant">Aspirante</option>
+                                <option value="professor">Profesor</option>
+                                <option value="administrative">Administrativo</option>
+                                <option value="graduate">Egresado</option>
+                                <option value="contractor">Contratista</option>
+                                <option value="external">Persona externa</option>
+                            </select>
+                        </div>
+
+                        <!-- Campos adicionales para administrativos -->
+                        <div id="administrative-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="area">Nombre del área o dependencia:</label>
+                                <input type="text" id="area" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="faculty">Facultad o unidad:</label>
+                                <input type="text" id="faculty" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-group">
+                            <label for="request-type">Tipo de solicitud:</label>
+                            <select id="request-type" class="form-control" disabled>
+                                <option value="">-- Seleccione primero su tipo de usuario --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div></div>
+                    <button class="btn btn-primary" onclick="nextStep(1, 2)">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Paso 2: Información del solicitante -->
+            <div class="form-section" id="section2">
+                <h3>Información del solicitante</h3>
+                
+                <div class="form-group">
+                    <label for="fullname">Nombre completo:</label>
+                    <input type="text" id="fullname" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="id-type">Tipo de documento:</label>
+                    <select id="id-type" class="form-control" required>
+                        <option value="">-- Seleccione --</option>
+                        <option value="cc">Cédula de ciudadanía</option>
+                        <option value="ce">Cédula de extranjería</option>
+                        <option value="ti">Tarjeta de identidad</option>
+                        <option value="passport">Pasaporte</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="id-number">Número de documento:</label>
+                    <input type="text" id="id-number" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Teléfono de contacto:</label>
+                    <input type="tel" id="phone" class="form-control" required>
+                </div>
+                
+                <!-- Campos específicos según tipo de solicitud -->
+                <div id="dynamic-fields">
+                    <!-- Se llenará dinámicamente según el tipo de solicitud -->
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="prevStep(2, 1)">Anterior</button>
+                    <button class="btn btn-primary" onclick="nextStep(2, 3)">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Paso 3: Adjuntar documentos -->
+            <div class="form-section" id="section3">
+                <h3>Adjuntar documentos</h3>
+                <p>Suba los documentos requeridos para su solicitud (PDF, JPG, PNG)</p>
+                
+                <div class="file-upload">
+                    <input type="file" id="file-input" multiple>
+                    <label for="file-input" class="file-upload-label">
+                        <i class="fas fa-cloud-upload-alt"></i> Arrastre archivos aquí o haga clic para seleccionar
+                    </label>
+                </div>
+
+                <div class="file-list" id="file-list">
+            
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="prevStep(3, 2)">Anterior</button>
+                    <button class="btn btn-primary" onclick="nextStep(3, 4)">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Paso 4: Confirmación -->
+            <div class="form-section" id="section4">
+                <div class="confirmation">
+                    <div class="confirmation-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>¡Solicitud lista para enviar!</h2>
+                    <p>Revise los detalles de su solicitud antes de enviar</p>
+                    
+                    <div id="summary-content" style="text-align: left; background: #f5f5f5; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" onclick="prevStep(4, 3)">Anterior</button>
+                        <button class="btn btn-primary" onclick="submitRequest()">Enviar Solicitud</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 5: Comprobante (se muestra después de enviar) -->
+            <div class="form-section" id="section5">
+                <div class="confirmation">
+                    <div class="confirmation-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>¡Solicitud enviada con éxito!</h2>
+                    <p>Hemos recibido su solicitud correctamente</p>
+                    
+                    <div class="ticket-number" id="ticket-number">
+                        Número de ticket: CC-2023-0001
+                    </div>
+
+                    <p>Hemos enviado un correo electrónico con los detalles de su solicitud.</p>
+                    <p>Puede consultar el estado de su solicitud en cualquier momento.</p>
+
+                    <button class="btn btn-primary" onclick="resetAndGoHome()">
+                        <i class="fas fa-home"></i> Volver al inicio
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos de los tipos de solicitud por usuario
+        const requestTypes = {
+            student: [
+                "Certificados (matrícula, notas, paz y salvo, etc.)",
+                "Asesoría académica",
+                "Problemas con plataforma virtual o correo",
+                "Solicitud de cambio de grupo o materia",
+                "Petición, queja, reclamo o sugerencia (PQRS)",
+                "Solicitud de extensión, cursos u horarios especiales",
+                "Préstamo de espacios o recursos (salones, laboratorios)",
+                "Apoyo psicológico o bienestar universitario",
+                "Solicitud de beca o ayuda económica",
+                "Otra"
+            ],
+            applicant: [
+                "Información sobre programas académicos",
+                "Solicitud de admisión",
+                "Requisitos de inscripción",
+                "Agendamiento de cita o visita al campus",
+                "Problemas con el formulario de inscripción en línea",
+                "Consulta sobre costos y formas de pago",
+                "Otra"
+            ],
+            professor: [
+                "Solicitud de soporte en plataforma o correo institucional",
+                "Reporte de fallas técnicas en salón o laboratorio",
+                "Solicitud de materiales o recursos didácticos",
+                "Solicitud de capacitación TIC",
+                "Petición de cambio de horario o grupo",
+                "PQRS",
+                "Otra"
+            ],
+            administrative: [
+                "Solicitud de mantenimiento (infraestructura, tecnología, limpieza)",
+                "Soporte técnico",
+                "Solicitud de dotación o insumos",
+                "Solicitud de personal o apoyo operativo",
+                "Consulta de procesos administrativos",
+                "PQRS",
+                "Otra"
+            ],
+            graduate: [
+                "Solicitud de certificado",
+                "Actualización de datos",
+                "Solicitud de homologación para nuevo programa",
+                "Apoyo para empleo o bolsa laboral",
+                "Consulta sobre eventos o beneficios para egresados",
+                "PQRS",
+                "Otra"
+            ],
+            contractor: [
+                "Solicitud de acceso a instalaciones",
+                "Reporte de novedades en ejecución de contrato",
+                "Solicitud de documentos o constancias",
+                "PQRS",
+                "Otra"
+            ],
+            external: [
+                "Solicitud de información general",
+                "Préstamo/alquiler de espacios",
+                "Solicitud de servicios institucionales",
+                "PQRS",
+                "Otra"
+            ]
+        };
+
+        // Campos específicos por tipo de solicitud
+        const requestFields = {
+            // Certificados (Estudiante)
+            "Certificados (matrícula, notas, paz y salvo, etc.)": [
+                { type: "select", name: "certificate_type", label: "Tipo de certificado", options: ["Certificado de matrícula", "Certificado de notas", "Paz y salvo", "Constancia de estudio", "Otro"], required: true },
+                { type: "text", name: "program", label: "Programa académico", required: true },
+                { type: "text", name: "semester", label: "Semestre o periodo académico", required: true },
+                { type: "select", name: "delivery_type", label: "Forma de entrega", options: ["Digital", "Física"], required: true }
+            ],
+            // PQRS (común a varios)
+            "Petición, queja, reclamo o sugerencia (PQRS)": [
+                { type: "select", name: "pqrs_type", label: "Tipo de PQRS", options: ["Petición", "Queja", "Reclamo", "Sugerencia"], required: true },
+                { type: "textarea", name: "description", label: "Descripción detallada", required: true },
+                { type: "text", name: "location", label: "Ubicación o área relacionada (si aplica)", required: false }
+            ],
+            // Solicitud de espacios
+            "Préstamo de espacios o recursos (salones, laboratorios)": [
+                { type: "select", name: "space_type", label: "Tipo de espacio", options: ["Salón de clase", "Laboratorio", "Sala de estudio", "Auditorio", "Otro"], required: true },
+                { type: "date", name: "date", label: "Fecha solicitada", required: true },
+                { type: "time", name: "start_time", label: "Hora de inicio", required: true },
+                { type: "time", name: "end_time", label: "Hora de finalización", required: true },
+                { type: "number", name: "attendees", label: "Número aproximado de personas", required: true },
+                { type: "textarea", name: "purpose", label: "Propósito del uso", required: true }
+            ],
+            // Solicitud de información (Aspirante)
+            "Información sobre programas académicos": [
+                { type: "select", name: "program_type", label: "Nivel de formación", options: ["Pregrado", "Posgrado", "Diplomado", "Curso de extensión"], required: true },
+                { type: "select", name: "modality", label: "Modalidad", options: ["Presencial", "Virtual", "Híbrida"], required: true },
+                { type: "text", name: "program_interest", label: "Programa de interés (si aplica)", required: false }
+            ],
+            // Otras solicitudes genéricas
+            "Otra": [
+                { type: "textarea", name: "description", label: "Descripción detallada de su solicitud", required: true }
+            ]
+            // Se pueden agregar más campos específicos para cada tipo de solicitud
+        };
+
+        // Variables para almacenar los datos del formulario
+        let formData = {
+            userType: "",
+            requestType: "",
+            administrativeInfo: {},
+            personalInfo: {},
+            requestDetails: {},
+            documents: []
+        };
+
+        // Evento cuando cambia el tipo de usuario
+        document.getElementById('user-type').addEventListener('change', function() {
+            const userType = this.value;
+            const requestTypeSelect = document.getElementById('request-type');
+            
+            if (userType) {
+                // Habilitar y actualizar el selector de tipo de solicitud
+                requestTypeSelect.disabled = false;
+                requestTypeSelect.innerHTML = '<option value="">-- Seleccione tipo de solicitud --</option>';
+                
+                // Agregar opciones según el tipo de usuario
+                requestTypes[userType].forEach(request => {
+                    requestTypeSelect.innerHTML += `<option value="${request}">${request}</option>`;
+                });
+                
+                // Mostrar campos adicionales para administrativos
+                if (userType === 'administrative') {
+                    document.getElementById('administrative-fields').style.display = 'block';
+                } else {
+                    document.getElementById('administrative-fields').style.display = 'none';
+                }
+                
+                formData.userType = userType;
+            } else {
+                requestTypeSelect.disabled = true;
+                requestTypeSelect.innerHTML = '<option value="">-- Seleccione primero su tipo de usuario --</option>';
+            }
+        });
+
+        // Manejo de pasos del formulario
+        function goToStep(step) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección actual
+            document.getElementById(`section${step}`).classList.add('active');
+            
+            // Actualizar pasos
+            document.querySelectorAll('.step').forEach((stepElement, index) => {
+                if (index + 1 < step) {
+                    stepElement.classList.remove('active');
+                    stepElement.classList.add('completed');
+                } else if (index + 1 === step) {
+                    stepElement.classList.add('active');
+                    stepElement.classList.remove('completed');
+                } else {
+                    stepElement.classList.remove('active', 'completed');
+                }
+            });
+            
+            // Cargar campos dinámicos si estamos en el paso 2
+            if (step === 2 && formData.userType && document.getElementById('request-type').value) {
+                loadDynamicFields();
+            }
+            
+            // Generar resumen si estamos en el paso 4
+            if (step === 4) {
+                generateSummary();
+            }
+        }
+
+        function nextStep(current, next) {
+            // Validar antes de avanzar
+            if (current === 1) {
+                if (!document.getElementById('user-type').value) {
+                    alert('Por favor seleccione su tipo de usuario');
+                    return;
+                }
+                if (!document.getElementById('request-type').value) {
+                    alert('Por favor seleccione el tipo de solicitud');
+                    return;
+                }
+                
+                formData.userType = document.getElementById('user-type').value;
+                formData.requestType = document.getElementById('request-type').value;
+                
+                // Guardar datos adicionales de administrativos
+                if (formData.userType === 'administrative') {
+                    formData.administrativeInfo = {
+                        area: document.getElementById('area').value,
+                        faculty: document.getElementById('faculty').value
+                    };
+                }
+            } else if (current === 2) {
+                // Validar campos personales
+                if (!validatePersonalInfo()) {
+                    alert('Por favor complete todos los campos requeridos');
+                    return;
+                }
+                
+                // Guardar datos personales
+                formData.personalInfo = {
+                    fullname: document.getElementById('fullname').value,
+                    idType: document.getElementById('id-type').value,
+                    idNumber: document.getElementById('id-number').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value
+                };
+                
+                // Guardar detalles específicos de la solicitud
+                formData.requestDetails = {};
+                const dynamicFields = document.querySelectorAll('#dynamic-fields input, #dynamic-fields select, #dynamic-fields textarea');
+                dynamicFields.forEach(field => {
+                    if (field.type === 'checkbox') {
+                        const checked = document.querySelectorAll(`input[name="${field.name}"]:checked`);
+                        formData.requestDetails[field.name] = Array.from(checked).map(c => c.value);
+                    } else {
+                        formData.requestDetails[field.name] = field.value;
+                    }
+                });
+            }
+            
+            goToStep(next);
+        }
+
+        function prevStep(current, prev) {
+            goToStep(prev);
+        }
+
+        // Cargar campos dinámicos según tipo de solicitud
+        function loadDynamicFields() {
+            const requestType = document.getElementById('request-type').value;
+            const dynamicFieldsDiv = document.getElementById('dynamic-fields');
+            let html = '<h3>Detalles de la solicitud</h3>';
+            
+            // Obtener campos para este tipo de solicitud o campos genéricos para "Otra"
+            const fields = requestFields[requestType] || requestFields["Otra"];
+            
+            if (fields) {
+                fields.forEach(field => {
+                    html += '<div class="form-group">';
+                    html += `<label for="${field.name}">${field.label}${field.required ? ' *' : ''}</label>`;
+                    
+                    if (field.type === 'select') {
+                        html += `<select id="${field.name}" name="${field.name}" class="form-control" ${field.required ? 'required' : ''}>`;
+                        html += '<option value="">-- Seleccione --</option>';
+                        field.options.forEach(option => {
+                            html += `<option value="${option}">${option}</option>`;
+                        });
+                        html += '</select>';
+                    } else if (field.type === 'textarea') {
+                        html += `<textarea id="${field.name}" name="${field.name}" class="form-control" rows="3" ${field.required ? 'required' : ''}></textarea>`;
+                    } else if (field.type === 'checkbox') {
+                        field.options.forEach((option, index) => {
+                            html += `<div><input type="checkbox" id="${field.name}-${index}" name="${field.name}" value="${option}">`;
+                            html += `<label for="${field.name}-${index}"> ${option}</label></div>`;
+                        });
+                    } else {
+                        html += `<input type="${field.type}" id="${field.name}" name="${field.name}" class="form-control" ${field.required ? 'required' : ''}>`;
+                    }
+                    
+                    html += '</div>';
+                });
+                
+                dynamicFieldsDiv.innerHTML = html;
+            }
+        }
+
+        // Validar información personal
+        function validatePersonalInfo() {
+            const requiredFields = [
+                'fullname', 'id-type', 'id-number', 'email', 'phone'
+            ];
+            
+            let isValid = true;
+            
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value) {
+                    field.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Manejo de archivos adjuntos
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            const files = e.target.files;
+            const fileList = document.getElementById('file-list');
+            
+            fileList.innerHTML = '';
+            formData.documents = [];
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                formData.documents.push(file);
+                
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <span>${file.name} (${(file.size / 1024).toFixed(1)} KB)</span>
+                    <button onclick="removeFile(${i})"><i class="fas fa-times"></i></button>
+                `;
+                
+                fileList.appendChild(fileItem);
+            }
+        });
+
+        function removeFile(index) {
+            formData.documents.splice(index, 1);
+            document.getElementById('file-input').value = '';
+            document.getElementById('file-list').innerHTML = '';
+            
+            // Volver a agregar los archivos restantes
+            formData.documents.forEach((file, i) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <span>${file.name} (${(file.size / 1024).toFixed(1)} KB)</span>
+                    <button onclick="removeFile(${i})"><i class="fas fa-times"></i></button>
+                `;
+                
+                document.getElementById('file-list').appendChild(fileItem);
+            });
+        }
+
+        // Generar resumen de la solicitud
+        function generateSummary() {
+            const summaryContent = document.getElementById('summary-content');
+            let html = `
+                <h4>Resumen de la solicitud</h4>
+                <p><strong>Tipo de usuario:</strong> ${document.getElementById('user-type').selectedOptions[0].text}</p>
+                <p><strong>Tipo de solicitud:</strong> ${formData.requestType}</p>
+            `;
+            
+            // Información adicional para administrativos
+            if (formData.userType === 'administrative') {
+                html += `
+                    <p><strong>Área/Dependencia:</strong> ${formData.administrativeInfo.area}</p>
+                    <p><strong>Facultad/Unidad:</strong> ${formData.administrativeInfo.faculty}</p>
+                `;
+            }
+            
+            // Información personal
+            html += `
+                <h5>Información personal</h5>
+                <p><strong>Nombre completo:</strong> ${formData.personalInfo.fullname}</p>
+                <p><strong>Tipo de documento:</strong> ${document.getElementById('id-type').selectedOptions[0].text}</p>
+                <p><strong>Número de documento:</strong> ${formData.personalInfo.idNumber}</p>
+                <p><strong>Correo electrónico:</strong> ${formData.personalInfo.email}</p>
+                <p><strong>Teléfono de contacto:</strong> ${formData.personalInfo.phone}</p>
+            `;
+            
+            // Detalles de la solicitud
+            html += `<h5>Detalles de la solicitud</h5>`;
+            for (const [key, value] of Object.entries(formData.requestDetails)) {
+                if (Array.isArray(value)) {
+                    html += `<p><strong>${key}:</strong> ${value.join(', ')}</p>`;
+                } else {
+                    html += `<p><strong>${key}:</strong> ${value}</p>`;
+                }
+            }
+            
+            // Documentos adjuntos
+            html += `<h5>Documentos adjuntos</h5>`;
+            if (formData.documents.length > 0) {
+                formData.documents.forEach(file => {
+                    html += `<p>${file.name} (${(file.size / 1024).toFixed(1)} KB)</p>`;
+                });
+            } else {
+                html += `<p>Ningún documento adjunto</p>`;
+            }
+            
+            summaryContent.innerHTML = html;
+        }
+
+        // Enviar la solicitud
+        function submitRequest() {
+            // Generar ticket
+            formData.ticket = 'CC-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+
+            // Crear FormData para enviar todo correctamente (incluyendo archivos)
+            const dataToSend = new FormData();
+
+            // Campos simples
+            dataToSend.append('userType', formData.userType);
+            dataToSend.append('requestType', formData.requestType);
+            dataToSend.append('fullname', formData.personalInfo.fullname);
+            dataToSend.append('idType', formData.personalInfo.idType);
+            dataToSend.append('idNumber', formData.personalInfo.idNumber);
+            dataToSend.append('email', formData.personalInfo.email);
+            dataToSend.append('phone', formData.personalInfo.phone);
+            dataToSend.append('requestDetails', JSON.stringify(formData.requestDetails));
+            dataToSend.append('ticket', formData.ticket);
+
+            // Archivos (formData.documents es un array de File)
+            if (formData.documents && formData.documents.length > 0) {
+                formData.documents.forEach((file, index) => {
+                    dataToSend.append('documents[]', file);
+                });
+            }
+
+            fetch('../controladores/enviarFormulario.php', {
+                method: 'POST',
+                body: dataToSend
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Respuesta del PHP:", data);
+
+                if (data.success) {
+                    document.getElementById('ticket-number').textContent = 'Número de ticket: ' + formData.ticket;
+
+                    alert("Solicitud enviada correctamente. Número de ticket: " + formData.ticket);
+                    goToStep(5); // Ir al paso 5
+                } else {
+                    alert("Error al enviar solicitud: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error en la solicitud:", error);
+            });
+        }
+
+        function resetAndGoHome() {
+            // Reiniciar los datos del formulario (si estás usando formData)
+            formData = {
+                userType: '',
+                requestType: '',
+                personalInfo: {
+                    fullname: '',
+                    idType: '',
+                    idNumber: '',
+                    email: '',
+                    phone: ''
+                },
+                requestDetails: {},
+                documents: [],
+                ticket: ''
+            };
+
+            // También puedes resetear elementos del DOM si fuera necesario
+            document.getElementById('ticket-number').innerText = '';
+
+            // Redireccionar al inicio
+            window.location.href = '/campus_connect/vistas/index.html';
+        }
+
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Universitario</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="chatbot-button" id="chatbotButton">
+        <i class="fas fa-comments"></i>
+    </div>
+    
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            Asistente Universitario
+        </div>
+        <div class="chatbot-body" id="chatbotBody"></div>
+        <div class="chatbot-footer">
+            <input type="text" id="userInput" placeholder="Escribe tu mensaje..." autocomplete="off">
+        </div>
+    </div>
+
+    <script>
+        const chatbotButton = document.getElementById('chatbotButton');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatbotBody = document.getElementById('chatbotBody');
+        const userInput = document.getElementById('userInput');
+        
+        // Mostrar/ocultar chatbot
+        chatbotButton.addEventListener('click', () => {
+            chatbotContainer.style.display = chatbotContainer.style.display === 'flex' ? 'none' : 'flex';
+            if (chatbotContainer.style.display === 'flex') {
+                showMainMenu();
+            }
+        });
+        
+        // Manejar entrada del usuario
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && userInput.value.trim() !== '') {
+                addUserMessage(userInput.value.trim());
+                handleUserInput(userInput.value.trim());
+                userInput.value = '';
+            }
+        });
+        
+        function addUserMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user-message';
+            messageDiv.textContent = text;
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+        
+        function addBotMessage(text, isHTML = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot-message';
+            if (isHTML) {
+                messageDiv.innerHTML = text;
+            } else {
+                messageDiv.textContent = text;
+            }
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+        
+        function showMainMenu() {
+            addBotMessage(`
+                <strong>Menú Principal</strong>
+                <div class="menu-option" onclick="selectOption(1)"><i class="fas fa-paper-plane icon"></i> Enviar Solicitud</div>
+                <div class="menu-option" onclick="selectOption(2)"><i class="fas fa-search icon"></i> Consultar Estado</div>
+                <div class="menu-option" onclick="selectOption(3)"><i class="fas fa-question-circle icon"></i> Preguntas Frecuentes</div>
+                <div class="menu-option" onclick="selectOption(4)"><i class="fas fa-headset icon"></i> Contactar Asesor</div>
+            `, true);
+        }
+        
+        function selectOption(option) {
+            addUserMessage(['Enviar Solicitud', 'Consultar Estado', 'Preguntas Frecuentes', 'Contactar Asesor'][option-1]);
+            
+            if (option === 1) {
+                showUserTypes();
+            } else if (option === 2) {
+                addBotMessage("Ingresa tu número de solicitud o documento:");
+            } else if (option === 3) {
+                showFAQ();
+            } else {
+                showContactForm();
+            }
+        }
+        
+        function showUserTypes() {
+            addBotMessage(`
+                <strong>Tipo de Usuario</strong>
+                <div class="menu-option" onclick="selectUserType('Estudiante')"><i class="fas fa-user-graduate icon"></i> Estudiante</div>
+                <div class="menu-option" onclick="selectUserType('Profesor')"><i class="fas fa-chalkboard-teacher icon"></i> Profesor</div>
+                <div class="menu-option" onclick="selectUserType('Administrativo')"><i class="fas fa-briefcase icon"></i> Administrativo</div>
+                <div class="menu-option" onclick="selectUserType('Egresado')"><i class="fas fa-user-tie icon"></i> Egresado</div>
+            `, true);
+        }
+        
+        function selectUserType(type) {
+            addUserMessage(type);
+            addBotMessage(`Has seleccionado: ${type}. Próximamente más opciones...`);
+            setTimeout(showMainMenu, 1500);
+        }
+        
+        function showFAQ() {
+            addBotMessage(`
+                <strong>Preguntas Frecuentes</strong>
+                <div class="menu-option" onclick="showFAQAnswer('¿Cómo matricularme?')"><i class="fas fa-question-circle icon"></i> ¿Cómo matricularme?</div>
+                <div class="menu-option" onclick="showFAQAnswer('¿Dónde pagar?')"><i class="fas fa-question-circle icon"></i> ¿Dónde pagar?</div>
+                <div class="menu-option" onclick="showFAQAnswer('Horarios de atención')"><i class="fas fa-question-circle icon"></i> Horarios de atención</div>
+            `, true);
+        }
+        
+        function showFAQAnswer(question) {
+            const answers = {
+                '¿Cómo matricularme?': 'Puedes matricularte en línea a través de nuestro portal o en las oficinas de registro.',
+                '¿Dónde pagar?': 'Los pagos se realizan en la plataforma de pagos en línea o en bancos autorizados.',
+                'Horarios de atención': 'Atención de lunes a viernes de 8:00 am a 5:00 pm.'
+            };
+            addUserMessage(question);
+            addBotMessage(answers[question]);
+            setTimeout(showFAQ, 1500);
+        }
+        
+        function showContactForm() {
+            addBotMessage(`
+                <strong>Contactar Asesor</strong>
+                <p>Un asesor se comunicará contigo pronto. ¿Cuál es tu número de teléfono?</p>
+            `);
+        }
+        
+        function handleUserInput(input) {
+            if (input.toLowerCase().includes('teléfono') || input.toLowerCase().includes('telefono') || input.toLowerCase().includes('contacto')) {
+                addBotMessage("Gracias. Un asesor te contactará en las próximas 24 horas.");
+                setTimeout(showMainMenu, 1500);
+            } else if (/^\d+$/.test(input)) {
+                addBotMessage(`Consulta recibida para el número ${input}. Te responderemos pronto.`);
+                setTimeout(showMainMenu, 1500);
+            } else {
+                addBotMessage("No entendí tu mensaje. Por favor selecciona una opción del menú.");
+                setTimeout(showMainMenu, 1500);
+            }
+        }
+        
+        // Hacer funciones accesibles globalmente
+        window.selectOption = selectOption;
+        window.selectUserType = selectUserType;
+        window.showFAQAnswer = showFAQAnswer;
+    </script>
+</body>
+</html>

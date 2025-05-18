@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Estado de Solicitud</title>
+    <link href="/campus_connect/vistas/CSS/estiloestado_solicitud.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Menú lateral -->
+    <nav class="sidebar">
+        <div>
+            <div class="logo">
+                <a href="index.html">
+                  <img src="/campus_connect/vistas/SRC/logo.png" alt="Campus Connect">
+                </a>
+              </div>
+            <ul class="menu">
+                <li><a href="/campus_connect/vistas/index.html"><i class="fas fa-home"></i>Inicio</a></li>
+                <li><a href="/campus_connect/vistas/enviar_solicitud.html"><i class="fas fa-paper-plane"></i>Enviar Solicitud</a></li>
+                <li><a href="" class="active"><i class="fas fa-clipboard-check"></i>Estado de mi Solicitud</a></li>
+                <li><a href="/campus_connect/vistas/calendario.html"><i class="fas fa-calendar-alt"></i>Calendario Académico</a></li>
+                <li><a href="/campus_connect/vistas/directorio.html"><i class="fas fa-map-marker-alt"></i>Mapa y Directorio</a></li>
+                <li><a href="/campus_connect/vistas/ayuda.html"><i class="fas fa-comments"></i>Ayuda</a></li>
+                <li><a href="/campus_connect/vistas/respuestas.html"><i class="fas fa-inbox"></i>Mis Respuestas</a></li>
+            </ul>
+        </div>
+        <button class="admin-button" onclick="location.href='iniciosesion.html'">
+            <i class="fas fa-user-shield"></i> Administrador
+          </button>
+          
+    <div class="udem-logo">
+        <img src="/campus_connect/vistas/SRC/universidad.jpg" alt="Universidad de Medellín">
+      </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <div class="calendar-header">
+            <span class="university-badge">
+                <i class="fas fa-university"></i> Universidad de Medellín
+            </span>
+
+        <div class="status-header">
+            <h1><i class="fas fa-clipboard-check"></i> Estado de mi Solicitud</h1>
+            <p>Consulta el estado actual de todas tus solicitudes enviadas a través de Campus Connect</p>
+        </div>
+
+        <!-- Tarjeta de búsqueda -->
+        <div class="search-card">
+            <h2><i class="fas fa-search"></i> Buscar solicitud</h2>
+            <p>Ingresa tu número de ticket o ID de estudiante para buscar solicitudes específicas</p>
+            
+            <form class="search-form">
+                <input type="text" class="search-input" placeholder="Ej: CC-2023-0042 o 2023-00158" required>
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </form>
+        </div>
+
+        <!-- Contenedor de estados -->
+        <div class="status-container">
+            <!-- Solicitud 1 -->
+            <div class="status-card">
+                <div class="status-header-card">
+                    <div>
+                        <h3 class="status-title">Certificado de notas</h3>
+                        <div class="status-meta">
+                            <div class="status-meta-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>CC-2023-0042</span>
+                            </div>
+                            <div class="status-meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>15/03/2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="status-badge badge-completed">Completado</span>
+                </div>
+                
+                <div class="status-progress">
+                    <div class="progress-steps">
+                        <div class="progress-step">
+                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                            <span class="step-label">Recibido</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                            <span class="step-label">Revisión</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                            <span class="step-label">Procesando</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                            <span class="step-label">Completado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="status-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Última actualización</div>
+                        <div class="detail-value">20/03/2023 - 14:30</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Responsable</div>
+                        <div class="detail-value">Oficina de Registro</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Comentarios</div>
+                        <div class="detail-value">Tu certificado ha sido generado y está disponible para descarga.</div>
+                    </div>
+                </div>
+                
+                <div class="status-actions">
+                    <button class="action-button action-primary">
+                        <i class="fas fa-download"></i> Descargar
+                    </button>
+                    <button class="action-button action-secondary">
+                        <i class="fas fa-print"></i> Imprimir
+                    </button>
+                </div>
+            </div>
+
+            <!-- Solicitud 2 -->
+            <div class="status-card">
+                <div class="status-header-card">
+                    <div>
+                        <h3 class="status-title">Reserva de laboratorio</h3>
+                        <div class="status-meta">
+                            <div class="status-meta-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>CC-2023-0058</span>
+                            </div>
+                            <div class="status-meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>22/03/2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="status-badge badge-processing">En proceso</span>
+                </div>
+                
+                <div class="status-progress">
+                    <div class="progress-steps">
+                        <div class="progress-step">
+                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                            <span class="step-label">Recibido</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                            <span class="step-label">Revisión</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon active"><i class="fas fa-sync-alt fa-spin"></i></div>
+                            <span class="step-label">Procesando</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon"><i class="far fa-clock"></i></div>
+                            <span class="step-label">Completado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="status-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Última actualización</div>
+                        <div class="detail-value">25/03/2023 - 09:15</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Responsable</div>
+                        <div class="detail-value">Departamento de Laboratorios</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Comentarios</div>
+                        <div class="detail-value">Tu solicitud está siendo verificada con el calendario de disponibilidad.</div>
+                    </div>
+                </div>
+                
+                <div class="status-actions">
+                    <button class="action-button action-secondary">
+                        <i class="fas fa-comment"></i> Consultar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Solicitud 3 -->
+            <div class="status-card">
+                <div class="status-header-card">
+                    <div>
+                        <h3 class="status-title">Cambio de grupo</h3>
+                        <div class="status-meta">
+                            <div class="status-meta-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>CC-2023-0031</span>
+                            </div>
+                            <div class="status-meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>10/03/2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="status-badge badge-pending">Pendiente</span>
+                </div>
+                
+                <div class="status-progress">
+                    <div class="progress-steps">
+                        <div class="progress-step">
+                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                            <span class="step-label">Recibido</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon active"><i class="fas fa-hourglass-half"></i></div>
+                            <span class="step-label">Revisión</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon"><i class="far fa-clock"></i></div>
+                            <span class="step-label">Procesando</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon"><i class="far fa-clock"></i></div>
+                            <span class="step-label">Completado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="status-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Última actualización</div>
+                        <div class="detail-value">12/03/2023 - 16:45</div>
+                    </div>
+                    <div class="detail-label">Responsable</div>
+                    <div class="detail-value">Coordinación Académica</div>
+                </div>
+                
+                <div class="status-actions">
+                    <button class="action-button action-secondary">
+                        <i class="fas fa-comment"></i> Consultar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Solicitud 4 -->
+            <div class="status-card">
+                <div class="status-header-card">
+                    <div>
+                        <h3 class="status-title">Beca académica</h3>
+                        <div class="status-meta">
+                            <div class="status-meta-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>CC-2023-0024</span>
+                            </div>
+                            <div class="status-meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>05/03/2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="status-badge badge-rejected">Rechazado</span>
+                </div>
+                
+                <div class="status-progress">
+                    <div class="progress-steps">
+                        <div class="progress-step">
+                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                            <span class="step-label">Recibido</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                            <span class="step-label">Revisión</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon completed"><i class="fas fa-times"></i></div>
+                            <span class="step-label">Procesando</span>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-icon completed"><i class="fas fa-times"></i></div>
+                            <span class="step-label">Completado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="status-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Última actualización</div>
+                        <div class="detail-value">15/03/2023 - 11:20</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Responsable</div>
+                        <div class="detail-value">Oficina de Bienestar</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Comentarios</div>
+                        <div class="detail-value">No cumples con los requisitos mínimos para esta beca. Por favor revisa los documentos requeridos.</div>
+                    </div>
+                </div>
+                
+                <div class="status-actions">
+                    <button class="action-button action-secondary">
+                        <i class="fas fa-redo"></i> Reintentar
+                    </button>
+                    <button class="action-button action-secondary">
+                        <i class="fas fa-question-circle"></i> Ayuda
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Efecto decorativo -->
+        <div class="wave-decoration"></div>
+    </div>
+
+    <script>
+        // Simular búsqueda
+        document.querySelector('.search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchValue = document.querySelector('.search-input').value.trim();
+            
+            if (searchValue === '') {
+                alert('Por favor ingresa un número de ticket o ID de estudiante');
+                return;
+            }
+            
+        
+            alert('Buscando: ' + searchValue);
+        });
+
+        // Menú toggle para móviles
+        const menuToggle = document.createElement('div');
+        menuToggle.className = 'menu-toggle';
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        document.body.appendChild(menuToggle);
+        
+        menuToggle.addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace 
+        document.querySelectorAll('.menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    document.querySelector('.sidebar').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Universitario</title>
+</head>
+<body>
+    <div class="chatbot-button" id="chatbotButton">
+        <i class="fas fa-comments"></i>
+    </div>
+    
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            Asistente Universitario
+        </div>
+        <div class="chatbot-body" id="chatbotBody"></div>
+        <div class="chatbot-footer">
+            <input type="text" id="userInput" placeholder="Escribe tu mensaje..." autocomplete="off">
+        </div>
+    </div>
+
+    <script>
+        const chatbotButton = document.getElementById('chatbotButton');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatbotBody = document.getElementById('chatbotBody');
+        const userInput = document.getElementById('userInput');
+        
+        // Mostrar/ocultar chatbot
+        chatbotButton.addEventListener('click', () => {
+            chatbotContainer.style.display = chatbotContainer.style.display === 'flex' ? 'none' : 'flex';
+            if (chatbotContainer.style.display === 'flex') {
+                showMainMenu();
+            }
+        });
+        
+        // Manejar entrada del usuario
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && userInput.value.trim() !== '') {
+                addUserMessage(userInput.value.trim());
+                handleUserInput(userInput.value.trim());
+                userInput.value = '';
+            }
+        });
+        
+        function addUserMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user-message';
+            messageDiv.textContent = text;
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+        
+        function addBotMessage(text, isHTML = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot-message';
+            if (isHTML) {
+                messageDiv.innerHTML = text;
+            } else {
+                messageDiv.textContent = text;
+            }
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+        
+        function showMainMenu() {
+            addBotMessage(`
+                <strong>Menú Principal</strong>
+                <div class="menu-option" onclick="selectOption(1)"><i class="fas fa-paper-plane icon"></i> Enviar Solicitud</div>
+                <div class="menu-option" onclick="selectOption(2)"><i class="fas fa-search icon"></i> Consultar Estado</div>
+                <div class="menu-option" onclick="selectOption(3)"><i class="fas fa-question-circle icon"></i> Preguntas Frecuentes</div>
+                <div class="menu-option" onclick="selectOption(4)"><i class="fas fa-headset icon"></i> Contactar Asesor</div>
+            `, true);
+        }
+        
+        function selectOption(option) {
+            addUserMessage(['Enviar Solicitud', 'Consultar Estado', 'Preguntas Frecuentes', 'Contactar Asesor'][option-1]);
+            
+            if (option === 1) {
+                showUserTypes();
+            } else if (option === 2) {
+                addBotMessage("Ingresa tu número de solicitud o documento:");
+            } else if (option === 3) {
+                showFAQ();
+            } else {
+                showContactForm();
+            }
+        }
+        
+        function showUserTypes() {
+            addBotMessage(`
+                <strong>Tipo de Usuario</strong>
+                <div class="menu-option" onclick="selectUserType('Estudiante')"><i class="fas fa-user-graduate icon"></i> Estudiante</div>
+                <div class="menu-option" onclick="selectUserType('Profesor')"><i class="fas fa-chalkboard-teacher icon"></i> Profesor</div>
+                <div class="menu-option" onclick="selectUserType('Administrativo')"><i class="fas fa-briefcase icon"></i> Administrativo</div>
+                <div class="menu-option" onclick="selectUserType('Egresado')"><i class="fas fa-user-tie icon"></i> Egresado</div>
+            `, true);
+        }
+        
+        function selectUserType(type) {
+            addUserMessage(type);
+            addBotMessage(`Has seleccionado: ${type}. Próximamente más opciones...`);
+            setTimeout(showMainMenu, 1500);
+        }
+        
+        function showFAQ() {
+            addBotMessage(`
+                <strong>Preguntas Frecuentes</strong>
+                <div class="menu-option" onclick="showFAQAnswer('¿Cómo matricularme?')"><i class="fas fa-question-circle icon"></i> ¿Cómo matricularme?</div>
+                <div class="menu-option" onclick="showFAQAnswer('¿Dónde pagar?')"><i class="fas fa-question-circle icon"></i> ¿Dónde pagar?</div>
+                <div class="menu-option" onclick="showFAQAnswer('Horarios de atención')"><i class="fas fa-question-circle icon"></i> Horarios de atención</div>
+            `, true);
+        }
+        
+        function showFAQAnswer(question) {
+            const answers = {
+                '¿Cómo matricularme?': 'Puedes matricularte en línea a través de nuestro portal o en las oficinas de registro.',
+                '¿Dónde pagar?': 'Los pagos se realizan en la plataforma de pagos en línea o en bancos autorizados.',
+                'Horarios de atención': 'Atención de lunes a viernes de 8:00 am a 5:00 pm.'
+            };
+            addUserMessage(question);
+            addBotMessage(answers[question]);
+            setTimeout(showFAQ, 1500);
+        }
+        
+        function showContactForm() {
+            addBotMessage(`
+                <strong>Contactar Asesor</strong>
+                <p>Un asesor se comunicará contigo pronto. ¿Cuál es tu número de teléfono?</p>
+            `);
+        }
+        
+        function handleUserInput(input) {
+            if (input.toLowerCase().includes('teléfono') || input.toLowerCase().includes('telefono') || input.toLowerCase().includes('contacto')) {
+                addBotMessage("Gracias. Un asesor te contactará en las próximas 24 horas.");
+                setTimeout(showMainMenu, 1500);
+            } else if (/^\d+$/.test(input)) {
+                addBotMessage(`Consulta recibida para el número ${input}. Te responderemos pronto.`);
+                setTimeout(showMainMenu, 1500);
+            } else {
+                addBotMessage("No entendí tu mensaje. Por favor selecciona una opción del menú.");
+                setTimeout(showMainMenu, 1500);
+            }
+        }
+        
+        // Hacer funciones accesibles globalmente
+        window.selectOption = selectOption;
+        window.selectUserType = selectUserType;
+        window.showFAQAnswer = showFAQAnswer;
+    </script>
+</body>
+</html>

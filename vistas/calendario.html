@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Académico | Universidad de Medellín</title>
+    <link href="estilo_calendario.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Menú lateral -->
+    <nav class="sidebar">
+        <div class="logo">
+            <a href="index.html">
+              <img src="logo.png" alt="Campus Connect">
+            </a>
+          </div>
+            <ul class="menu">
+                <li><a href="index.html"><i class="fas fa-home"></i>Inicio</a></li>
+                <li><a href="enviar_solicitud.html"><i class="fas fa-paper-plane"></i>Enviar Solicitud</a></li>
+                <li><a href="estado_solicitud.html"><i class="fas fa-clipboard-check"></i>Estado de mi Solicitud</a></li>
+                <li><a href="calendario.html" class="active"><i class="fas fa-calendar-alt"></i>Calendario Académico</a></li>
+                <li><a href="directorio.html"><i class="fas fa-map-marker-alt"></i>Mapa y Directorio</a></li>
+                <li><a href="ayuda.html"><i class="fas fa-comments"></i>Ayuda</a></li>
+                <li><a href="respuestas.html"><i class="fas fa-inbox"></i>Mis Respuestas</a></li>
+            </ul>
+        </div>
+        <button class="admin-button" onclick="location.href='iniciosesion.html'">
+            <i class="fas fa-user-shield"></i> Administrador
+          </button>
+          
+          
+        <div class="udem-logo">
+            <img src="universidad.jpg" alt="Universidad de Medellín">
+          </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <div class="calendar-header">
+            <span class="university-badge">
+                <i class="fas fa-university"></i> Universidad de Medellín
+            </span>
+            <h1><i class="fas fa-calendar-alt"></i> Calendario Académico 2025</h1>
+            <p>Consulta las fechas importantes, eventos académicos y actividades institucionales</p>
+        </div>
+
+        <!-- Controles del calendario -->
+        <div class="calendar-controls">
+            <div class="period-selector">
+                <button class="period-button active">Semestre I</button>
+                <button class="period-button">Semestre II</button>
+                <button class="period-button">Vacaciones</button>
+                <button class="period-button">Año completo</button>
+            </div>
+            <div class="month-navigator">
+                <button class="nav-button"><i class="fas fa-chevron-left"></i></button>
+                <div class="current-month">Marzo 2023</div>
+                <button class="nav-button"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Calendario académico -->
+        <div class="academic-calendar">
+            <div class="calendar-grid">
+                <!-- Días de la semana -->
+                <div class="calendar-header-day">Lunes</div>
+                <div class="calendar-header-day">Martes</div>
+                <div class="calendar-header-day">Miércoles</div>
+                <div class="calendar-header-day">Jueves</div>
+                <div class="calendar-header-day">Viernes</div>
+                <div class="calendar-header-day">Sábado</div>
+                <div class="calendar-header-day">Domingo</div>
+                
+                <!-- Días del mes (ejemplo para marzo 2023) -->
+                <!-- Semana 1 -->
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">27</div>
+                </div>
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">28</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">1</div>
+                    <div class="academic-event event-important">Inicio Semestre</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">2</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">3</div>
+                    <div class="academic-event event-cultural">Feria del libro</div>
+                </div>
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">4</div>
+                </div>
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">5</div>
+                </div>
+                
+                <!-- Semana 2 -->
+                <div class="calendar-day">
+                    <div class="day-number">6</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">7</div>
+                    <div class="academic-event event-academic">Conferencia Investigación</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">8</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">9</div>
+                    <div class="academic-event event-sports">Juegos Interfacultades</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">10</div>
+                </div>
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">11</div>
+                </div>
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">12</div>
+                </div>
+                
+                <!-- Semana 3 -->
+                <div class="calendar-day">
+                    <div class="day-number">13</div>
+                    <div class="academic-event event-important">Entrega parcial 1</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">14</div>
+                </div>
+                <div class="calendar-day current-day">
+                    <div class="day-number">15</div>
+                    <div class="academic-event event-academic">Reunión Consejo Académico</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">16</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">17</div>
+                    <div class="academic-event event-cultural">Día de la cultura</div>
+                </div>
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">18</div>
+                </div>
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">19</div>
+                </div>
+                
+                <!-- Semana 4 -->
+                <div class="calendar-day">
+                    <div class="day-number">20</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">21</div>
+                    <div class="academic-event event-important">Último día de retiro</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">22</div>
+                    <div class="academic-event event-academic">Seminario Internacional</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">23</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">24</div>
+                </div>
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">25</div>
+                </div>
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">26</div>
+                </div>
+                
+                <!-- Semana 5 -->
+                <div class="calendar-day">
+                    <div class="day-number">27</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">28</div>
+                    <div class="academic-event event-important">Corte académico</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">29</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">30</div>
+                    <div class="academic-event event-cultural">Presentación artística</div>
+                </div>
+                <div class="calendar-day">
+                    <div class="day-number">31</div>
+                </div>
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">1</div>
+                </div>
+                <div class="calendar-day non-academic-day">
+                    <div class="day-number">2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Próximos eventos -->
+        <div class="events-section">
+            <h2 class="section-title"><i class="fas fa-bullhorn"></i> Próximos Eventos</h2>
+            <ul class="event-list">
+                <li class="event-item">
+                    <div class="event-date">
+                        <div class="event-day">15</div>
+                        <div class="event-month">Mar</div>
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-title">Reunión del Consejo Académico</h3>
+                        <div class="event-time">
+                            <i class="far fa-clock"></i> 10:00 AM - 12:00 PM | Rectoría
+                        </div>
+                        <p class="event-description">
+                            Sesión ordinaria del Consejo Académico para revisión de planes de estudio y reglamentos.
+                        </p>
+                        <span class="event-category category-academic">Académico</span>
+                    </div>
+                </li>
+                <li class="event-item">
+                    <div class="event-date">
+                        <div class="event-day">17</div>
+                        <div class="event-month">Mar</div>
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-title">Día de la Cultura Universitaria</h3>
+                        <div class="event-time">
+                            <i class="far fa-clock"></i> Todo el día | Plazoleta Central
+                        </div>
+                        <p class="event-description">
+                            Celebración de la diversidad cultural con presentaciones artísticas, gastronomía y música.
+                        </p>
+                        <span class="event-category category-cultural">Cultural</span>
+                    </div>
+                </li>
+                <li class="event-item">
+                    <div class="event-date">
+                        <div class="event-day">21</div>
+                        <div class="event-month">Mar</div>
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-title">Fecha límite para retiro de asignaturas</h3>
+                        <div class="event-time">
+                            <i class="far fa-clock"></i> Hasta las 5:00 PM | Registro Académico
+                        </div>
+                        <p class="event-description">
+                            Último día para retirar asignaturas sin penalización académica.
+                        </p>
+                        <span class="event-category category-important">Importante</span>
+                    </div>
+                </li>
+                <li class="event-item">
+                    <div class="event-date">
+                        <div class="event-day">22</div>
+                        <div class="event-month">Mar</div>
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-title">Seminario Internacional de Investigación</h3>
+                        <div class="event-time">
+                            <i class="far fa-clock"></i> 8:00 AM - 6:00 PM | Auditorio 101
+                        </div>
+                        <p class="event-description">
+                            Presentación de avances de investigación con invitados internacionales de 5 países.
+                        </p>
+                        <span class="event-category category-academic">Académico</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Menú toggle para móviles
+        const menuToggle = document.createElement('div');
+        menuToggle.className = 'menu-toggle';
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        document.body.appendChild(menuToggle);
+        
+        menuToggle.addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Simular navegación del calendario
+        const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+                           "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        
+        let currentMonth = 2; // Marzo
+        const currentMonthElement = document.querySelector('.current-month');
+        
+        function updateMonthDisplay() {
+            currentMonthElement.textContent = `${monthNames[currentMonth]} 2023`;
+        }
+        
+        document.querySelector('.nav-button:nth-child(1)').addEventListener('click', function() {
+            if (currentMonth > 0) {
+                currentMonth--;
+                updateMonthDisplay();
+            }
+        });
+        
+        document.querySelector('.nav-button:nth-child(3)').addEventListener('click', function() {
+            if (currentMonth < 11) {
+                currentMonth++;
+                updateMonthDisplay();
+            }
+        });
+        
+        // Simular selección de período académico
+        document.querySelectorAll('.period-button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.period-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Mostrar detalles del evento al hacer clic en un día del calendario
+        document.querySelectorAll('.academic-event').forEach(event => {
+            event.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('Mostrar detalles completos del evento:\n\n' + this.textContent);
+            });
+        });
+        
+        // Cerrar menú al hacer clic en un enlace (en móviles)
+        document.querySelectorAll('.menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    document.querySelector('.sidebar').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Universitario</title>
+</head>
+<body>
+    <div class="chatbot-button" id="chatbotButton">
+        <i class="fas fa-comments"></i>
+    </div>
+    
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            Asistente Universitario
+        </div>
+        <div class="chatbot-body" id="chatbotBody"></div>
+        <div class="chatbot-footer">
+            <input type="text" id="userInput" placeholder="Escribe tu mensaje..." autocomplete="off">
+        </div>
+    </div>
+
+    <script>
+        const chatbotButton = document.getElementById('chatbotButton');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatbotBody = document.getElementById('chatbotBody');
+        const userInput = document.getElementById('userInput');
+        
+        // Mostrar/ocultar chatbot
+        chatbotButton.addEventListener('click', () => {
+            chatbotContainer.style.display = chatbotContainer.style.display === 'flex' ? 'none' : 'flex';
+            if (chatbotContainer.style.display === 'flex') {
+                showMainMenu();
+            }
+        });
+        
+        // Manejar entrada del usuario
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && userInput.value.trim() !== '') {
+                addUserMessage(userInput.value.trim());
+                handleUserInput(userInput.value.trim());
+                userInput.value = '';
+            }
+        });
+        
+        function addUserMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user-message';
+            messageDiv.textContent = text;
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+        
+        function addBotMessage(text, isHTML = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot-message';
+            if (isHTML) {
+                messageDiv.innerHTML = text;
+            } else {
+                messageDiv.textContent = text;
+            }
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+        
+        function showMainMenu() {
+            addBotMessage(`
+                <strong>Menú Principal</strong>
+                <div class="menu-option" onclick="selectOption(1)"><i class="fas fa-paper-plane icon"></i> Enviar Solicitud</div>
+                <div class="menu-option" onclick="selectOption(2)"><i class="fas fa-search icon"></i> Consultar Estado</div>
+                <div class="menu-option" onclick="selectOption(3)"><i class="fas fa-question-circle icon"></i> Preguntas Frecuentes</div>
+                <div class="menu-option" onclick="selectOption(4)"><i class="fas fa-headset icon"></i> Contactar Asesor</div>
+            `, true);
+        }
+        
+        function selectOption(option) {
+            addUserMessage(['Enviar Solicitud', 'Consultar Estado', 'Preguntas Frecuentes', 'Contactar Asesor'][option-1]);
+            
+            if (option === 1) {
+                showUserTypes();
+            } else if (option === 2) {
+                addBotMessage("Ingresa tu número de solicitud o documento:");
+            } else if (option === 3) {
+                showFAQ();
+            } else {
+                showContactForm();
+            }
+        }
+        
+        function showUserTypes() {
+            addBotMessage(`
+                <strong>Tipo de Usuario</strong>
+                <div class="menu-option" onclick="selectUserType('Estudiante')"><i class="fas fa-user-graduate icon"></i> Estudiante</div>
+                <div class="menu-option" onclick="selectUserType('Profesor')"><i class="fas fa-chalkboard-teacher icon"></i> Profesor</div>
+                <div class="menu-option" onclick="selectUserType('Administrativo')"><i class="fas fa-briefcase icon"></i> Administrativo</div>
+                <div class="menu-option" onclick="selectUserType('Egresado')"><i class="fas fa-user-tie icon"></i> Egresado</div>
+            `, true);
+        }
+        
+        function selectUserType(type) {
+            addUserMessage(type);
+            addBotMessage(`Has seleccionado: ${type}. Próximamente más opciones...`);
+            setTimeout(showMainMenu, 1500);
+        }
+        
+        function showFAQ() {
+            addBotMessage(`
+                <strong>Preguntas Frecuentes</strong>
+                <div class="menu-option" onclick="showFAQAnswer('¿Cómo matricularme?')"><i class="fas fa-question-circle icon"></i> ¿Cómo matricularme?</div>
+                <div class="menu-option" onclick="showFAQAnswer('¿Dónde pagar?')"><i class="fas fa-question-circle icon"></i> ¿Dónde pagar?</div>
+                <div class="menu-option" onclick="showFAQAnswer('Horarios de atención')"><i class="fas fa-question-circle icon"></i> Horarios de atención</div>
+            `, true);
+        }
+        
+        function showFAQAnswer(question) {
+            const answers = {
+                '¿Cómo matricularme?': 'Puedes matricularte en línea a través de nuestro portal o en las oficinas de registro.',
+                '¿Dónde pagar?': 'Los pagos se realizan en la plataforma de pagos en línea o en bancos autorizados.',
+                'Horarios de atención': 'Atención de lunes a viernes de 8:00 am a 5:00 pm.'
+            };
+            addUserMessage(question);
+            addBotMessage(answers[question]);
+            setTimeout(showFAQ, 1500);
+        }
+        
+        function showContactForm() {
+            addBotMessage(`
+                <strong>Contactar Asesor</strong>
+                <p>Un asesor se comunicará contigo pronto. ¿Cuál es tu número de teléfono?</p>
+            `);
+        }
+        
+        function handleUserInput(input) {
+            if (input.toLowerCase().includes('teléfono') || input.toLowerCase().includes('telefono') || input.toLowerCase().includes('contacto')) {
+                addBotMessage("Gracias. Un asesor te contactará en las próximas 24 horas.");
+                setTimeout(showMainMenu, 1500);
+            } else if (/^\d+$/.test(input)) {
+                addBotMessage(`Consulta recibida para el número ${input}. Te responderemos pronto.`);
+                setTimeout(showMainMenu, 1500);
+            } else {
+                addBotMessage("No entendí tu mensaje. Por favor selecciona una opción del menú.");
+                setTimeout(showMainMenu, 1500);
+            }
+        }
+        
+        // Hacer funciones accesibles globalmente
+        window.selectOption = selectOption;
+        window.selectUserType = selectUserType;
+        window.showFAQAnswer = showFAQAnswer;
+    </script>
+</body>
+</html>

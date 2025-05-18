@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Panel de Administración</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="estilo_admin.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Menú lateral -->
+    <nav class="sidebar">
+        <div>
+            <div class="logo">
+                <a href="admin.html">
+                  <img src="logo.png" alt="Campus Connect">
+                </a>
+              </div>
+            
+            <div class="user-info">
+                <h3>Administrador del Sistema</h3>
+                <p>admin@campusconnect.edu</p>
+            </div>
+            
+            <ul class="menu">
+                <li><a href="admin.html" class="active"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+                <li><a href="solicitudes.html"><i class="fas fa-inbox"></i>Solicitudes</a></li>
+                <li><a href="usuarios.html"><i class="fas fa-users"></i>Usuarios</a></li>
+                <li><a href="unidades.html"><i class="fas fa-building"></i>Unidades</a></li>
+                <li><a href="reportes.html"><i class="fas fa-chart-bar"></i>Reportes</a></li>
+                <li><a href="configuracion.html"><i class="fas fa-cog"></i>Configuración</a></li>
+                <li><a href="calendario.html"><i class="fas fa-calendar-alt"></i>Calendario</a></li>
+            </ul>
+        </div>
+        <button class="logout-button" onclick="location.href='index.html'">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </button>
+          
+        <div class="udem-logo">
+            <img src="universidad.jpg" alt="Universidad de Medellín">
+          </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <span class="university-badge">
+            <i class="fas fa-university"></i> Universidad de Medellín
+        </span>
+  
+        <div class="header">
+            <h1><i class="fas fa-tachometer-alt"></i> Panel de Administración</h1>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar solicitudes...">
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters">
+            <div class="filter-group">
+                <label for="status-filter">Estado</label>
+                <select id="status-filter" class="filter-select">
+                    <option value="all">Todos los estados</option>
+                    <option value="new">Nuevas</option>
+                    <option value="assigned">Asignadas</option>
+                    <option value="in-progress">En progreso</option>
+                    <option value="resolved">Resueltas</option>
+                    <option value="closed">Cerradas</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="type-filter">Tipo de usuario</label>
+                <select id="type-filter" class="filter-select">
+                    <option value="all">Todos los tipos</option>
+                    <option value="student">Estudiante</option>
+                    <option value="professor">Profesor</option>
+                    <option value="external">Persona Externa</option>
+                    <option value="contractor">Contratista</option>
+                    <option value="applicant">Aspirante</option>
+                    <option value="graduate">Egresado</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="priority-filter">Prioridad</label>
+                <select id="priority-filter" class="filter-select">
+                    <option value="all">Todas</option>
+                    <option value="high">Alta</option>
+                    <option value="medium">Media</option>
+                    <option value="low">Baja</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="date-filter">Fecha</label>
+                <select id="date-filter" class="filter-select">
+                    <option value="all">Todo el tiempo</option>
+                    <option value="today">Hoy</option>
+                    <option value="week">Esta semana</option>
+                    <option value="month">Este mes</option>
+                    <option value="custom">Personalizado</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Estadísticas -->
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Solicitudes Totales</h3>
+                <p>1,248</p>
+            </div>
+            <div class="stat-card secondary">
+                <h3>Nuevas</h3>
+                <p>42</p>
+            </div>
+            <div class="stat-card success">
+                <h3>Resueltas</h3>
+                <p>856</p>
+            </div>
+            <div class="stat-card warning">
+                <h3>En Progreso</h3>
+                <p>128</p>
+            </div>
+        </div>
+
+        <!-- Tabla de solicitudes -->
+        <div style="overflow-x: auto;">
+            <table class="requests-table">
+                <thead>
+                    <tr>
+                        <th>Ticket ID</th>
+                        <th>Tipo de Usuario</th>
+                        <th>Tipo de Solicitud</th>
+                        <th>Fecha</th>
+                        <th>Prioridad</th>
+                        <th>Estado</th>
+                        <th>Unidad Asignada</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ticket-id">CC-2023-0042</td>
+                        <td><span class="user-type">Estudiante</span></td>
+                        <td>Certificado de notas</td>
+                        <td>15/11/2023</td>
+                        <td><span class="priority high"></span>Alta</td>
+                        <td><span class="status new">Nueva</span></td>
+                        <td>-</td>
+                        <td>
+                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0042')">
+                                <i class="fas fa-eye"></i> Ver
+                            </button>
+                            <button class="action-btn assign">
+                                <i class="fas fa-user-tag"></i> Asignar
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ticket-id">CC-2023-0041</td>
+                        <td><span class="user-type">Profesor</span></td>
+                        <td>Reserva de laboratorio</td>
+                        <td>14/11/2023</td>
+                        <td><span class="priority medium"></span>Media</td>
+                        <td><span class="status assigned">Asignada</span></td>
+                        <td>Recursos Académicos</td>
+                        <td>
+                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0041')">
+                                <i class="fas fa-eye"></i> Ver
+                            </button>
+                            <button class="action-btn resolve">
+                                <i class="fas fa-check-circle"></i> Resolver
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ticket-id">CC-2023-0040</td>
+                        <td><span class="user-type">Persona Externa</span></td>
+                        <td>Visita guiada</td>
+                        <td>13/11/2023</td>
+                        <td><span class="priority low"></span>Baja</td>
+                        <td><span class="status in-progress">En progreso</span></td>
+                        <td>Admisiones</td>
+                        <td>
+                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0040')">
+                                <i class="fas fa-eye"></i> Ver
+                            </button>
+                            <button class="action-btn resolve">
+                                <i class="fas fa-check-circle"></i> Resolver
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ticket-id">CC-2023-0039</td>
+                        <td><span class="user-type">Egresado</span></td>
+                        <td>Certificado de grado</td>
+                        <td>12/11/2023</td>
+                        <td><span class="priority high"></span>Alta</td>
+                        <td><span class="status closed">Cerrada</span></td>
+                        <td>Registro Académico</td>
+                        <td>
+                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0039')">
+                                <i class="fas fa-eye"></i> Ver
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ticket-id">CC-2023-0038</td>
+                        <td><span class="user-type">Contratista</span></td>
+                        <td>Solicitud de acceso</td>
+                        <td>10/11/2023</td>
+                        <td><span class="priority medium"></span>Media</td>
+                        <td><span class="status assigned">Asignada</span></td>
+                        <td>Seguridad</td>
+                        <td>
+                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0038')">
+                                <i class="fas fa-eye"></i> Ver
+                            </button>
+                            <button class="action-btn resolve">
+                                <i class="fas fa-check-circle"></i> Resolver
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ticket-id">CC-2023-0037</td>
+                        <td><span class="user-type">Aspirante</span></td>
+                        <td>Información de becas</td>
+                        <td>09/11/2023</td>
+                        <td><span class="priority low"></span>Baja</td>
+                        <td><span class="status new">Nueva</span></td>
+                        <td>-</td>
+                        <td>
+                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0037')">
+                                <i class="fas fa-eye"></i> Ver
+                            </button>
+                            <button class="action-btn assign">
+                                <i class="fas fa-user-tag"></i> Asignar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal de solicitud -->
+    <div class="modal" id="requestModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Detalles de la Solicitud</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="request-details">
+                    <div class="detail-row">
+                        <div class="detail-label">Ticket ID:</div>
+                        <div class="detail-value" id="modalTicketId">CC-2023-0042</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Tipo de Usuario:</div>
+                        <div class="detail-value" id="modalUserType">Estudiante</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Tipo de Solicitud:</div>
+                        <div class="detail-value" id="modalRequestType">Certificado de notas</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Fecha de Creación:</div>
+                        <div class="detail-value" id="modalDate">15/11/2023 10:24 AM</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Prioridad:</div>
+                        <div class="detail-value" id="modalPriority"><span class="priority high"></span> Alta</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Estado:</div>
+                        <div class="detail-value" id="modalStatus"><span class="status new">Nueva</span></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Unidad Asignada:</div>
+                        <div class="detail-value" id="modalAssignedUnit">-</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Solicitante:</div>
+                        <div class="detail-value" id="modalRequester">Juan Pérez (juan.perez@email.com)</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Detalles:</div>
+                        <div class="detail-value" id="modalDetails">
+                            Necesito un certificado de notas oficial para aplicar a una beca de posgrado en el extranjero. 
+                            Por favor incluir todos los semestres cursados hasta la fecha.
+                        </div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Documentos Adjuntos:</div>
+                        <div class="detail-value">
+                            <div class="documents-list">
+                                <div class="document-item">
+                                    <i class="fas fa-file-pdf document-icon"></i>
+                                    <span>documento_identidad.pdf (250 KB)</span>
+                                </div>
+                                <div class="document-item">
+                                    <i class="fas fa-file-image document-icon"></i>
+                                    <span>foto_carnet.jpg (180 KB)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-section">
+                    <h3>Historial de Acciones</h3>
+                    <div id="actionHistory">
+                        <div style="padding: 0.5rem; border-bottom: 1px solid var(--gray-light);">
+                            <strong>15/11/2023 10:24 AM</strong> - Solicitud creada por el usuario
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-section">
+                    <h3>Realizar Acción</h3>
+                    <div class="form-group">
+                        <label for="actionType">Tipo de Acción</label>
+                        <select id="actionType" class="form-control">
+                            <option value="">-- Seleccione una acción --</option>
+                            <option value="assign">Asignar a unidad</option>
+                            <option value="priority">Cambiar prioridad</option>
+                            <option value="comment">Agregar comentario</option>
+                            <option value="resolve">Resolver solicitud</option>
+                            <option value="close">Cerrar solicitud</option>
+                        </select>
+                    </div>
+
+                    <div id="assignFields" style="display: none;">
+                        <div class="form-group">
+                            <label for="assignUnit">Unidad</label>
+                            <select id="assignUnit" class="form-control">
+                                <option value="">-- Seleccione una unidad --</option>
+                                <option value="academic">Registro Académico</option>
+                                <option value="admissions">Admisiones</option>
+                                <option value="security">Seguridad</option>
+                                <option value="resources">Recursos Académicos</option>
+                                <option value="finance">Finanzas</option>
+                                <option value="library">Biblioteca</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignComments">Comentarios (opcional)</label>
+                            <textarea id="assignComments" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div id="priorityFields" style="display: none;">
+                        <div class="form-group">
+                            <label for="newPriority">Nueva Prioridad</label>
+                            <select id="newPriority" class="form-control">
+                                <option value="high">Alta</option>
+                                <option value="medium">Media</option>
+                                <option value="low">Baja</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="priorityReason">Razón del cambio (opcional)</label>
+                            <textarea id="priorityReason" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div id="commentFields" style="display: none;">
+                        <div class="form-group">
+                            <label for="actionComment">Comentario</label>
+                            <textarea id="actionComment" class="form-control" required></textarea>
+                        </div>
+                    </div>
+
+                    <div id="resolveFields" style="display: none;">
+                        <div class="form-group">
+                            <label for="resolutionDetails">Detalles de la solución</label>
+                            <textarea id="resolutionDetails" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="responseMessage">Mensaje al solicitante</label>
+                            <textarea id="responseMessage" class="form-control" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                <button class="btn btn-primary" id="saveActionBtn" onclick="saveAction()">Guardar Acción</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        const requestsData = {
+            "CC-2023-0042": {
+                userType: "Estudiante",
+                requestType: "Certificado de notas",
+                date: "15/11/2023 10:24 AM",
+                priority: "high",
+                status: "new",
+                assignedUnit: "",
+                requester: "Juan Pérez (juan.perez@email.com)",
+                details: "Necesito un certificado de notas oficial para aplicar a una beca de posgrado en el extranjero. Por favor incluir todos los semestres cursados hasta la fecha.",
+                documents: [
+                    { name: "documento_identidad.pdf", type: "pdf", size: 250 },
+                    { name: "foto_carnet.jpg", type: "image", size: 180 }
+                ],
+                history: [
+                    { date: "15/11/2023 10:24 AM", action: "Solicitud creada por el usuario" }
+                ]
+            },
+            "CC-2023-0041": {
+                userType: "Profesor",
+                requestType: "Reserva de laboratorio",
+                date: "14/11/2023 14:30 PM",
+                priority: "medium",
+                status: "assigned",
+                assignedUnit: "Recursos Académicos",
+                requester: "María González (maria.gonzalez@email.com)",
+                details: "Necesito reservar el laboratorio de informática 3 para el curso de programación avanzada los días lunes y miércoles de 2pm a 4pm durante el mes de diciembre.",
+                documents: [
+                    { name: "programa_curso.pdf", type: "pdf", size: 320 }
+                ],
+                history: [
+                    { date: "14/11/2023 14:30 PM", action: "Solicitud creada por el usuario" },
+                    { date: "14/11/2023 16:45 PM", action: "Asignada a Recursos Académicos por Admin1" }
+                ]
+            },
+            "CC-2023-0040": {
+                userType: "Persona Externa",
+                requestType: "Visita guiada",
+                date: "13/11/2023 09:15 AM",
+                priority: "low",
+                status: "in-progress",
+                assignedUnit: "Admisiones",
+                requester: "Carlos Rodríguez (carlos.rodriguez@email.com)",
+                details: "Solicito una visita guiada para un grupo de 15 estudiantes de último año de colegio que están interesados en conocer las instalaciones y programas de la universidad. Preferiblemente en la semana del 20 al 24 de noviembre.",
+                documents: [],
+                history: [
+                    { date: "13/11/2023 09:15 AM", action: "Solicitud creada por el usuario" },
+                    { date: "13/11/2023 11:30 AM", action: "Asignada a Admisiones por Admin2" },
+                    { date: "14/11/2023 10:00 AM", action: "Enviado correo de confirmación al solicitante" }
+                ]
+            },
+            "CC-2023-0039": {
+                userType: "Egresado",
+                requestType: "Certificado de grado",
+                date: "12/11/2023 16:20 PM",
+                priority: "high",
+                status: "closed",
+                assignedUnit: "Registro Académico",
+                requester: "Ana Martínez (ana.martinez@email.com)",
+                details: "Solicito certificado de grado con apostilla para presentar en una universidad en España. Por favor incluir todos los detalles del programa cursado y calificaciones finales.",
+                documents: [
+                    { name: "copia_cedula.pdf", type: "pdf", size: 210 },
+                    { name: "solicitud_apostilla.pdf", type: "pdf", size: 150 }
+                ],
+                history: [
+                    { date: "12/11/2023 16:20 PM", action: "Solicitud creada por el usuario" },
+                    { date: "13/11/2023 09:00 AM", action: "Asignada a Registro Académico por Admin1" },
+                    { date: "13/11/2023 14:30 PM", action: "Documento generado y enviado a apostilla" },
+                    { date: "15/11/2023 11:15 AM", action: "Proceso completado, solicitud cerrada" }
+                ]
+            }
+        };
+
+        // Abrir modal con los detalles de la solicitud
+        function openRequestModal(ticketId) {
+            const request = requestsData[ticketId];
+            const modal = document.getElementById('requestModal');
+            
+            // Llenar los datos en el modal
+            document.getElementById('modalTitle').textContent = `Solicitud: ${request.requestType}`;
+            document.getElementById('modalTicketId').textContent = ticketId;
+            document.getElementById('modalUserType').textContent = request.userType;
+            document.getElementById('modalRequestType').textContent = request.requestType;
+            document.getElementById('modalDate').textContent = request.date;
+            
+            // Prioridad
+            const priorityElement = document.getElementById('modalPriority');
+            priorityElement.innerHTML = `<span class="priority ${request.priority}"></span> ${getPriorityText(request.priority)}`;
+            
+            // Estado
+            const statusElement = document.getElementById('modalStatus');
+            statusElement.innerHTML = `<span class="status ${request.status}">${getStatusText(request.status)}</span>`;
+            
+            document.getElementById('modalAssignedUnit').textContent = request.assignedUnit || '-';
+            document.getElementById('modalRequester').textContent = request.requester;
+            document.getElementById('modalDetails').textContent = request.details;
+            
+            // Documentos adjuntos
+            const documentsList = document.querySelector('.documents-list');
+            documentsList.innerHTML = '';
+            
+            if (request.documents.length > 0) {
+                request.documents.forEach(doc => {
+                    const iconClass = doc.type === 'pdf' ? 'fa-file-pdf' : 'fa-file-image';
+                    const docItem = document.createElement('div');
+                    docItem.className = 'document-item';
+                    docItem.innerHTML = `<i class="fas ${iconClass} document-icon"></i><span>${doc.name} (${doc.size} KB)</span>`;
+                    documentsList.appendChild(docItem);
+                });
+            } else {
+                documentsList.innerHTML = '<p>No hay documentos adjuntos</p>';
+            }
+            
+            // Historial de acciones
+            const actionHistory = document.getElementById('actionHistory');
+            actionHistory.innerHTML = '';
+            
+            request.history.forEach(item => {
+                const historyItem = document.createElement('div');
+                historyItem.style.padding = '0.5rem';
+                historyItem.style.borderBottom = '1px solid var(--gray-light)';
+                historyItem.innerHTML = `<strong>${item.date}</strong> - ${item.action}`;
+                actionHistory.appendChild(historyItem);
+            });
+            
+            // Mostrar modal
+            modal.style.display = 'flex';
+        }
+
+        // Cerrar modal
+        function closeModal() {
+            document.getElementById('requestModal').style.display = 'none';
+        }
+
+        // Convertir códigos de prioridad a texto
+        function getPriorityText(code) {
+            const priorities = {
+                'high': 'Alta',
+                'medium': 'Media',
+                'low': 'Baja'
+            };
+            return priorities[code] || code;
+        }
+
+        // Convertir códigos de estado a texto
+        function getStatusText(code) {
+            const statuses = {
+                'new': 'Nueva',
+                'assigned': 'Asignada',
+                'in-progress': 'En progreso',
+                'resolved': 'Resuelta',
+                'closed': 'Cerrada'
+            };
+            return statuses[code] || code;
+        }
+
+        // Mostrar campos según el tipo de acción seleccionada
+        document.getElementById('actionType').addEventListener('change', function() {
+            const actionType = this.value;
+            
+            // Ocultar todos los campos primero
+            document.getElementById('assignFields').style.display = 'none';
+            document.getElementById('priorityFields').style.display = 'none';
+            document.getElementById('commentFields').style.display = 'none';
+            document.getElementById('resolveFields').style.display = 'none';
+            
+            // Mostrar los campos correspondientes
+            if (actionType === 'assign') {
+                document.getElementById('assignFields').style.display = 'block';
+            } else if (actionType === 'priority') {
+                document.getElementById('priorityFields').style.display = 'block';
+            } else if (actionType === 'comment') {
+                document.getElementById('commentFields').style.display = 'block';
+            } else if (actionType === 'resolve' || actionType === 'close') {
+                document.getElementById('resolveFields').style.display = 'block';
+            }
+        });
+
+        // Guardar acción (simulado)
+        function saveAction() {
+            const actionType = document.getElementById('actionType').value;
+            const ticketId = document.getElementById('modalTicketId').textContent;
+            
+            if (!actionType) {
+                alert('Por favor seleccione un tipo de acción');
+                return;
+            }
+            
+            // Aquí iría la lógica para guardar la acción en el servidor
+            // Por ahora solo mostramos un mensaje y cerramos el modal
+            alert(`Acción "${actionType}" guardada para la solicitud ${ticketId}`);
+            closeModal();
+            
+            // En una implementación real, aquí actualizaríamos la interfaz según la acción realizada
+        }
+
+        // Cerrar modal al hacer clic fuera del contenido
+        window.onclick = function(event) {
+            const modal = document.getElementById('requestModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Gestión de Unidades</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="estilos_unidades.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div>
+            <div class="logo">
+                <a href="admin.html">
+                  <img src="logo.png" alt="Campus Connect">
+                </a>
+              </div>
+            
+            <div class="user-info">
+                <h3>Administrador del Sistema</h3>
+                <p>admin@campusconnect.edu</p>
+            </div>
+            
+            <ul class="menu">
+                <li><a href="admin.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+                <li><a href="solicitudes.html"><i class="fas fa-inbox"></i>Solicitudes</a></li>
+                <li><a href="usuarios.html"><i class="fas fa-users"></i>Usuarios <span class="status completed"></span></a></li>
+                <li><a href="unidades.html" class="active"><i class="fas fa-building"></i>Unidades</a></li>
+                <li><a href="reportes.html"><i class="fas fa-chart-bar"></i>Reportes</a></li>
+                <li><a href="configuracion.html"><i class="fas fa-cog"></i>Configuración</a></li>
+                <li><a href="calendarioadmin.html"><i class="fas fa-calendar-alt"></i>Calendario</a></li>
+            </ul>
+        </div>
+        <button class="logout-button" onclick="location.href='index.html'">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </button>
+          
+        <div class="udem-logo">
+            <img src="universidad.jpg" alt="Universidad de Medellín">
+          </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <span class="university-badge">
+            <i class="fas fa-university"></i> Universidad de Medellín
+        </span>
+  
+        <div class="header">
+            <h1><i class="fas fa-building"></i> Gestión de Unidades</h1>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar unidades...">
+                </div>
+                <button class="btn btn-primary" onclick="openUnitModal('new')">
+                    <i class="fas fa-plus"></i> Nueva Unidad
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters">
+            <div class="filter-group">
+                <label for="type-filter">Tipo de unidad</label>
+                <select id="type-filter" class="filter-select">
+                    <option value="all">Todos los tipos</option>
+                    <option value="academic">Académica</option>
+                    <option value="administrative">Administrativa</option>
+                    <option value="support">Soporte</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="status-filter">Estado</label>
+                <select id="status-filter" class="filter-select">
+                    <option value="all">Todos los estados</option>
+                    <option value="active">Activa</option>
+                    <option value="inactive">Inactiva</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="campus-filter">Campus</label>
+                <select id="campus-filter" class="filter-select">
+                    <option value="all">Todos los campus</option>
+                    <option value="north">Norte</option>
+                    <option value="south">Sur</option>
+                    <option value="central">Central</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Tabla de unidades -->
+        <div style="overflow-x: auto;">
+            <table class="units-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Código</th>
+                        <th>Tipo</th>
+                        <th>Responsable</th>
+                        <th>Campus</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Registro Académico</td>
+                        <td>RA-001</td>
+                        <td>Administrativa</td>
+                        <td>María González</td>
+                        <td>Central</td>
+                        <td><span class="unit-status status-active">Activa</span></td>
+                        <td>
+                            <button class="action-btn edit" onclick="openUnitModal('edit', 'unit1')">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="action-btn delete">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Departamento de Matemáticas</td>
+                        <td>DM-002</td>
+                        <td>Académica</td>
+                        <td>Carlos Rodríguez</td>
+                        <td>Norte</td>
+                        <td><span class="unit-status status-active">Activa</span></td>
+                        <td>
+                            <button class="action-btn edit" onclick="openUnitModal('edit', 'unit2')">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="action-btn delete">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Biblioteca Central</td>
+                        <td>BC-003</td>
+                        <td>Soporte</td>
+                        <td>Ana Martínez</td>
+                        <td>Central</td>
+                        <td><span class="unit-status status-active">Activa</span></td>
+                        <td>
+                            <button class="action-btn edit" onclick="openUnitModal('edit', 'unit3')">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="action-btn delete">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Laboratorios de Ingeniería</td>
+                        <td>LI-004</td>
+                        <td>Académica</td>
+                        <td>Luis García</td>
+                        <td>Sur</td>
+                        <td><span class="unit-status status-inactive">Inactiva</span></td>
+                        <td>
+                            <button class="action-btn edit" onclick="openUnitModal('edit', 'unit4')">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="action-btn delete">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Servicios Estudiantiles</td>
+                        <td>SE-005</td>
+                        <td>Administrativa</td>
+                        <td>Patricia López</td>
+                        <td>Norte</td>
+                        <td><span class="unit-status status-active">Activa</span></td>
+                        <td>
+                            <button class="action-btn edit" onclick="openUnitModal('edit', 'unit5')">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="action-btn delete">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal de unidad -->
+    <div class="modal" id="unitModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalUnitTitle">Nueva Unidad</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="unitForm">
+                    <div class="form-group">
+                        <label for="unitName">Nombre de la unidad</label>
+                        <input type="text" id="unitName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="unitCode">Código</label>
+                        <input type="text" id="unitCode" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="unitType">Tipo de unidad</label>
+                        <select id="unitType" class="form-control" required>
+                            <option value="">Seleccionar tipo</option>
+                            <option value="academic">Académica</option>
+                            <option value="administrative">Administrativa</option>
+                            <option value="support">Soporte</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="unitManager">Responsable</label>
+                        <select id="unitManager" class="form-control" required>
+                            <option value="">Seleccionar responsable</option>
+                            <option value="user1">María González</option>
+                            <option value="user2">Carlos Rodríguez</option>
+                            <option value="user3">Ana Martínez</option>
+                            <option value="user4">Luis García</option>
+                            <option value="user5">Patricia López</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="unitCampus">Campus</label>
+                        <select id="unitCampus" class="form-control" required>
+                            <option value="">Seleccionar campus</option>
+                            <option value="north">Norte</option>
+                            <option value="south">Sur</option>
+                            <option value="central">Central</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="unitStatus">Estado</label>
+                        <select id="unitStatus" class="form-control" required>
+                            <option value="active">Activa</option>
+                            <option value="inactive">Inactiva</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="unitDescription">Descripción</label>
+                        <textarea id="unitDescription" class="form-control"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveUnit()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos de ejemplo para las unidades
+        const unitsData = {
+            "unit1": {
+                name: "Registro Académico",
+                code: "RA-001",
+                type: "administrative",
+                manager: "user1",
+                campus: "central",
+                status: "active",
+                description: "Unidad encargada de los procesos de registro y control académico de los estudiantes."
+            },
+            "unit2": {
+                name: "Departamento de Matemáticas",
+                code: "DM-002",
+                type: "academic",
+                manager: "user2",
+                campus: "north",
+                status: "active",
+                description: "Departamento responsable de los cursos y programas relacionados con matemáticas."
+            },
+            "unit3": {
+                name: "Biblioteca Central",
+                code: "BC-003",
+                type: "support",
+                manager: "user3",
+                campus: "central",
+                status: "active",
+                description: "Biblioteca principal del campus con recursos para todas las disciplinas."
+            }
+        };
+
+        // Abrir modal de unidad
+        function openUnitModal(action, unitId = null) {
+            const modal = document.getElementById('unitModal');
+            const form = document.getElementById('unitForm');
+            
+            if (action === 'new') {
+                document.getElementById('modalUnitTitle').textContent = 'Nueva Unidad';
+                form.reset();
+            } else if (action === 'edit' && unitId) {
+                document.getElementById('modalUnitTitle').textContent = 'Editar Unidad';
+                const unit = unitsData[unitId];
+                
+                document.getElementById('unitName').value = unit.name;
+                document.getElementById('unitCode').value = unit.code;
+                document.getElementById('unitType').value = unit.type;
+                document.getElementById('unitManager').value = unit.manager;
+                document.getElementById('unitCampus').value = unit.campus;
+                document.getElementById('unitStatus').value = unit.status;
+                document.getElementById('unitDescription').value = unit.description;
+            }
+            
+            modal.style.display = 'flex';
+        }
+
+        // Guardar unidad
+        function saveUnit() {
+            // Aquí iría la lógica para guardar la unidad
+            alert('Unidad guardada correctamente');
+            closeModal();
+        }
+
+        // Cerrar modal
+        function closeModal() {
+            document.getElementById('unitModal').style.display = 'none';
+        }
+
+        // Cerrar modal al hacer clic fuera del contenido
+        window.onclick = function(event) {
+            const modal = document.getElementById('unitModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

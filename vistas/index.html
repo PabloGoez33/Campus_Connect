@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campus Connect</title>
+  <link href="/campus_connect/vistas/CSS/estiloindex.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <nav class="sidebar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="/campus_connect/vistas/SRC/logo.png" alt="Campus Connect">
+      </a>
+    </div>
+    
+    <ul class="menu">
+      <li><a href="" class="active"><i class="fas fa-home"></i>Inicio</a></li>
+      <li><a href="/campus_connect/vistas/enviar_solicitud.html"><i class="fas fa-paper-plane"></i>Enviar Solicitud</a></li>
+      <li><a href="/campus_connect/vistas/estado_solicitud.html"><i class="fas fa-clipboard-check"></i>Estado de mi Solicitud</a></li>
+      <li><a href="/campus_connect/vistas/calendario.html"><i class="fas fa-calendar-alt"></i>Calendario Académico</a></li>
+      <li><a href="/campus_connect/vistas/directorio.html"><i class="fas fa-map-marker-alt"></i>Mapa y Directorio</a></li>
+      <li><a href="/campus_connect/vistas/ayuda.html"><i class="fas fa-comments"></i>Ayuda</a></li>
+      <li><a href="/campus_connect/vistas/respuestas.html"><i class="fas fa-inbox"></i>Mis Respuestas</a></li>
+    </ul>
+    
+    <button class="admin-button" onclick="location.href='iniciosesion.html'">
+      <i class="fas fa-user-shield"></i> Administrador
+    </button>
+    
+    
+    
+
+    <div class="udem-logo">
+      <img src="/campus_connect/vistas/SRC/universidad.jpg" alt="Universidad de Medellín">
+    </div>
+  </nav>
+  <div class="main-content">
+    <div class="calendar-header">
+      <span class="university-badge">
+          <i class="fas fa-university"></i> Universidad de Medellín
+      </span>
+    <!-- Sección de bienvenida -->
+    <section class="welcome-section">
+      <div class="welcome-header">
+        <h1 class="welcome-title"><i class="fas fa-door-open"></i> Bienvenid@ a Campus Connect</h1>
+        <p class="welcome-subtitle">"Gestiona tus trámites institucionales de manera fácil, rápida y sin filas. Todo lo que necesitas, en un solo lugar."</p>
+        <p class="welcome-description">
+          ¡Hola! 👋 Bienvenido/a al portal <strong>Campus Connect</strong>,l portal oficial para gestionar solicitudes de estudiantes, profesores, administrativos, egresados, aspirantes, contratista y personas externas! Aquí podrás enviar tus solicitudes, hacerles seguimiento y recibir respuestas de manera fácil, rápida y centralizada. ¡Gestiona todo en un solo lugar! 
+        </p>
+      </div>
+    </section>
+
+    <!-- Sección de funciones -->
+    <section class="functions-section">
+      <h2 class="section-title"><i class="fas fa-bullseye"></i> ¿Qué puedes hacer en Campus Connect?</h2>
+      <p class="section-description">Descubre todas las funciones disponibles en esta plataforma:</p>
+      
+      <div class="functions-grid">
+        <div class="function-card">
+          <div class="function-icon"><i class="fas fa-envelope"></i></div>
+          <h3 class="function-title">Enviar Solicitudes</h3>
+          <p class="function-description">Registra cualquier tipo de trámite según tu perfil: académico, administrativo, acceso, certificaciones, entre otros.</p>
+        </div>
+        
+        <div class="function-card">
+          <div class="function-icon"><i class="fas fa-clipboard-check"></i></div>
+          <h3 class="function-title">Estado de mi Solicitud</h3>
+          <p class="function-description">Revisa el progreso de tus solicitudes con una visualización tipo pizza.</p>
+        </div>
+        
+        <div class="function-card">
+          <div class="function-icon"><i class="fas fa-calendar-alt"></i></div>
+          <h3 class="function-title">Calendario Académico</h3>
+          <p class="function-description">Consulta fechas importantes, actividades y talleres programados.</p>
+        </div>
+        
+        <div class="function-card">
+          <div class="function-icon"><i class="fas fa-map-marked-alt"></i></div>
+          <h3 class="function-title">Mapa y Directorio</h3>
+          <p class="function-description">Encuentra fácilmente aulas, oficinas, cafeterías y más en el campus.</p>
+        </div>
+        
+        <div class="function-card">
+          <div class="function-icon"><i class="fas fa-inbox"></i></div>
+          <h3 class="function-title">Mis Respuestas</h3>
+          <p class="function-description">Accede a las respuestas oficiales y documentos relacionados con tus solicitudes.</p>
+        </div>
+        
+        <div class="function-card">
+          <div class="function-icon"><i class="fas fa-robot"></i></div>
+          <h3 class="function-title">Ayuda y Chatbot</h3>
+          <p class="function-description">Resuelve dudas frecuentes y recibe asistencia en tiempo real con nuestro asistente virtual.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de tutorial -->
+    <section class="tutorial-section">
+      <h2 class="section-title"><i class="fas fa-film"></i> Tutorial: ¿Cómo usar la plataforma?</h2>
+      <p class="section-description">Mira el siguiente video para aprender paso a paso cómo:</p>
+      
+      <div class="tutorial-content">
+        <div class="tutorial-video-container">
+          <iframe class="tutorial-video" width="300" height="500" src="https://www.youtube.com/embed/Chh-4eajBu0?si=QhEXCfWiWTbQ9Ns8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="tutorial-steps">
+          <ul>
+            <li>Crear una solicitud desde cero</li>
+            <li>Consultar el estado de tus trámites</li>
+          <li>Ver calendario académico</li>
+            <li>Descargar respuestas y documentos oficiales</li>
+            <li>Usar el chatbot para resolver dudas rápidas</li>
+            <li>Ver el mapa del campus</li>
+          </ul>
+          <button class="tutorial-button">
+            <i class="fas fa-play-circle"></i> Ver tutorial completo
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de noticias realistas -->
+<!-- Sección de noticias actualizada -->
+<section class="news-section">
+  <h2 class="section-title"><i class="fas fa-newspaper"></i> Noticias y Actualizaciones</h2>
+  <p class="section-description">Mantente al día con lo que pasa en la institución:</p>
+  
+  <div class="news-grid">
+    <!-- Noticia 1 -->
+    <div class="news-card">
+      <img class="news-image" src="aceditacion_negocios.jpg" alt="Estudiantes de Negocios Internacionales">
+      <div class="news-content">
+        <span class="news-badge">Acreditación</span>
+        <div class="news-date"><i class="far fa-calendar-alt"></i> 2 de abril, 2025 | 10:51 am</div>
+        <h3 class="news-title">Negocios Internacionales recibe Acreditación de Alta Calidad hasta el 2033</h3>
+        <p class="news-excerpt">La Facultad de Ciencias Económicas y Administrativas celebra la renovación de la Acreditación en Alta Calidad para el programa de Negocios Internacionales por 8 años más.</p>
+        <div class="news-author">Por Catalina Florez</div>
+        <a href="https://udemedellin.edu.co/negocios-internacionales-recibe-acreditacion-de-alta-calidad-hasta-el-2033/" class="news-link" target="_blank" rel="noopener noreferrer">
+          Leer más <i class="fas fa-arrow-right"></i>
+        </a>
+              </div>
+    </div>
+    
+    <!-- Noticia 2 -->
+    <div class="news-card">
+      <img class="news-image" src="concierto_cerati.jpg" alt="Concierto homenaje a Soda Stereo">
+      <div class="news-content">
+        <span class="news-badge" style="background-color: #ff9800;">Evento</span>
+        <div class="news-date"><i class="far fa-calendar-alt"></i> 2 de abril, 2025 | 10:14 am</div>
+        <h3 class="news-title">Un homenaje a Soda Stereo y a Gustavo Cerati en la UdeMedellín</h3>
+        <p class="news-excerpt">La magia y el legado de Gustavo Cerati revivirán este sábado 5 de abril en el Teatro Gabriel Obregón Botero.</p>
+        <div class="news-author">Por Catalina Florez</div>
+<a href="https://udemedellin.edu.co/soda-grandes-exitos-fuerza-natural-en-la-udemedellin-un-homenaje-a-gustavo-cerati/" class="news-link" target="_blank" rel="noopener noreferrer">
+  Leer más <i class="fas fa-arrow-right"></i>
+</a>
+      </div>
+    </div>
+    
+    <!-- Noticia 3 -->
+    <div class="news-card">
+      <img class="news-image" src="patrimonio_textil.jpg" alt="Patrimonio textil indígena">
+      <div class="news-content">
+        <span class="news-badge" style="background-color: #4caf50;">Investigación</span>
+        <div class="news-date"><i class="far fa-calendar-alt"></i> 2 de abril, 2025</div>
+        <h3 class="news-title">Investigación busca entrenar a la IA para preservar el patrimonio textil indígena</h3>
+        <p class="news-excerpt">Proyecto indaga cómo la inteligencia artificial reproduce sesgos al representar el patrimonio textil indígena.</p>
+        <div class="news-author">Por Equipo de Investigación</div>
+        <a href="https://udemedellin.edu.co/noticias-campus-vivo-del-07-al-11-de-abril-de-2025/" class="news-link" target="_blank" rel="noopener noreferrer">
+          Leer más <i class="fas fa-arrow-right"></i>
+        </a>
+              </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Sección de asistencia -->
+    <section class="assistance-section">
+      <div class="assistance-content">
+        <div class="assistance-icon">
+          <i class="fas fa-question"></i>
+        </div>
+        <h2 class="section-title"><i class="fas fa-hands-helping"></i> Asistencia rápida</h2>
+        <p class="section-description">Si tienes dudas, haz clic en el botón flotante del chatbot que te acompaña en todo momento. Está disponible 24/7 para ayudarte con cualquier consulta sobre el portal.</p>
+      </div>
+    </section>
+  </div>
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Chatbot Universitario</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+      <div class="chatbot-button" id="chatbotButton">
+          <i class="fas fa-comments"></i>
+      </div>
+      
+      <div class="chatbot-container" id="chatbotContainer">
+          <div class="chatbot-header">
+              Asistente Universitario
+          </div>
+          <div class="chatbot-body" id="chatbotBody"></div>
+          <div class="chatbot-footer">
+              <input type="text" id="userInput" placeholder="Escribe tu mensaje..." autocomplete="off">
+          </div>
+      </div>
+  
+      <script>
+          const chatbotButton = document.getElementById('chatbotButton');
+          const chatbotContainer = document.getElementById('chatbotContainer');
+          const chatbotBody = document.getElementById('chatbotBody');
+          const userInput = document.getElementById('userInput');
+          
+          // Mostrar/ocultar chatbot
+          chatbotButton.addEventListener('click', () => {
+              chatbotContainer.style.display = chatbotContainer.style.display === 'flex' ? 'none' : 'flex';
+              if (chatbotContainer.style.display === 'flex') {
+                  showMainMenu();
+              }
+          });
+          
+          // Manejar entrada del usuario
+          userInput.addEventListener('keypress', (e) => {
+              if (e.key === 'Enter' && userInput.value.trim() !== '') {
+                  addUserMessage(userInput.value.trim());
+                  handleUserInput(userInput.value.trim());
+                  userInput.value = '';
+              }
+          });
+          
+          function addUserMessage(text) {
+              const messageDiv = document.createElement('div');
+              messageDiv.className = 'message user-message';
+              messageDiv.textContent = text;
+              chatbotBody.appendChild(messageDiv);
+              chatbotBody.scrollTop = chatbotBody.scrollHeight;
+          }
+          
+          function addBotMessage(text, isHTML = false) {
+              const messageDiv = document.createElement('div');
+              messageDiv.className = 'message bot-message';
+              if (isHTML) {
+                  messageDiv.innerHTML = text;
+              } else {
+                  messageDiv.textContent = text;
+              }
+              chatbotBody.appendChild(messageDiv);
+              chatbotBody.scrollTop = chatbotBody.scrollHeight;
+          }
+          
+          function showMainMenu() {
+              addBotMessage(`
+                  <strong>Menú Principal</strong>
+                  <div class="menu-option" onclick="selectOption(1)"><i class="fas fa-paper-plane icon"></i> Enviar Solicitud</div>
+                  <div class="menu-option" onclick="selectOption(2)"><i class="fas fa-search icon"></i> Consultar Estado</div>
+                  <div class="menu-option" onclick="selectOption(3)"><i class="fas fa-question-circle icon"></i> Preguntas Frecuentes</div>
+                  <div class="menu-option" onclick="selectOption(4)"><i class="fas fa-headset icon"></i> Contactar Asesor</div>
+              `, true);
+          }
+          
+          function selectOption(option) {
+              addUserMessage(['Enviar Solicitud', 'Consultar Estado', 'Preguntas Frecuentes', 'Contactar Asesor'][option-1]);
+              
+              if (option === 1) {
+                  showUserTypes();
+              } else if (option === 2) {
+                  addBotMessage("Ingresa tu número de solicitud o documento:");
+              } else if (option === 3) {
+                  showFAQ();
+              } else {
+                  showContactForm();
+              }
+          }
+          
+          function showUserTypes() {
+              addBotMessage(`
+                  <strong>Tipo de Usuario</strong>
+                  <div class="menu-option" onclick="selectUserType('Estudiante')"><i class="fas fa-user-graduate icon"></i> Estudiante</div>
+                  <div class="menu-option" onclick="selectUserType('Profesor')"><i class="fas fa-chalkboard-teacher icon"></i> Profesor</div>
+                  <div class="menu-option" onclick="selectUserType('Administrativo')"><i class="fas fa-briefcase icon"></i> Administrativo</div>
+                  <div class="menu-option" onclick="selectUserType('Egresado')"><i class="fas fa-user-tie icon"></i> Egresado</div>
+              `, true);
+          }
+          
+          function selectUserType(type) {
+              addUserMessage(type);
+              addBotMessage(`Has seleccionado: ${type}. Próximamente más opciones...`);
+              setTimeout(showMainMenu, 1500);
+          }
+          
+          function showFAQ() {
+              addBotMessage(`
+                  <strong>Preguntas Frecuentes</strong>
+                  <div class="menu-option" onclick="showFAQAnswer('¿Cómo matricularme?')"><i class="fas fa-question-circle icon"></i> ¿Cómo matricularme?</div>
+                  <div class="menu-option" onclick="showFAQAnswer('¿Dónde pagar?')"><i class="fas fa-question-circle icon"></i> ¿Dónde pagar?</div>
+                  <div class="menu-option" onclick="showFAQAnswer('Horarios de atención')"><i class="fas fa-question-circle icon"></i> Horarios de atención</div>
+              `, true);
+          }
+          
+          function showFAQAnswer(question) {
+              const answers = {
+                  '¿Cómo matricularme?': 'Puedes matricularte en línea a través de nuestro portal o en las oficinas de registro.',
+                  '¿Dónde pagar?': 'Los pagos se realizan en la plataforma de pagos en línea o en bancos autorizados.',
+                  'Horarios de atención': 'Atención de lunes a viernes de 8:00 am a 5:00 pm.'
+              };
+              addUserMessage(question);
+              addBotMessage(answers[question]);
+              setTimeout(showFAQ, 1500);
+          }
+          
+          function showContactForm() {
+              addBotMessage(`
+                  <strong>Contactar Asesor</strong>
+                  <p>Un asesor se comunicará contigo pronto. ¿Cuál es tu número de teléfono?</p>
+              `);
+          }
+          
+          function handleUserInput(input) {
+              if (input.toLowerCase().includes('teléfono') || input.toLowerCase().includes('telefono') || input.toLowerCase().includes('contacto')) {
+                  addBotMessage("Gracias. Un asesor te contactará en las próximas 24 horas.");
+                  setTimeout(showMainMenu, 1500);
+              } else if (/^\d+$/.test(input)) {
+                  addBotMessage(`Consulta recibida para el número ${input}. Te responderemos pronto.`);
+                  setTimeout(showMainMenu, 1500);
+              } else {
+                  addBotMessage("No entendí tu mensaje. Por favor selecciona una opción del menú.");
+                  setTimeout(showMainMenu, 1500);
+              }
+          }
+          
+          // Hacer funciones accesibles globalmente
+          window.selectOption = selectOption;
+          window.selectUserType = selectUserType;
+          window.showFAQAnswer = showFAQAnswer;
+      </script>
+  </body>
+  </html>

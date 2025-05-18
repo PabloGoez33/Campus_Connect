@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Mapa y Directorio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="estilo_directorio.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Menú lateral -->
+    <nav class="sidebar">
+        <div>
+            <div class="logo">
+                <a href="index.html">
+                  <img src="logo.png" alt="Campus Connect">
+                </a>
+            <ul class="menu">
+                <li><a href="index.html"><i class="fas fa-home"></i>Inicio</a></li>
+                <li><a href="enviar_solicitud.html"><i class="fas fa-paper-plane"></i>Enviar Solicitud</a></li>
+                <li><a href="estado_solicitud.html"><i class="fas fa-clipboard-check"></i>Estado de mi Solicitud</a></li>
+                <li><a href="calendario.html"><i class="fas fa-calendar-alt"></i>Calendario Académico</a></li>
+                <li><a href="directorio.html" class="active"><i class="fas fa-map-marker-alt"></i>Mapa y Directorio</a></li>
+                <li><a href="ayuda.html"><i class="fas fa-comments"></i>Ayuda</a></li>
+                <li><a href="respuestas.html"><i class="fas fa-inbox"></i>Mis Respuestas</a></li>
+            </ul>
+        </div>
+        <button class="admin-button">
+            <i class="fas fa-user-shield"></i> Administrador
+        </button>
+        <div class="udem-logo">
+            <img src="universidad.jpg" alt="Universidad de Medellín">
+          </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        
+        <div class="calendar-header">
+            <span class="university-badge">
+                <i class="fas fa-university"></i> Universidad de Medellín
+            </span>
+        <div class="map-header">
+            <h1><i class="fas fa-map-marked-alt"></i> Mapa y Directorio</h1>
+            <p>Encuentra fácilmente las ubicaciones y contactos de todas las dependencias de la Universidad de Medellín</p>
+        </div>
+
+        <!-- Sección de mapa -->
+        <div class="map-container">
+            <div class="map-image">
+       
+                <img src="mapa.png" alt="Mapa Universidad de Medellín">
+            </div>
+        </div>
+
+        <!-- Sección de directorio -->
+        <div class="directory-section">
+            <h2 class="section-title"><i class="fas fa-address-book"></i> Directorio Universitario</h2>
+            
+            <div class="search-directory">
+                <h3><i class="fas fa-search"></i> Buscar en el directorio</h3>
+                <p>Encuentra oficinas, departamentos o personal de la universidad</p>
+                
+                <form class="search-form" onsubmit="return false;">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="search-input" placeholder="Ej: Registro, Decanatura, Biblioteca..." oninput="filterDirectory()">
+                    <button type="button" class="search-button" onclick="filterDirectory()">
+                        Buscar
+                    </button>
+                </form>
+            </div>
+            
+            <div class="directory-categories">
+                <button class="category-button active" data-category="all">Todos</button>
+                <button class="category-button" data-category="administrativos">Administrativos</button>
+                <button class="category-button" data-category="academicos">Académicos</button>
+                <button class="category-button" data-category="facultades">Facultades</button>
+                <button class="category-button" data-category="servicios">Servicios</button>
+                <button class="category-button" data-category="investigacion">Investigación</button>
+                <button class="category-button" data-category="bienestar">Bienestar</button>
+            </div>
+            
+            <div class="directory-results" id="directory-results">
+              
+            </div>
+        </div>
+
+        <!-- Efecto decorativo -->
+        <div class="wave-decoration"></div>
+    </div>
+
+    <script>
+        // Datos del directorio
+        const directoryData = [
+            {
+                title: "Rectoría",
+                department: "Administración Central",
+                category: "administrativos",
+                icon: "university",
+                location: "Edificio Administrativo, Piso 2",
+                phone: "(604) 590 45 00 Ext. 1001",
+                email: "rectoria@udemedellin.edu.co",
+                schedule: "Lunes a viernes: 8:00 a.m. – 12:00 p.m. / 2:00 p.m. – 6:00 p.m."
+            },
+            {
+                title: "Oficina de Internacionalización",
+                department: "Cooperación Internacional",
+                category: "administrativos",
+                icon: "globe",
+                location: "Edificio Administrativo, Piso 2",
+                phone: "(604) 590 45 00 Ext. 1102",
+                email: "internacionalizacion@udemedellin.edu.co",
+                schedule: "Lunes a viernes: 8:00 a.m. – 12:00 p.m. / 2:00 p.m. – 6:00 p.m."
+            },
+            {
+                title: "Facultad de Derecho",
+                department: "Área Académica",
+                category: "facultades",
+                icon: "gavel",
+                location: "Edificio de Derecho, Piso 2",
+                phone: "(604) 590 45 00 Ext. 890",
+                email: "facultad.derecho@udemedellin.edu.co",
+                schedule: "Lunes a viernes: 8:00 a.m. – 12:00 p.m. / 2:00 p.m. – 6:00 p.m."
+            },
+            {
+                title: "Oficina de Registro Académico",
+                department: "Vicerrectoría Académica",
+                category: "administrativos",
+                icon: "file-alt",
+                location: "Edificio Administrativo, Piso 1",
+                phone: "(604) 590 45 00 Ext. 123",
+                email: "registro@udemedellin.edu.co",
+                schedule: "Lunes a viernes: 7:30 a.m. – 12:00 p.m. / 1:30 p.m. – 6:00 p.m."
+            },
+            {
+                title: "Oficina de Planeación",
+                department: "Administración",
+                category: "administrativos",
+                icon: "chart-line",
+                location: "Edificio Administrativo, Piso 3",
+                phone: "(604) 590 45 00 Ext. 456",
+                email: "planeacion@udemedellin.edu.co",
+                schedule: "Lunes a viernes: 8:00 a.m. – 12:00 p.m. / 2:00 p.m. – 6:00 p.m."
+            },
+            {
+                title: "Dirección de Investigación y Extensión",
+                department: "Investigación",
+                category: "investigacion",
+                icon: "flask",
+                location: "Edificio de Investigación, Piso 2",
+                phone: "(604) 590 45 00 Ext. 678",
+                email: "investigacion@udemedellin.edu.co",
+                schedule: "Lunes a viernes: 8:00 a.m. – 12:00 p.m. / 2:00 p.m. – 6:00 p.m."
+            },
+            {
+                title: "Sala de Bienestar",
+                department: "Bienestar Universitario",
+                category: "bienestar",
+                icon: "heartbeat",
+                location: "Edificio de Bienestar, Piso 2",
+                phone: "(604) 590 45 00 Ext. 2345",
+                email: "bienestar.actividades@udemedellin.edu.co",
+                schedule: "Lunes a viernes: 9:00 a.m. – 5:00 p.m."
+            },
+            {
+                title: "Gimnasio Universitario",
+                department: "Deportes y Recreación",
+                category: "bienestar",
+                icon: "dumbbell",
+                location: "Bloque Deportivo, Nivel 1",
+                phone: "(604) 590 45 00 Ext. 3150",
+                email: "gimnasio@udemedellin.edu.co",
+                schedule: "Lunes a viernes: 6:00 a.m. – 8:00 p.m."
+            },
+            {
+                title: "Oficina de Mensajería y Correspondencia",
+                department: "Servicios Generales",
+                category: "servicios",
+                icon: "envelope-open-text",
+                location: "Edificio Administrativo, Zona de Servicios Generales",
+                phone: "(604) 590 45 00 Ext. 9910",
+                email: "mensajeria@udemedellin.edu.co",
+                schedule: "Lunes a viernes: 8:00 a.m. – 5:00 p.m."
+            },
+            {
+                title: "Tesorería",
+                department: "Administración Financiera",
+                category: "administrativos",
+                icon: "calculator",
+                location: "Edificio Administrativo, Piso 1",
+                phone: "(604) 590 45 00 Ext. 1200",
+                email: "tesoreria@udemedellin.edu.co",
+                schedule: "Lunes a viernes: 8:00 a.m. – 12:00 p.m. / 1:30 p.m. – 6:00 p.m."
+            },
+            {
+                title: "Sala de Proyección / Cine Universitario",
+                department: "Cultura y Arte",
+                category: "bienestar",
+                icon: "film",
+                location: "Edificio de Comunicación, Piso 1",
+                phone: "(604) 590 45 00 Ext. 1700",
+                email: "cineclub@udemedellin.edu.co",
+                schedule: "Consulta la cartelera semanal en la entrada del edificio"
+            },
+            {
+                title: "Canchas Deportivas",
+                department: "Deportes",
+                category: "bienestar",
+                icon: "running",
+                location: "Zona Deportiva, detrás del Edificio de Derecho",
+                phone: "(604) 590 45 00 Ext. 9999",
+                email: "deportes@udemedellin.edu.co",
+                schedule: "Lunes a sábado: 6:00 a.m. – 9:00 p.m."
+            },
+            {
+                title: "Sala de Innovación TIC",
+                department: "Tecnología e Innovación",
+                category: "investigacion",
+                icon: "laptop-code",
+                location: "Edificio de Ingenierías, Piso 2",
+                phone: "(604) 590 45 00 Ext. 2121",
+                email: "innovaciontic@udemedellin.edu.co",
+                schedule: "Lunes a viernes: 8:00 a.m. – 6:00 p.m."
+            }
+        ];
+
+        // Variables para el filtrado
+        let currentCategory = "all";
+        let currentSearchTerm = "";
+
+        // Cargar el directorio al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            renderDirectory(directoryData);
+            
+            // Configurar eventos de los botones de categoría
+            document.querySelectorAll('.category-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remover clase active de todos los botones
+                    document.querySelectorAll('.category-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Agregar clase active al botón clickeado
+                    this.classList.add('active');
+                    
+                    // Actualizar categoría actual y filtrar
+                    currentCategory = this.dataset.category;
+                    filterDirectory();
+                });
+            });
+        });
+
+        // Función para renderizar el directorio
+        function renderDirectory(data) {
+            const resultsContainer = document.getElementById('directory-results');
+            
+            if (data.length === 0) {
+                resultsContainer.innerHTML = '<div class="no-results">No se encontraron resultados</div>';
+                return;
+            }
+            
+            let html = '';
+            
+            data.forEach(item => {
+                html += `
+                    <div class="directory-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-${item.icon}"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title">${item.title}</h3>
+                                <p class="card-department">${item.department}</p>
+                            </div>
+                        </div>
+                        <div class="card-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Ubicación</div>
+                                    <div>${item.location}</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Teléfono</div>
+                                    <div>${item.phone}</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Correo</div>
+                                    <div>${item.email}</div>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Horario</div>
+                                    <div>${item.schedule}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsContainer.innerHTML = html;
+        }
+
+        // Función para filtrar el directorio
+        function filterDirectory() {
+            currentSearchTerm = document.getElementById('search-input').value.toLowerCase();
+            
+            const filteredData = directoryData.filter(item => {
+                // Filtrar por categoría
+                const categoryMatch = currentCategory === 'all' || item.category === currentCategory;
+                
+                // Filtrar por término de búsqueda
+                const searchMatch = 
+                    item.title.toLowerCase().includes(currentSearchTerm) ||
+                    item.department.toLowerCase().includes(currentSearchTerm) ||
+                    item.location.toLowerCase().includes(currentSearchTerm) ||
+                    item.phone.toLowerCase().includes(currentSearchTerm) ||
+                    item.email.toLowerCase().includes(currentSearchTerm);
+                
+                return categoryMatch && searchMatch;
+            });
+            
+            renderDirectory(filteredData);
+        }
+
+        // Menú toggle para móviles
+        const menuToggle = document.createElement('div');
+        menuToggle.className = 'menu-toggle';
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        document.body.appendChild(menuToggle);
+        
+        menuToggle.addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace (en móviles)
+        document.querySelectorAll('.menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    document.querySelector('.sidebar').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+<<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Universitario</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="chatbot-button" id="chatbotButton">
+        <i class="fas fa-comments"></i>
+    </div>
+    
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            Asistente Universitario
+        </div>
+        <div class="chatbot-body" id="chatbotBody"></div>
+        <div class="chatbot-footer">
+            <input type="text" id="userInput" placeholder="Escribe tu mensaje..." autocomplete="off">
+        </div>
+    </div>
+
+    <script>
+        const chatbotButton = document.getElementById('chatbotButton');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatbotBody = document.getElementById('chatbotBody');
+        const userInput = document.getElementById('userInput');
+        
+        // Mostrar/ocultar chatbot
+        chatbotButton.addEventListener('click', () => {
+            chatbotContainer.style.display = chatbotContainer.style.display === 'flex' ? 'none' : 'flex';
+            if (chatbotContainer.style.display === 'flex') {
+                showMainMenu();
+            }
+        });
+        
+        // Manejar entrada del usuario
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && userInput.value.trim() !== '') {
+                addUserMessage(userInput.value.trim());
+                handleUserInput(userInput.value.trim());
+                userInput.value = '';
+            }
+        });
+        
+        function addUserMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user-message';
+            messageDiv.textContent = text;
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+        
+        function addBotMessage(text, isHTML = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot-message';
+            if (isHTML) {
+                messageDiv.innerHTML = text;
+            } else {
+                messageDiv.textContent = text;
+            }
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+        
+        function showMainMenu() {
+            addBotMessage(`
+                <strong>Menú Principal</strong>
+                <div class="menu-option" onclick="selectOption(1)"><i class="fas fa-paper-plane icon"></i> Enviar Solicitud</div>
+                <div class="menu-option" onclick="selectOption(2)"><i class="fas fa-search icon"></i> Consultar Estado</div>
+                <div class="menu-option" onclick="selectOption(3)"><i class="fas fa-question-circle icon"></i> Preguntas Frecuentes</div>
+                <div class="menu-option" onclick="selectOption(4)"><i class="fas fa-headset icon"></i> Contactar Asesor</div>
+            `, true);
+        }
+        
+        function selectOption(option) {
+            addUserMessage(['Enviar Solicitud', 'Consultar Estado', 'Preguntas Frecuentes', 'Contactar Asesor'][option-1]);
+            
+            if (option === 1) {
+                showUserTypes();
+            } else if (option === 2) {
+                addBotMessage("Ingresa tu número de solicitud o documento:");
+            } else if (option === 3) {
+                showFAQ();
+            } else {
+                showContactForm();
+            }
+        }
+        
+        function showUserTypes() {
+            addBotMessage(`
+                <strong>Tipo de Usuario</strong>
+                <div class="menu-option" onclick="selectUserType('Estudiante')"><i class="fas fa-user-graduate icon"></i> Estudiante</div>
+                <div class="menu-option" onclick="selectUserType('Profesor')"><i class="fas fa-chalkboard-teacher icon"></i> Profesor</div>
+                <div class="menu-option" onclick="selectUserType('Administrativo')"><i class="fas fa-briefcase icon"></i> Administrativo</div>
+                <div class="menu-option" onclick="selectUserType('Egresado')"><i class="fas fa-user-tie icon"></i> Egresado</div>
+            `, true);
+        }
+        
+        function selectUserType(type) {
+            addUserMessage(type);
+            addBotMessage(`Has seleccionado: ${type}. Próximamente más opciones...`);
+            setTimeout(showMainMenu, 1500);
+        }
+        
+        function showFAQ() {
+            addBotMessage(`
+                <strong>Preguntas Frecuentes</strong>
+                <div class="menu-option" onclick="showFAQAnswer('¿Cómo matricularme?')"><i class="fas fa-question-circle icon"></i> ¿Cómo matricularme?</div>
+                <div class="menu-option" onclick="showFAQAnswer('¿Dónde pagar?')"><i class="fas fa-question-circle icon"></i> ¿Dónde pagar?</div>
+                <div class="menu-option" onclick="showFAQAnswer('Horarios de atención')"><i class="fas fa-question-circle icon"></i> Horarios de atención</div>
+            `, true);
+        }
+        
+        function showFAQAnswer(question) {
+            const answers = {
+                '¿Cómo matricularme?': 'Puedes matricularte en línea a través de nuestro portal o en las oficinas de registro.',
+                '¿Dónde pagar?': 'Los pagos se realizan en la plataforma de pagos en línea o en bancos autorizados.',
+                'Horarios de atención': 'Atención de lunes a viernes de 8:00 am a 5:00 pm.'
+            };
+            addUserMessage(question);
+            addBotMessage(answers[question]);
+            setTimeout(showFAQ, 1500);
+        }
+        
+        function showContactForm() {
+            addBotMessage(`
+                <strong>Contactar Asesor</strong>
+                <p>Un asesor se comunicará contigo pronto. ¿Cuál es tu número de teléfono?</p>
+            `);
+        }
+        
+        function handleUserInput(input) {
+            if (input.toLowerCase().includes('teléfono') || input.toLowerCase().includes('telefono') || input.toLowerCase().includes('contacto')) {
+                addBotMessage("Gracias. Un asesor te contactará en las próximas 24 horas.");
+                setTimeout(showMainMenu, 1500);
+            } else if (/^\d+$/.test(input)) {
+                addBotMessage(`Consulta recibida para el número ${input}. Te responderemos pronto.`);
+                setTimeout(showMainMenu, 1500);
+            } else {
+                addBotMessage("No entendí tu mensaje. Por favor selecciona una opción del menú.");
+                setTimeout(showMainMenu, 1500);
+            }
+        }
+        
+        // Hacer funciones accesibles globalmente
+        window.selectOption = selectOption;
+        window.selectUserType = selectUserType;
+        window.showFAQAnswer = showFAQAnswer;
+    </script>
+</body>
+</html>

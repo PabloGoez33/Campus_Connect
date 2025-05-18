@@ -1,0 +1,336 @@
+
+:root {
+    --primary: #8e0000; /* Rojo principal */
+    --primary-dark: #7bbebe;
+    --primary-light: #ff5f52;
+    --secondary: #d32229; /* Azul secundario */
+    --secondary-dark: #d32229;
+    --secondary-light: #d32229;
+    --azul:#60A8A6;
+    --text: #212121;
+    --text-light: #757575;
+    --background: #fafafa;
+    --white: #ffffff;
+    --gray: #e0e0e0;
+    --gray-light: #f5f5f5;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+    display: flex;
+    position: relative;
+}
+
+
+.sidebar {
+    width: 260px;
+    background-color: var(--gray);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    border-right: 1px solid var(--gray);
+    position: fixed;
+    box-shadow: 1px 0 10px rgba(0,0,0,0.03);
+}
+
+.logo {
+    margin: 0;
+    text-align: center;
+}
+
+.logo img {
+    height: 93px;
+    width: auto;
+    filter: brightness(0.9);
+    margin: -20px 0 0.5rem 0;
+}
+
+.udem-logo {
+    margin: 0;
+    text-align: center;
+}
+
+.udem-logo img {
+    width: 123px;
+    height: auto;
+    opacity: 0.9;
+    background: none;
+    transition: opacity 0.3s ease;
+    margin: 3px 0 0.5rem 0;
+}
+
+.udem-logo img:hover {
+    opacity: 1;
+}
+
+.admin-button {
+    background-color: var(--azul);
+    color: var(--white);
+    padding: 0.7rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    margin-top: auto;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.admin-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.menu li {
+    width: 100%;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.menu li:last-child {
+    width: 100%;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 0.92rem;
+}
+
+.menu a:hover,
+.menu a:focus {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.menu a.active {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.menu a i {
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* Contenido principal */
+.main-content {
+    margin-left: 260px;
+    padding: 2.5rem;
+    flex-grow: 1;
+    max-width: 1200px;
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Formulario de login */
+.login-container {
+    width: 100%;
+    max-width: 500px;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+    border: 1px solid var(--gray);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.login-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.login-subtitle {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.login-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.login-form input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(142, 0, 0, 0.1);
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+.input-with-icon input {
+    padding-left: 3rem;
+}
+
+.login-button {
+    width: 100%;
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 1rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.login-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.login-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .main-content {
+        padding: 2rem;
+    }
+    
+    .login-container {
+        padding: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 240px;
+        padding: 1.5rem;
+    }
+    
+    .main-content {
+        margin-left: 240px;
+        padding: 1.8rem;
+    }
+    
+    .login-container {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 100;
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 1.5rem;
+    }
+    
+    .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 90;
+        background-color: var(--primary);
+        color: var(--white);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+}
+

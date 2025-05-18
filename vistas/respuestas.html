@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Mis Respuestas</title>
+    <link href="estilos_respuestas.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Menú lateral -->
+    <nav class="sidebar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Campus Connect">
+            </a>
+        </div>
+        
+        <ul class="menu">
+            <li><a href="index.html"><i class="fas fa-home"></i>Inicio</a></li>
+            <li><a href="enviar_solicitud.html"><i class="fas fa-paper-plane"></i>Enviar Solicitud</a></li>
+            <li><a href="estado_solicitud.html"><i class="fas fa-clipboard-check"></i>Estado de mi Solicitud</a></li>
+            <li><a href="calendario.html"><i class="fas fa-calendar-alt"></i>Calendario Académico</a></li>
+            <li><a href="directorio.html"><i class="fas fa-map-marker-alt"></i>Mapa y Directorio</a></li>
+            <li><a href="ayuda.html"><i class="fas fa-comments"></i>Ayuda</a></li>
+            <li><a href="respuestas.html" class="active"><i class="fas fa-inbox"></i>Mis Respuestas</a></li>
+        </ul>
+        
+        <button class="admin-button" onclick="location.href='iniciosesion.html'">
+            <i class="fas fa-user-shield"></i> Administrador
+          </button>
+          
+        
+        <!-- Logo de la Universidad de Medellín -->
+        <div class="udem-logo">
+            <img src="universidad.jpg" alt="Universidad de Medellín">
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <div class="calendar-header">
+            <span class="university-badge">
+                <i class="fas fa-university"></i> Universidad de Medellín
+            </span>
+
+        <!-- Formulario para ingresar documento (visible inicialmente) -->
+        <div class="document-form" id="document-form">
+            <div class="form-header">
+                <h1><i class="fas fa-file-alt"></i> Consultar Respuestas</h1>
+                <p>Ingrese su número de documento o ticket para ver las respuestas a sus solicitudes</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="document-type">Tipo de consulta:</label>
+                <select id="document-type" class="form-control">
+                    <option value="id">Por número de documento</option>
+                    <option value="ticket">Por número de ticket</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="document-number" id="document-label">Número de documento:</label>
+                <input type="text" id="document-number" class="form-control" placeholder="Ingrese su número de documento">
+            </div>
+            
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" onclick="checkResponses()">
+                    <i class="fas fa-search"></i> Buscar Respuestas
+                </button>
+            </div>
+            
+            <div class="form-group text-center">
+                <p>¿No recuerda su número de ticket? <a href="estado_solicitud.html">Consulte el estado de sus solicitudes</a></p>
+            </div>
+        </div>
+        
+        <!-- Sección de respuestas (oculta inicialmente) -->
+        <div class="responses-section" id="responses-section">
+            <div class="responses-header">
+                <h1><i class="fas fa-inbox"></i> Respuestas para: <span id="user-identifier"></span></h1>
+                <button class="btn btn-primary" onclick="backToForm()">
+                    <i class="fas fa-arrow-left"></i> Nueva consulta
+                </button>
+            </div>
+            
+            <div class="search-filter">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar en mis respuestas..." id="response-search">
+                </div>
+                <div class="filter-dropdown">
+                    <select id="response-filter">
+                        <option value="">Todas las respuestas</option>
+                        <option value="pending">Pendientes</option>
+                        <option value="resolved">Resueltas</option>
+                        <option value="recent">Recientes (últimos 30 días)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="responses-list" id="responses-list">
+                <!-- Las respuestas se cargarán aquí dinámicamente -->
+                
+                <!-- Ejemplo de respuesta 1 -->
+                <div class="response-item">
+                    <div class="response-header">
+                        <div class="response-title">Respuesta a solicitud de certificado académico</div>
+                        <div class="response-date">15 de abril, 2023</div>
+                    </div>
+                    <div class="response-meta">
+                        <span class="response-ticket">Ticket: CC-2023-0042</span>
+                        <span><i class="fas fa-check-circle" style="color: #4CAF50;"></i> Resuelta</span>
+                        <span><i class="fas fa-user-tie"></i> Departamento de Registro</span>
+                    </div>
+                    <div class="response-content">
+                        <p>Hemos procesado su solicitud de certificado académico. Adjunto encontrará el documento solicitado en formato PDF. Este certificado incluye su historial académico completo hasta la fecha. Si necesita alguna modificación o tiene alguna pregunta, no dude en responder a este mensaje.</p>
+                    </div>
+                    <div class="response-actions">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-download"></i> Descargar adjuntos
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-reply"></i> Responder
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Ejemplo de respuesta 2 -->
+                <div class="response-item">
+                    <div class="response-header">
+                        <div class="response-title">Seguimiento a PQRS - Ruido en biblioteca</div>
+                        <div class="response-date">10 de abril, 2023</div>
+                    </div>
+                    <div class="response-meta">
+                        <span class="response-ticket">Ticket: CC-2023-0038</span>
+                        <span><i class="fas fa-clock" style="color: #FFC107;"></i> En proceso</span>
+                        <span><i class="fas fa-user-tie"></i> Bienestar Universitario</span>
+                    </div>
+                    <div class="response-content">
+                        <p>Gracias por reportar la situación de ruido excesivo en la biblioteca central. Hemos notificado al personal encargado y se están tomando medidas para mejorar el control de ruido en el área de estudio. Hemos programado una reunión con los grupos estudiantiles involucrados para establecer horarios y normas de convivencia. Le mantendremos informado sobre los avances.</p>
+                    </div>
+                    <div class="response-actions">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-eye"></i> Ver detalles
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-reply"></i> Comentar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <button><i class="fas fa-angle-double-left"></i></button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button><i class="fas fa-angle-double-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cambiar el label según el tipo de consulta seleccionada
+        document.getElementById('document-type').addEventListener('change', function() {
+            const label = document.getElementById('document-label');
+            if (this.value === 'ticket') {
+                label.textContent = 'Número de ticket:';
+                document.getElementById('document-number').placeholder = 'Ingrese su número de ticket (ej: CC-2023-0042)';
+            } else {
+                label.textContent = 'Número de documento:';
+                document.getElementById('document-number').placeholder = 'Ingrese su número de documento';
+            }
+        });
+
+        // Función para verificar las respuestas (simulada)
+        function checkResponses() {
+            const docType = document.getElementById('document-type').value;
+            const docNumber = document.getElementById('document-number').value.trim();
+            
+            // Validación básica
+            if (!docNumber) {
+                alert('Por favor ingrese un número de ' + (docType === 'ticket' ? 'ticket' : 'documento'));
+                return;
+            }
+            
+            // Simular validación (en una aplicación real harías una petición al servidor)
+            if (docType === 'ticket' && !docNumber.startsWith('CC-')) {
+                alert('El número de ticket debe comenzar con CC- seguido del año y número consecutivo');
+                return;
+            }
+            
+            if (docType === 'id' && (docNumber.length < 6 || isNaN(docNumber))) {
+                alert('Por favor ingrese un número de documento válido');
+                return;
+            }
+            
+            // Mostrar el identificador en la sección de respuestas
+            const identifier = docType === 'ticket' ? docNumber : 'Documento: ' + docNumber;
+            document.getElementById('user-identifier').textContent = identifier;
+            
+            // Ocultar formulario y mostrar respuestas
+            document.getElementById('document-form').style.display = 'none';
+            document.getElementById('responses-section').style.display = 'block';
+            
+            // Aquí iría la lógica para cargar las respuestas desde el servidor
+            // Por ahora mostramos datos de ejemplo
+        }
+
+        // Función para volver al formulario
+        function backToForm() {
+            document.getElementById('document-form').style.display = 'block';
+            document.getElementById('responses-section').style.display = 'none';
+            document.getElementById('document-number').value = '';
+        }
+
+        // Manejar búsqueda y filtrado (simulado)
+        document.getElementById('response-search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            filterResponses();
+        });
+
+        document.getElementById('response-filter').addEventListener('change', function() {
+            filterResponses();
+        });
+
+        function filterResponses() {
+            const searchTerm = document.getElementById('response-search').value.toLowerCase();
+            const filterValue = document.getElementById('response-filter').value;
+            
+            // En una aplicación real, harías una petición al servidor con estos parámetros
+            console.log('Filtrando respuestas con:', { searchTerm, filterValue });
+        }
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Universitario</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="chatbot-button" id="chatbotButton">
+        <i class="fas fa-comments"></i>
+    </div>
+    
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            Asistente Universitario
+        </div>
+        <div class="chatbot-body" id="chatbotBody"></div>
+        <div class="chatbot-footer">
+            <input type="text" id="userInput" placeholder="Escribe tu mensaje..." autocomplete="off">
+        </div>
+    </div>
+
+    <script>
+        const chatbotButton = document.getElementById('chatbotButton');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatbotBody = document.getElementById('chatbotBody');
+        const userInput = document.getElementById('userInput');
+        
+        // Mostrar/ocultar chatbot
+        chatbotButton.addEventListener('click', () => {
+            chatbotContainer.style.display = chatbotContainer.style.display === 'flex' ? 'none' : 'flex';
+            if (chatbotContainer.style.display === 'flex') {
+                showMainMenu();
+            }
+        });
+        
+        // Manejar entrada del usuario
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && userInput.value.trim() !== '') {
+                addUserMessage(userInput.value.trim());
+                handleUserInput(userInput.value.trim());
+                userInput.value = '';
+            }
+        });
+        
+        function addUserMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user-message';
+            messageDiv.textContent = text;
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+        
+        function addBotMessage(text, isHTML = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot-message';
+            if (isHTML) {
+                messageDiv.innerHTML = text;
+            } else {
+                messageDiv.textContent = text;
+            }
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+        
+        function showMainMenu() {
+            addBotMessage(`
+                <strong>Menú Principal</strong>
+                <div class="menu-option" onclick="selectOption(1)"><i class="fas fa-paper-plane icon"></i> Enviar Solicitud</div>
+                <div class="menu-option" onclick="selectOption(2)"><i class="fas fa-search icon"></i> Consultar Estado</div>
+                <div class="menu-option" onclick="selectOption(3)"><i class="fas fa-question-circle icon"></i> Preguntas Frecuentes</div>
+                <div class="menu-option" onclick="selectOption(4)"><i class="fas fa-headset icon"></i> Contactar Asesor</div>
+            `, true);
+        }
+        
+        function selectOption(option) {
+            addUserMessage(['Enviar Solicitud', 'Consultar Estado', 'Preguntas Frecuentes', 'Contactar Asesor'][option-1]);
+            
+            if (option === 1) {
+                showUserTypes();
+            } else if (option === 2) {
+                addBotMessage("Ingresa tu número de solicitud o documento:");
+            } else if (option === 3) {
+                showFAQ();
+            } else {
+                showContactForm();
+            }
+        }
+        
+        function showUserTypes() {
+            addBotMessage(`
+                <strong>Tipo de Usuario</strong>
+                <div class="menu-option" onclick="selectUserType('Estudiante')"><i class="fas fa-user-graduate icon"></i> Estudiante</div>
+                <div class="menu-option" onclick="selectUserType('Profesor')"><i class="fas fa-chalkboard-teacher icon"></i> Profesor</div>
+                <div class="menu-option" onclick="selectUserType('Administrativo')"><i class="fas fa-briefcase icon"></i> Administrativo</div>
+                <div class="menu-option" onclick="selectUserType('Egresado')"><i class="fas fa-user-tie icon"></i> Egresado</div>
+            `, true);
+        }
+        
+        function selectUserType(type) {
+            addUserMessage(type);
+            addBotMessage(`Has seleccionado: ${type}. Próximamente más opciones...`);
+            setTimeout(showMainMenu, 1500);
+        }
+        
+        function showFAQ() {
+            addBotMessage(`
+                <strong>Preguntas Frecuentes</strong>
+                <div class="menu-option" onclick="showFAQAnswer('¿Cómo matricularme?')"><i class="fas fa-question-circle icon"></i> ¿Cómo matricularme?</div>
+                <div class="menu-option" onclick="showFAQAnswer('¿Dónde pagar?')"><i class="fas fa-question-circle icon"></i> ¿Dónde pagar?</div>
+                <div class="menu-option" onclick="showFAQAnswer('Horarios de atención')"><i class="fas fa-question-circle icon"></i> Horarios de atención</div>
+            `, true);
+        }
+        
+        function showFAQAnswer(question) {
+            const answers = {
+                '¿Cómo matricularme?': 'Puedes matricularte en línea a través de nuestro portal o en las oficinas de registro.',
+                '¿Dónde pagar?': 'Los pagos se realizan en la plataforma de pagos en línea o en bancos autorizados.',
+                'Horarios de atención': 'Atención de lunes a viernes de 8:00 am a 5:00 pm.'
+            };
+            addUserMessage(question);
+            addBotMessage(answers[question]);
+            setTimeout(showFAQ, 1500);
+        }
+        
+        function showContactForm() {
+            addBotMessage(`
+                <strong>Contactar Asesor</strong>
+                <p>Un asesor se comunicará contigo pronto. ¿Cuál es tu número de teléfono?</p>
+            `);
+        }
+        
+        function handleUserInput(input) {
+            if (input.toLowerCase().includes('teléfono') || input.toLowerCase().includes('telefono') || input.toLowerCase().includes('contacto')) {
+                addBotMessage("Gracias. Un asesor te contactará en las próximas 24 horas.");
+                setTimeout(showMainMenu, 1500);
+            } else if (/^\d+$/.test(input)) {
+                addBotMessage(`Consulta recibida para el número ${input}. Te responderemos pronto.`);
+                setTimeout(showMainMenu, 1500);
+            } else {
+                addBotMessage("No entendí tu mensaje. Por favor selecciona una opción del menú.");
+                setTimeout(showMainMenu, 1500);
+            }
+        }
+        
+        // Hacer funciones accesibles globalmente
+        window.selectOption = selectOption;
+        window.selectUserType = selectUserType;
+        window.showFAQAnswer = showFAQAnswer;
+    </script>
+</body>
+</html>
