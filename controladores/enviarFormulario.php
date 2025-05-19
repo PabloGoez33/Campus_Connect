@@ -17,6 +17,7 @@ $email = $_POST['email'] ?? null;
 $phone = $_POST['phone'] ?? null;
 $requestDetails = $_POST['requestDetails'] ?? '{}';
 $ticket = $_POST['ticket'] ?? null;
+$estado = 'Pendiente';
 
 // Decodificar detalles de la solicitud
 $requestDetailsArray = json_decode($requestDetails, true);
@@ -52,10 +53,10 @@ if (!empty($_FILES['documents'])) {
 $documentsJson = json_encode($uploadedFilesInfo);
 
 $stmt = $conexion->prepare("INSERT INTO solicitudes 
-    (user_type, request_type, fullname, id_type, id_number, email, phone, request_details, documents, ticket) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    (user_type, request_type, fullname, id_type, id_number, email, phone, request_details, documents, ticket, estado) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-$stmt->bind_param("ssssssssss", $userType, $requestType, $fullname, $idType, $idNumber, $email, $phone, $requestDetails, $documentsJson, $ticket);
+$stmt->bind_param("ssssssssss", $userType, $requestType, $fullname, $idType, $idNumber, $email, $phone, $requestDetails, $documentsJson, $ticket, $estado);
 
 if ($stmt->execute()) {
     echo json_encode(['success' => true, 'message' => 'Solicitud guardada correctamente', 'ticket' => $ticket]);
