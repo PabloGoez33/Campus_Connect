@@ -13,7 +13,7 @@
     <nav class="sidebar">
         <div>
             <div class="logo">
-                <a href="index.html">
+                <a href="/campus_connect/vistas/index.html">
                   <img src="/campus_connect/vistas/SRC/logo.png" alt="Campus Connect">
                 </a>
               </div>
@@ -24,7 +24,6 @@
                 <li><a href="/campus_connect/vistas/calendario.html"><i class="fas fa-calendar-alt"></i>Calendario Académico</a></li>
                 <li><a href="/campus_connect/vistas/directorio.html"><i class="fas fa-map-marker-alt"></i>Mapa y Directorio</a></li>
                 <li><a href="/campus_connect/vistas/ayuda.html"><i class="fas fa-comments"></i>Ayuda</a></li>
-                <li><a href="/campus_connect/vistas/respuestas.html"><i class="fas fa-inbox"></i>Mis Respuestas</a></li>
             </ul>
         </div>
         <button class="admin-button" onclick="location.href='iniciosesion.html'">
@@ -53,8 +52,8 @@
             <h2><i class="fas fa-search"></i> Buscar solicitud</h2>
             <p>Ingresa tu número de ticket o ID de estudiante para buscar solicitudes específicas</p>
             
-            <form class="search-form">
-                <input type="text" class="search-input" placeholder="Ej: CC-2023-0042 o 2023-00158" required>
+            <form class="search-form"  method="POST" id="form-busqueda">
+                <input type="text" id="input-busqueda" class="search-input" placeholder="Ej: CC-2023-0042 o 2023-00158" required>
                 <button type="submit" class="search-button">
                     <i class="fas fa-search"></i> Buscar
                 </button>
@@ -62,274 +61,260 @@
         </div>
 
         <!-- Contenedor de estados -->
+        <div id="resultado-solicitudes" class="status-container"></div>
+        
         <div class="status-container">
-            <!-- Solicitud 1 -->
-            <div class="status-card">
-                <div class="status-header-card">
-                    <div>
-                        <h3 class="status-title">Certificado de notas</h3>
-                        <div class="status-meta">
-                            <div class="status-meta-item">
-                                <i class="fas fa-ticket-alt"></i>
-                                <span>CC-2023-0042</span>
-                            </div>
-                            <div class="status-meta-item">
-                                <i class="far fa-calendar"></i>
-                                <span>15/03/2023</span>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="status-badge badge-completed">Completado</span>
-                </div>
-                
-                <div class="status-progress">
-                    <div class="progress-steps">
-                        <div class="progress-step">
-                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
-                            <span class="step-label">Recibido</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
-                            <span class="step-label">Revisión</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
-                            <span class="step-label">Procesando</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
-                            <span class="step-label">Completado</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="status-details">
-                    <div class="detail-item">
-                        <div class="detail-label">Última actualización</div>
-                        <div class="detail-value">20/03/2023 - 14:30</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Responsable</div>
-                        <div class="detail-value">Oficina de Registro</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Comentarios</div>
-                        <div class="detail-value">Tu certificado ha sido generado y está disponible para descarga.</div>
-                    </div>
-                </div>
-                
-                <div class="status-actions">
-                    <button class="action-button action-primary">
-                        <i class="fas fa-download"></i> Descargar
-                    </button>
-                    <button class="action-button action-secondary">
-                        <i class="fas fa-print"></i> Imprimir
-                    </button>
-                </div>
-            </div>
-
-            <!-- Solicitud 2 -->
-            <div class="status-card">
-                <div class="status-header-card">
-                    <div>
-                        <h3 class="status-title">Reserva de laboratorio</h3>
-                        <div class="status-meta">
-                            <div class="status-meta-item">
-                                <i class="fas fa-ticket-alt"></i>
-                                <span>CC-2023-0058</span>
-                            </div>
-                            <div class="status-meta-item">
-                                <i class="far fa-calendar"></i>
-                                <span>22/03/2023</span>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="status-badge badge-processing">En proceso</span>
-                </div>
-                
-                <div class="status-progress">
-                    <div class="progress-steps">
-                        <div class="progress-step">
-                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
-                            <span class="step-label">Recibido</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
-                            <span class="step-label">Revisión</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon active"><i class="fas fa-sync-alt fa-spin"></i></div>
-                            <span class="step-label">Procesando</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon"><i class="far fa-clock"></i></div>
-                            <span class="step-label">Completado</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="status-details">
-                    <div class="detail-item">
-                        <div class="detail-label">Última actualización</div>
-                        <div class="detail-value">25/03/2023 - 09:15</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Responsable</div>
-                        <div class="detail-value">Departamento de Laboratorios</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Comentarios</div>
-                        <div class="detail-value">Tu solicitud está siendo verificada con el calendario de disponibilidad.</div>
-                    </div>
-                </div>
-                
-                <div class="status-actions">
-                    <button class="action-button action-secondary">
-                        <i class="fas fa-comment"></i> Consultar
-                    </button>
-                </div>
-            </div>
-
-            <!-- Solicitud 3 -->
-            <div class="status-card">
-                <div class="status-header-card">
-                    <div>
-                        <h3 class="status-title">Cambio de grupo</h3>
-                        <div class="status-meta">
-                            <div class="status-meta-item">
-                                <i class="fas fa-ticket-alt"></i>
-                                <span>CC-2023-0031</span>
-                            </div>
-                            <div class="status-meta-item">
-                                <i class="far fa-calendar"></i>
-                                <span>10/03/2023</span>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="status-badge badge-pending">Pendiente</span>
-                </div>
-                
-                <div class="status-progress">
-                    <div class="progress-steps">
-                        <div class="progress-step">
-                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
-                            <span class="step-label">Recibido</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon active"><i class="fas fa-hourglass-half"></i></div>
-                            <span class="step-label">Revisión</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon"><i class="far fa-clock"></i></div>
-                            <span class="step-label">Procesando</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon"><i class="far fa-clock"></i></div>
-                            <span class="step-label">Completado</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="status-details">
-                    <div class="detail-item">
-                        <div class="detail-label">Última actualización</div>
-                        <div class="detail-value">12/03/2023 - 16:45</div>
-                    </div>
-                    <div class="detail-label">Responsable</div>
-                    <div class="detail-value">Coordinación Académica</div>
-                </div>
-                
-                <div class="status-actions">
-                    <button class="action-button action-secondary">
-                        <i class="fas fa-comment"></i> Consultar
-                    </button>
-                </div>
-            </div>
-
-            <!-- Solicitud 4 -->
-            <div class="status-card">
-                <div class="status-header-card">
-                    <div>
-                        <h3 class="status-title">Beca académica</h3>
-                        <div class="status-meta">
-                            <div class="status-meta-item">
-                                <i class="fas fa-ticket-alt"></i>
-                                <span>CC-2023-0024</span>
-                            </div>
-                            <div class="status-meta-item">
-                                <i class="far fa-calendar"></i>
-                                <span>05/03/2023</span>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="status-badge badge-rejected">Rechazado</span>
-                </div>
-                
-                <div class="status-progress">
-                    <div class="progress-steps">
-                        <div class="progress-step">
-                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
-                            <span class="step-label">Recibido</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon completed"><i class="fas fa-check"></i></div>
-                            <span class="step-label">Revisión</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon completed"><i class="fas fa-times"></i></div>
-                            <span class="step-label">Procesando</span>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon completed"><i class="fas fa-times"></i></div>
-                            <span class="step-label">Completado</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="status-details">
-                    <div class="detail-item">
-                        <div class="detail-label">Última actualización</div>
-                        <div class="detail-value">15/03/2023 - 11:20</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Responsable</div>
-                        <div class="detail-value">Oficina de Bienestar</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Comentarios</div>
-                        <div class="detail-value">No cumples con los requisitos mínimos para esta beca. Por favor revisa los documentos requeridos.</div>
-                    </div>
-                </div>
-                
-                <div class="status-actions">
-                    <button class="action-button action-secondary">
-                        <i class="fas fa-redo"></i> Reintentar
-                    </button>
-                    <button class="action-button action-secondary">
-                        <i class="fas fa-question-circle"></i> Ayuda
-                    </button>
-                </div>
-            </div>
-        </div>
+            
 
         <!-- Efecto decorativo -->
         <div class="wave-decoration"></div>
     </div>
 
     <script>
-        // Simular búsqueda
-        document.querySelector('.search-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const searchValue = document.querySelector('.search-input').value.trim();
-            
-            if (searchValue === '') {
-                alert('Por favor ingresa un número de ticket o ID de estudiante');
-                return;
-            }
-            
-        
-            alert('Buscando: ' + searchValue);
+        //Búsqueda
+        document.getElementById('form-busqueda').addEventListener('submit', function (e) {
+            e.preventDefault(); // Evita recargar la página
+
+            const busqueda = document.getElementById('input-busqueda').value;
+
+            fetch('../controladores/estadoSolicitud.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'busqueda=' + encodeURIComponent(busqueda)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Respuesta del servidor:', data); // Aquí ves el resultado en consola
+            })
+            .catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
         });
+
+        // Generar tarjetas
+        document.getElementById('form-busqueda').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const busqueda = document.getElementById('input-busqueda').value;
+
+            fetch('../controladores/estadoSolicitud.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'busqueda=' + encodeURIComponent(busqueda)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const contenedor = document.getElementById('resultado-solicitudes');
+                contenedor.innerHTML = ''; // Limpiar resultados anteriores
+
+                if (data.success) {
+                    data.results.forEach(item => {
+                    const estado = item.estado;
+                    const estadoLower = estado.toLowerCase();
+                    const fecha = new Date(item.created_at);
+                    const fechaFormateada = fecha.toLocaleDateString();
+                    const horaFormateada = fecha.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                    let descripcion = '';
+                    try {
+                        descripcion = JSON.parse(item.request_details).description || '';
+                    } catch (error) {
+                        descripcion = 'No hay descripción disponible';
+                    }
+
+                    // Clase del badge según estado
+                    let estadoClase = '';
+                    switch (estadoLower) {
+                        case 'rechazado':
+                            estadoClase = 'badge-rejected';
+                            break;
+                        case 'pendiente':
+                            estadoClase = 'badge-pending';
+                            break;
+                        case 'en proceso':
+                            estadoClase = 'badge-processing';
+                            break;
+                        case 'completado':
+                            estadoClase = 'badge-completed';
+                            break;
+                        default:
+                            estadoClase = 'badge-pending';
+                    }
+
+                    // Barra de progreso
+                    let progresoHTML = '';
+                    if (estadoLower === 'completado' || estadoLower === 'rechazado') {
+                        progresoHTML = `
+                            <div class="status-progress">
+                                <div class="progress-steps">
+                                    <div class="progress-step">
+                                        <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                                        <span class="step-label">Recibido</span>
+                                    </div>
+                                    <div class="progress-step">
+                                        <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                                        <span class="step-label">Revisión</span>
+                                    </div>
+                                    <div class="progress-step">
+                                        <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                                        <span class="step-label">Procesando</span>
+                                    </div>
+                                    <div class="progress-step">
+                                        <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                                        <span class="step-label">${estado === 'Rechazado' ? 'Rechazado' : 'Completado'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (estadoLower === 'pendiente') {
+                        progresoHTML = `
+                            <div class="status-progress">
+                                <div class="progress-steps">
+                                    <div class="progress-step">
+                                        <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                                        <span class="step-label">Recibido</span>
+                                    </div>
+                                    <div class="progress-step">
+                                        <div class="step-icon active"><i class="fas fa-hourglass-half"></i></div>
+                                        <span class="step-label">Revisión</span>
+                                    </div>
+                                    <div class="progress-step">
+                                        <div class="step-icon"><i class="far fa-clock"></i></div>
+                                        <span class="step-label">Procesando</span>
+                                    </div>
+                                    <div class="progress-step">
+                                        <div class="step-icon"><i class="far fa-clock"></i></div>
+                                        <span class="step-label">Completado</span>
+                                    </div>
+                                </div>
+                            </div>`;
+                    } else {
+                        progresoHTML = `
+                            <div class="status-progress">
+                                <div class="progress-steps">
+                                    <div class="progress-step">
+                                        <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                                        <span class="step-label">Recibido</span>
+                                    </div>
+                                    <div class="progress-step">
+                                        <div class="step-icon completed"><i class="fas fa-check"></i></div>
+                                        <span class="step-label">Revisión</span>
+                                    </div>
+                                    <div class="progress-step">
+                                        <div class="step-icon active"><i class="fas fa-sync-alt fa-spin"></i></div>
+                                        <span class="step-label">Procesando</span>
+                                    </div>
+                                    <div class="progress-step">
+                                        <div class="step-icon"><i class="far fa-clock"></i></div>
+                                        <span class="step-label">Completado</span>
+                                    </div>
+                                </div>
+                            </div>`;
+                    }
+
+                    //Generar botones
+                    let botonesHTML = '';
+
+                    // Mostrar botón de imprimir si completado o rechazado
+                    if (estadoLower === 'completado' || estadoLower === 'rechazado') {
+                        botonesHTML += `
+                            <button class="action-button action-secondary" onclick="window.print()">
+                                <i class="fas fa-print"></i> Imprimir
+                            </button>`;
+                    }
+
+                    // Botón de descarga solo si hay documentos válidos
+                    let documentos = [];
+                    try {
+                        documentos = JSON.parse(item.documents);
+                        if (Array.isArray(documentos) && documentos.length > 0) {
+                            botonesHTML = `
+                                <button class="action-button action-primary" data-docs='${item.documents}' onclick="descargarDocumento(this)">
+                                    <i class="fas fa-download"></i> Descargar
+                                </button>
+                            ` + botonesHTML; // Agrega el botón de descarga antes del de imprimir
+                        }
+                    } catch (e) {
+                        console.warn('Documentos mal formateados');
+                    }
+
+                    // Crear tarjeta
+                    const tarjeta = document.createElement('div');
+                    tarjeta.classList.add('status-card');
+
+                    tarjeta.innerHTML = `
+                        <div class="status-header-card">
+                            <div>
+                                <h3 class="status-title">${item.request_type}</h3>
+                                <div class="status-meta">
+                                    <div class="status-meta-item">
+                                        <i class="fas fa-ticket-alt"></i>
+                                        <span>${item.ticket}</span>
+                                    </div>
+                                    <div class="status-meta-item">
+                                        <i class="far fa-calendar"></i>
+                                        <span>${fechaFormateada}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="status-badge ${estadoClase}">${estado}</span>
+                        </div>
+
+                        ${progresoHTML}
+
+                        <div class="status-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Última actualización</div>
+                                <div class="detail-value">${item.fecha_ultima_actualizacion}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Responsable</div>
+                                <div class="detail-value">${item.responsable}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Comentarios</div>
+                                <div class="detail-value">${item.comentarios}</div>
+                            </div>
+                        </div>
+
+                        <div class="status-actions">
+                            ${botonesHTML}
+                        </div>
+                    `;
+
+                    contenedor.appendChild(tarjeta);
+                });
+
+                } else {
+                    contenedor.innerHTML = `<p>${data.message}</p>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        function descargarDocumento(button) {
+            try {
+                const documentsJson = button.getAttribute('data-docs');
+                const documentos = JSON.parse(documentsJson);
+                if (documentos.length > 0) {
+                    const baseUrl = window.location.origin + '/campus_connect';
+                    const url = documentos[0].storedPath.replace('..', baseUrl);
+                    window.open(url, '_blank');
+                } else {
+                    alert('No hay documentos para descargar.');
+                }
+            } catch (e) {
+                alert('Error al procesar el documento.');
+                console.error(e);
+            }
+        }
+
+
+
 
         // Menú toggle para móviles
         const menuToggle = document.createElement('div');

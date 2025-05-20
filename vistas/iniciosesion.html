@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Connect - Admin Login</title>
-    <link href="estilo_inicio_sesion.css" rel="stylesheet">
+    <link href="/campus_connect/vistas/CSS/estilo_inicio_sesion.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -12,7 +12,7 @@
     <nav class="sidebar">
         <div class="logo">
             <a href="index.html">
-                <img src="logo.png" alt="Campus Connect">
+                <img src="/campus_connect/vistas/SRC/logo.png" alt="Campus Connect">
             </a>
         </div>
         
@@ -31,7 +31,7 @@
         </button>
 
         <div class="udem-logo">
-            <img src="universidad.jpg" alt="Universidad de Medellín">
+            <img src="/campus_connect/vistas/SRC/universidad.jpg" alt="Universidad de Medellín">
         </div>
     </nav>
 
@@ -74,41 +74,39 @@
     </div>
 
     <script>
-        // Validación del formulario
         document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-        
-            // Por ahora simulamos un login exitoso
-            if(username && password) {
-                alert('Autenticación exitosa. Redirigiendo al panel de administración...');
-                // window.location.href = 'admin_dashboard.html';
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (username === 'admin' && password === '1234') {
+                // Autenticación exitosa
+                window.location.href = 'admin.html';
             } else {
-                alert('Por favor completa todos los campos');
+                // Credenciales incorrectas
+                alert('Usuario o contraseña incorrectos. Intenta nuevamente.');
             }
         });
 
         // Menú toggle para móviles
-        if(window.innerWidth <= 640) {
+        if (window.innerWidth <= 640) {
             const menuToggle = document.createElement('div');
             menuToggle.className = 'menu-toggle';
             menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             document.body.appendChild(menuToggle);
-            
-            menuToggle.addEventListener('click', function() {
+
+            menuToggle.addEventListener('click', function () {
                 document.querySelector('.sidebar').classList.toggle('active');
             });
 
-            // Cerrar menú al hacer clic en un enlace (en móviles)
             document.querySelectorAll('.menu a').forEach(link => {
-                link.addEventListener('click', function() {
+                link.addEventListener('click', function () {
                     document.querySelector('.sidebar').classList.remove('active');
                 });
             });
         }
     </script>
+
 </body>
 </html>

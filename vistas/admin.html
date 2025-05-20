@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Connect - Panel de Administración</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="estilo_admin.css" rel="stylesheet">
+    <link href="/campus_connect/vistas/CSS/estilo_admin.css" rel="stylesheet">
 
 </head>
 <body>
     <!-- Menú lateral -->
     <nav class="sidebar">
-        <div>
             <div class="logo">
-                <a href="admin.html">
-                  <img src="logo.png" alt="Campus Connect">
+                <a href="/campus_connect/vistas/admin.html">
+                  <img src="/campus_connect/vistas/SRC/logo.png" alt="Campus Connect">
                 </a>
               </div>
             
@@ -24,21 +23,19 @@
             </div>
             
             <ul class="menu">
-                <li><a href="admin.html" class="active"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-                <li><a href="solicitudes.html"><i class="fas fa-inbox"></i>Solicitudes</a></li>
-                <li><a href="usuarios.html"><i class="fas fa-users"></i>Usuarios</a></li>
-                <li><a href="unidades.html"><i class="fas fa-building"></i>Unidades</a></li>
-                <li><a href="reportes.html"><i class="fas fa-chart-bar"></i>Reportes</a></li>
-                <li><a href="configuracion.html"><i class="fas fa-cog"></i>Configuración</a></li>
-                <li><a href="calendario.html"><i class="fas fa-calendar-alt"></i>Calendario</a></li>
+                <li><a href="" class="active"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+                <li><a href="/campus_connect/vistas/solicitudes.html"><i class="fas fa-inbox"></i>Solicitudes</a></li>
+                <li><a href="/campus_connect/vistas/reportes.html"><i class="fas fa-chart-bar"></i>Reportes</a></li>
+                <li><a href="/campus_connect/vistas/configuracion.html"><i class="fas fa-cog"></i>Configuración</a></li>
+                <li><a href="/campus_connect/vistas/calendarioadmin.html"><i class="fas fa-calendar-alt"></i>Calendario</a></li>
             </ul>
         </div>
-        <button class="logout-button" onclick="location.href='index.html'">
+        <button class="logout-button" onclick="location.href='/campus_connect/vistas/index.html'">
             <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
           </button>
           
         <div class="udem-logo">
-            <img src="universidad.jpg" alt="Universidad de Medellín">
+            <img src="/campus_connect/vistas/SRC/universidad.jpg" alt="Universidad de Medellín">
           </div>
     </nav>
 
@@ -109,19 +106,19 @@
         <div class="stats">
             <div class="stat-card">
                 <h3>Solicitudes Totales</h3>
-                <p>1,248</p>
+                <p id="totalSolicitudes">Cargando...</p>
             </div>
             <div class="stat-card secondary">
                 <h3>Nuevas</h3>
-                <p>42</p>
+                <p id="solicitudesUltimoDia">Cargando...</p>
             </div>
             <div class="stat-card success">
-                <h3>Resueltas</h3>
-                <p>856</p>
+                <h3>Completadas</h3>
+                <p id="solicitudesCompletadas">Cargando...</p>
             </div>
             <div class="stat-card warning">
-                <h3>En Progreso</h3>
-                <p>128</p>
+                <h3>Pendientes</h3>
+                <p id="solicitudesPendientes">Cargando...</p>
             </div>
         </div>
 
@@ -137,109 +134,10 @@
                         <th>Prioridad</th>
                         <th>Estado</th>
                         <th>Unidad Asignada</th>
-                        <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="ticket-id">CC-2023-0042</td>
-                        <td><span class="user-type">Estudiante</span></td>
-                        <td>Certificado de notas</td>
-                        <td>15/11/2023</td>
-                        <td><span class="priority high"></span>Alta</td>
-                        <td><span class="status new">Nueva</span></td>
-                        <td>-</td>
-                        <td>
-                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0042')">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                            <button class="action-btn assign">
-                                <i class="fas fa-user-tag"></i> Asignar
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ticket-id">CC-2023-0041</td>
-                        <td><span class="user-type">Profesor</span></td>
-                        <td>Reserva de laboratorio</td>
-                        <td>14/11/2023</td>
-                        <td><span class="priority medium"></span>Media</td>
-                        <td><span class="status assigned">Asignada</span></td>
-                        <td>Recursos Académicos</td>
-                        <td>
-                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0041')">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                            <button class="action-btn resolve">
-                                <i class="fas fa-check-circle"></i> Resolver
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ticket-id">CC-2023-0040</td>
-                        <td><span class="user-type">Persona Externa</span></td>
-                        <td>Visita guiada</td>
-                        <td>13/11/2023</td>
-                        <td><span class="priority low"></span>Baja</td>
-                        <td><span class="status in-progress">En progreso</span></td>
-                        <td>Admisiones</td>
-                        <td>
-                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0040')">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                            <button class="action-btn resolve">
-                                <i class="fas fa-check-circle"></i> Resolver
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ticket-id">CC-2023-0039</td>
-                        <td><span class="user-type">Egresado</span></td>
-                        <td>Certificado de grado</td>
-                        <td>12/11/2023</td>
-                        <td><span class="priority high"></span>Alta</td>
-                        <td><span class="status closed">Cerrada</span></td>
-                        <td>Registro Académico</td>
-                        <td>
-                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0039')">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ticket-id">CC-2023-0038</td>
-                        <td><span class="user-type">Contratista</span></td>
-                        <td>Solicitud de acceso</td>
-                        <td>10/11/2023</td>
-                        <td><span class="priority medium"></span>Media</td>
-                        <td><span class="status assigned">Asignada</span></td>
-                        <td>Seguridad</td>
-                        <td>
-                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0038')">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                            <button class="action-btn resolve">
-                                <i class="fas fa-check-circle"></i> Resolver
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ticket-id">CC-2023-0037</td>
-                        <td><span class="user-type">Aspirante</span></td>
-                        <td>Información de becas</td>
-                        <td>09/11/2023</td>
-                        <td><span class="priority low"></span>Baja</td>
-                        <td><span class="status new">Nueva</span></td>
-                        <td>-</td>
-                        <td>
-                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0037')">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                            <button class="action-btn assign">
-                                <i class="fas fa-user-tag"></i> Asignar
-                            </button>
-                        </td>
-                    </tr>
+                <tbody id="tabla-solicitudes">
+                    
                 </tbody>
             </table>
         </div>
@@ -598,6 +496,80 @@
                 closeModal();
             }
         }
+
+        // Cargar solicitudes al iniciar la página
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('/campus_connect/controladores/obtenerSolicitudes.php') // Usa la ruta correcta según tu estructura
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('tabla-solicitudes');
+                tbody.innerHTML = ''; // Limpiar la tabla
+
+                if (data.success && data.results.length > 0) {
+                data.results.forEach(solicitud => {
+                    const fila = `
+                    <tr>
+                        <td class="ticket-id">${solicitud.ticket}</td>
+                        <td><span class="user-type">${solicitud.user_type}</span></td>
+                        <td>${solicitud.request_type}</td>
+                        <td>${formatearFecha(solicitud.created_at)}</td>
+                        <td><span class="priority ${getPrioridadClass(solicitud.prioridad)}"></span>${solicitud.prioridad}</td>
+                        <td><span class="status ${getEstadoClass(solicitud.estado)}">${solicitud.estado}</span></td>
+                        <td>${solicitud.responsable || '-'}</td>
+                    </tr>
+                    `;
+                    tbody.innerHTML += fila;
+                });
+                } else {
+                tbody.innerHTML = `<tr><td colspan="7">No hay solicitudes</td></tr>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener las solicitudes:', error);
+            });
+
+            // Función para formatear la fecha al estilo dd/mm/yyyy
+            function formatearFecha(fecha) {
+            const f = new Date(fecha);
+            return `${f.getDate().toString().padStart(2, '0')}/${(f.getMonth() + 1).toString().padStart(2, '0')}/${f.getFullYear()}`;
+            }
+
+            function getPrioridadClass(prioridad) {
+            switch (prioridad.toLowerCase()) {
+                case 'alta': return 'high';
+                case 'media': return 'medium';
+                case 'baja': return 'low';
+                default: return '';
+            }
+            }
+
+            function getEstadoClass(estado) {
+            switch (estado.toLowerCase()) {
+                case 'en proceso': return 'new';
+                case 'completado': return 'assigned';
+                case 'pendiente': return 'in-progress';
+                case 'rechazado': return 'closed';
+                default: return '';
+            }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/campus_connect/controladores/obtenerEstadisticas.php')
+                .then(res => res.json())
+                .then(data => {
+                if (data.success) {
+                    document.getElementById('totalSolicitudes').textContent = data.stats.total_solicitudes;
+                    document.getElementById('solicitudesUltimoDia').textContent = data.stats.solicitudes_ultimo_dia;
+                    document.getElementById('solicitudesCompletadas').textContent = data.stats.solicitudes_completadas;
+                    document.getElementById('solicitudesPendientes').textContent = data.stats.solicitudes_pendientes;
+                } else {
+                    console.error('Error al cargar estadísticas:', data.message);
+                }
+            })
+            .catch(err => console.error('Error en la petición:', err));
+        });
     </script>
+
 </body>
 </html>

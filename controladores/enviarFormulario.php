@@ -49,14 +49,20 @@ if (!empty($_FILES['documents'])) {
     }
 }
 
+// Prioridad según tipo de usuario
+$prioridades = ['Alta', 'Media', 'Baja'];
+$prioridad = $prioridades[array_rand($prioridades)];
+
 // Guardar info en la base de datos
 $documentsJson = json_encode($uploadedFilesInfo);
 
 $stmt = $conexion->prepare("INSERT INTO solicitudes 
-    (user_type, request_type, fullname, id_type, id_number, email, phone, request_details, documents, ticket, estado) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    (user_type, request_type, fullname, id_type, id_number, email, phone, request_details, documents, ticket, estado,responsable, fecha_ultima_actualizacion, comentarios, prioridad) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)");
 
-$stmt->bind_param("ssssssssss", $userType, $requestType, $fullname, $idType, $idNumber, $email, $phone, $requestDetails, $documentsJson, $ticket, $estado);
+$responsable = "Administrador";
+$comentarios = "Sin comentarios";
+$stmt->bind_param("ssssssssssssss", $userType, $requestType, $fullname, $idType, $idNumber, $email, $phone, $requestDetails, $documentsJson, $ticket, $estado, $responsable, $comentarios, $prioridad);
 
 if ($stmt->execute()) {
     echo json_encode(['success' => true, 'message' => 'Solicitud guardada correctamente', 'ticket' => $ticket]);
