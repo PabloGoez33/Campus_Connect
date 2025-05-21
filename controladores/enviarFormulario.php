@@ -65,7 +65,28 @@ $comentarios = "Sin comentarios";
 $stmt->bind_param("ssssssssssssss", $userType, $requestType, $fullname, $idType, $idNumber, $email, $phone, $requestDetails, $documentsJson, $ticket, $estado, $responsable, $comentarios, $prioridad);
 
 if ($stmt->execute()) {
-    echo json_encode(['success' => true, 'message' => 'Solicitud guardada correctamente', 'ticket' => $ticket]);
+    // Envío de correo en texto plano
+    $subject = "Confirmación de solicitud – Campus Connect";
+
+    $message = "Estimado/a $fullname,\n\n";
+    $message .= "Hemos recibido tu solicitud correctamente con el número de ticket: $ticket.\n\n";
+    $message .= "Resumen de tu solicitud:\n";
+    $message .= "- Tipo de usuario: $userType\n";
+    $message .= "- Tipo de solicitud: $requestType\n";
+    $message .= "- Identificación: $idType $idNumber\n";
+    $message .= "- Correo: $email\n";
+    $message .= "- Teléfono: $phone\n";
+    $message .= "- Prioridad: $prioridad\n\n";
+    $message .= "Uno de nuestros agentes revisará tu solicitud y te contactará si es necesario.\n\n";
+    $message .= "Atentamente,\nEquipo de soporte – Campus Connect";
+
+    $headers = "From: Campus Connect <no-reply@campusconnect.edu>\r\n";
+
+    if (mail($email, $subject, $message, $headers)) {
+        echo json_encode(['success' => true, 'message' => 'Solicitud guardada y correo enviado correctamente', 'ticket' => $ticket]);
+    } else {
+        echo json_encode(['success' => true, 'message' => 'Solicitud guardada, pero hubo un error al enviar el correo', 'ticket' => $ticket]);
+    }
 } else {
     echo json_encode(['success' => false, 'message' => $stmt->error]);
 }
