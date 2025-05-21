@@ -6,6 +6,7 @@
     <title>Campus Connect - Reportes</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="/campus_connect/vistas/CSS/estilo_reportes.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <body>
@@ -129,7 +130,7 @@
                 </select>
             </div>
             <div class="chart-placeholder">
-                [Gráfico de solicitudes por estado]
+                <canvas id="graficoEstados" width="400" height="200"></canvas>
             </div>
         </div>
 
@@ -229,5 +230,77 @@
             }
         });
     </script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/campus_connect/controladores/obtener_estados.php')
+                .then(response => response.json())
+                .then(data => {
+                    const estados = data.map(item => item.estado);
+                    const cantidades = data.map(item => item.cantidad);
+
+                    const ctx = document.getElementById('graficoEstados').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: estados,
+                            datasets: [{
+                                label: 'Cantidad de solicitudes',
+                                data: cantidades,
+                                backgroundColor: [
+                                    'rgba(255, 206, 86, 0.6)',   // Amarillo
+                                    'rgba(75, 192, 192, 0.6)',   // Verde
+                                    'rgba(255, 99, 132, 0.6)',   // Rojo
+                                    'rgba(54, 162, 235, 0.6)',   // Azul
+                                    'rgba(153, 102, 255, 0.6)',  // Morado
+                                    'rgba(255, 159, 64, 0.6)'    // Naranja
+                                ],
+                                borderColor: [
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Cantidad'
+                                    }
+                                },
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Estado'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Solicitudes por Estado'
+                                },
+                                legend: {
+                                    display: false
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al obtener los datos:', error);
+                });
+        });
+    </script>
+
+
 </body>
 </html>
