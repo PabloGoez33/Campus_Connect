@@ -50,7 +50,7 @@
             <h1><i class="fas fa-inbox"></i> Gestión de Solicitudes</h1>
             <div class="search-bar">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Buscar solicitudes...">
+                <input type="text" id="busqueda-input" placeholder="Buscar solicitudes...">
             </div>
         </div>
 
@@ -58,45 +58,45 @@
         <div class="filters">
             <div class="filter-group">
                 <label for="status-filter">Estado</label>
-                <select id="status-filter" class="filter-select">
+                <select id="status-filter" class="filter-select" onchange="aplicarFiltros()">
                     <option value="all">Todos los estados</option>
-                    <option value="new">Nuevas</option>
-                    <option value="in-progress">En progreso</option>
-                    <option value="assigned">Asignadas</option>
-                    <option value="resolved">Resueltas</option>
-                    <option value="closed">Cerradas</option>
+                    <option value="new">En proceso</option>
+                    <option value="assigned">Completados</option>
+                    <option value="in-progress">Pendiente</option>
+                    <option value="closed">rechazado</option>
                 </select>
             </div>
             
             <div class="filter-group">
                 <label for="type-filter">Tipo de usuario</label>
-                <select id="type-filter" class="filter-select">
+                <select id="type-filter" class="filter-select" onchange="aplicarFiltros()">
                     <option value="all">Todos los tipos</option>
                     <option value="student">Estudiante</option>
                     <option value="professor">Profesor</option>
                     <option value="external">Persona Externa</option>
                     <option value="contractor">Contratista</option>
+                    <option value="applicant">Aspirante</option>
+                    <option value="graduate">Egresado</option>
                 </select>
             </div>
             
             <div class="filter-group">
                 <label for="priority-filter">Prioridad</label>
-                <select id="priority-filter" class="filter-select">
+                <select id="priority-filter" class="filter-select" onchange="aplicarFiltros()">
                     <option value="all">Todas</option>
-                    <option value="high">Alta</option>
-                    <option value="medium">Media</option>
-                    <option value="low">Baja</option>
+                    <option value="Alta">Alta</option>
+                    <option value="Media">Media</option>
+                    <option value="Baja">Baja</option>
                 </select>
             </div>
             
             <div class="filter-group">
                 <label for="date-filter">Fecha</label>
-                <select id="date-filter" class="filter-select">
+                <select id="date-filter" class="filter-select" onchange="aplicarFiltros()">
                     <option value="all">Todo el tiempo</option>
                     <option value="today">Hoy</option>
                     <option value="week">Esta semana</option>
                     <option value="month">Este mes</option>
-                    <option value="custom">Personalizado</option>
                 </select>
             </div>
         </div>
@@ -116,7 +116,7 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tabla-solicitudes">
                     <tr>
                         <td class="ticket-id">CC-2023-0042</td>
                         <td><span class="user-type">Estudiante</span></td>
@@ -129,59 +129,12 @@
                             <button class="action-btn view" onclick="openRequestModal('CC-2023-0042')">
                                 <i class="fas fa-eye"></i> Ver
                             </button>
-                            <button class="action-btn assign">
+                            <button class="action-btn assign" onclick="assignRequest(this)">
                                 <i class="fas fa-user-tag"></i> Asignar
                             </button>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="ticket-id">CC-2023-0041</td>
-                        <td><span class="user-type">Profesor</span></td>
-                        <td>Reserva de laboratorio</td>
-                        <td>14/11/2023</td>
-                        <td><span class="priority medium"></span>Media</td>
-                        <td><span class="status assigned">Asignada</span></td>
-                        <td>Recursos Académicos</td>
-                        <td>
-                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0041')">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                            <button class="action-btn resolve">
-                                <i class="fas fa-check-circle"></i> Resolver
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ticket-id">CC-2023-0040</td>
-                        <td><span class="user-type">Persona Externa</span></td>
-                        <td>Visita guiada</td>
-                        <td>13/11/2023</td>
-                        <td><span class="priority low"></span>Baja</td>
-                        <td><span class="status in-progress">En progreso</span></td>
-                        <td>Admisiones</td>
-                        <td>
-                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0040')">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                            <button class="action-btn resolve">
-                                <i class="fas fa-check-circle"></i> Resolver
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ticket-id">CC-2023-0039</td>
-                        <td><span class="user-type">Egresado</span></td>
-                        <td>Certificado de grado</td>
-                        <td>12/11/2023</td>
-                        <td><span class="priority high"></span>Alta</td>
-                        <td><span class="status closed">Cerrada</span></td>
-                        <td>Registro Académico</td>
-                        <td>
-                            <button class="action-btn view" onclick="openRequestModal('CC-2023-0039')">
-                                <i class="fas fa-eye"></i> Ver
-                            </button>
-                        </td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>
@@ -258,107 +211,249 @@
         </div>
     </div>
 
+    <!-- Modal de asignación de unidades -->
+    <div class="modal" id="assignmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Asignar solicitud a unidad</h2>
+                <button class="modal-close" onclick="closeAssignmentModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="units-container">
+                    <input type="text" class="search-box" id="unitSearch" placeholder="Buscar unidad..." oninput="filterUnits()">
+                    
+                    <div class="category-filter">
+                        <button class="category-btn active" onclick="filterByCategory('all')">Todas</button>
+                        <button class="category-btn" onclick="filterByCategory('academic')">Académicas</button>
+                        <button class="category-btn" onclick="filterByCategory('administrative')">Administrativas</button>
+                        <button class="category-btn" onclick="filterByCategory('support')">Soporte</button>
+                    </div>
+                    
+                    <div class="units-list" id="unitsList">
+                        <!-- Las unidades se cargarán dinámicamente aquí -->
+                    </div>
+                </div>
+                
+                <div class="assignment-actions">
+                    <button class="btn btn-secondary" onclick="closeAssignmentModal()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="confirmAssignment()">Asignar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Datos de ejemplo para las solicitudes
-        const requestsData = {
-            "CC-2023-0042": {
-                userType: "Estudiante",
-                requestType: "Certificado de notas",
-                date: "15/11/2023 10:24 AM",
-                priority: "high",
-                status: "new",
-                assignedUnit: "",
-                requester: "Juan Pérez (juan.perez@email.com)",
-                details: "Necesito un certificado de notas oficial para aplicar a una beca de posgrado en el extranjero. Por favor incluir todos los semestres cursados hasta la fecha.",
-                documents: [
-                    { name: "documento_identidad.pdf", type: "pdf", size: 250 },
-                    { name: "foto_carnet.jpg", type: "image", size: 180 }
-                ]
-            },
-            "CC-2023-0041": {
-                userType: "Profesor",
-                requestType: "Reserva de laboratorio",
-                date: "14/11/2023 14:30 PM",
-                priority: "medium",
-                status: "assigned",
-                assignedUnit: "Recursos Académicos",
-                requester: "María González (maria.gonzalez@email.com)",
-                details: "Necesito reservar el laboratorio de informática 3 para el curso de programación avanzada los días lunes y miércoles de 2pm a 4pm durante el mes de diciembre.",
-                documents: [
-                    { name: "programa_curso.pdf", type: "pdf", size: 320 }
-                ]
+        //Listar solicitudes
+        document.addEventListener('DOMContentLoaded', () => {
+            const tbody = document.getElementById('tabla-solicitudes');
+            const statusFilter = document.getElementById('status-filter');
+            const typeFilter = document.getElementById('type-filter');
+            const priorityFilter = document.getElementById('priority-filter');
+            const dateFilter = document.getElementById('date-filter');
+
+            // Cargar solicitudes al iniciar
+            cargarSolicitudes();
+
+            // Listeners para filtros
+            [statusFilter, typeFilter, priorityFilter, dateFilter].forEach(filtro => {
+                filtro.addEventListener('change', aplicarFiltros);
+            });
+
+            //Cargar solicitudes
+            function cargarSolicitudes() {
+                fetch('/campus_connect/controladores/obtenerSolicitudes.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            renderizarSolicitudes(data.results);
+                        } else {
+                            tbody.innerHTML = `<tr><td colspan="7">No hay solicitudes</td></tr>`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener las solicitudes:', error);
+                    });
             }
-        };
+
+            //Aplicar filtros
+            function aplicarFiltros() {
+                const status = statusFilter.value;
+                const type = typeFilter.value;
+                const priority = priorityFilter.value;
+                const date = dateFilter.value;
+
+                fetch('/campus_connect/controladores/obtenerSolicitudes.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status, type, priority, date })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        renderizarSolicitudes(data.results);
+                    } else {
+                        tbody.innerHTML = `<tr><td colspan="7">No hay solicitudes que coincidan con los filtros.</td></tr>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al aplicar filtros:', error);
+                });
+            }
+
+            //Renderizar solicitudes
+            function renderizarSolicitudes(solicitudes) {
+                tbody.innerHTML = '';
+                if (solicitudes.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="7">No hay solicitudes</td></tr>`;
+                    return;
+                }
+
+                solicitudes.forEach(solicitud => {
+
+                    // Convertir valores a minúsculas para comparación más segura
+                    const responsable = (solicitud.responsable || '').toLowerCase();
+                    const estado = solicitud.estado.toLowerCase();
+
+                    // Condición para mostrar el botón "Asignar"
+                    const mostrarBotonAsignar = (responsable === 'administrador' || estado === 'pendiente');
+
+                    const fila = `
+                        <tr>
+                            <td class="ticket-id">${solicitud.ticket}</td>
+                            <td><span class="user-type">${solicitud.user_type}</span></td>
+                            <td>${solicitud.request_type}</td>
+                            <td>${formatearFecha(solicitud.created_at)}</td>
+                            <td><span class="priority ${getPrioridadClass(solicitud.prioridad)}"></span>${solicitud.prioridad}</td>
+                            <td><span class="status ${getEstadoClass(solicitud.estado)}">${solicitud.estado}</span></td>
+                            <td>${solicitud.responsable || '-'}</td>
+                            <td>
+                                <button class="action-btn view" onclick="openRequestModal('${solicitud.ticket}')">
+                                    <i class="fas fa-eye"></i> Ver
+                                </button>
+                                ${mostrarBotonAsignar ? `
+                                <button class="action-btn assign" onclick="assignRequest(this)">
+                                    <i class="fas fa-user-tag"></i> Asignar
+                                </button>
+                                ` : ''}
+                            </td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += fila;
+                });
+            }
+        });
+
+        //Formatear fecha
+        function formatearFecha(fecha) {
+            const f = new Date(fecha);
+            return `${f.getDate().toString().padStart(2, '0')}/${(f.getMonth() + 1).toString().padStart(2, '0')}/${f.getFullYear()}`;
+        }
+
+        //Obtener prioridades
+        function getPrioridadClass(prioridad) {
+            switch (prioridad.toLowerCase()) {
+                case 'alta': return 'high';
+                case 'media': return 'medium';
+                case 'baja': return 'low';
+                default: return '';
+            }
+        }
+
+        //Obtener estados
+        function getEstadoClass(estado) {
+            switch (estado.toLowerCase()) {
+                case 'en proceso': return 'new';
+                case 'completado': return 'assigned';
+                case 'pendiente': return 'in-progress';
+                case 'rechazado': return 'closed';
+                default: return '';
+            }
+        }
+
+        //Boton de busqueda
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputBusqueda = document.getElementById('busqueda-input');
+
+            inputBusqueda.addEventListener('keyup', function () {
+                const termino = this.value.toLowerCase();
+                const filas = document.querySelectorAll('#tabla-solicitudes tr');
+
+                filas.forEach(fila => {
+                    const textoFila = fila.innerText.toLowerCase();
+                    if (textoFila.includes(termino)) {
+                        fila.style.display = ''; // Mostrar fila
+                    } else {
+                        fila.style.display = 'none'; // Ocultar fila
+                    }
+                });
+            });
+        });
 
         // Abrir modal con los detalles de la solicitud
         function openRequestModal(ticketId) {
-            const request = requestsData[ticketId];
             const modal = document.getElementById('requestModal');
-            
-            // Llenar los datos en el modal
-            document.getElementById('modalTitle').textContent = `Solicitud: ${request.requestType}`;
-            document.getElementById('modalTicketId').textContent = ticketId;
-            document.getElementById('modalUserType').textContent = request.userType;
-            document.getElementById('modalRequestType').textContent = request.requestType;
-            document.getElementById('modalDate').textContent = request.date;
-            
-            // Prioridad
-            const priorityElement = document.getElementById('modalPriority');
-            priorityElement.innerHTML = `<span class="priority ${request.priority}"></span> ${getPriorityText(request.priority)}`;
-            
-            // Estado
-            const statusElement = document.getElementById('modalStatus');
-            statusElement.innerHTML = `<span class="status ${request.status}">${getStatusText(request.status)}</span>`;
-            
-            document.getElementById('modalAssignedUnit').textContent = request.assignedUnit || '-';
-            document.getElementById('modalRequester').textContent = request.requester;
-            document.getElementById('modalDetails').textContent = request.details;
-            
-            // Documentos adjuntos
-            const documentsList = document.querySelector('.documents-list');
-            documentsList.innerHTML = '';
-            
-            if (request.documents.length > 0) {
-                request.documents.forEach(doc => {
-                    const iconClass = doc.type === 'pdf' ? 'fa-file-pdf' : 'fa-file-image';
-                    const docItem = document.createElement('div');
-                    docItem.className = 'document-item';
-                    docItem.innerHTML = `<i class="fas ${iconClass}"></i><span>${doc.name} (${doc.size} KB)</span>`;
-                    documentsList.appendChild(docItem);
+
+            fetch(`../controladores/obtenerDatosModalVer.php?ticket=${encodeURIComponent(ticketId)}`)
+                .then(response => response.json())
+                .then(request => {
+                    if (!request.success && request.message) {
+                        alert('Error: ' + request.message);
+                        return;
+                    }
+
+                    // Aquí llenas el modal con los datos recibidos:
+                    document.getElementById('modalTitle').textContent = `Solicitud: ${request.requestType}`;
+                    document.getElementById('modalTicketId').textContent = ticketId;
+                    document.getElementById('modalUserType').textContent = request.userType;
+                    document.getElementById('modalRequestType').textContent = request.requestType;
+                    document.getElementById('modalDate').textContent = formatearFecha(request.date);
+
+                    const priorityElement = document.getElementById('modalPriority');
+                    priorityElement.innerHTML = `<span class="priority ${getPrioridadClass(request.priority)}"></span> ${request.priority}`;
+
+                    const statusElement = document.getElementById('modalStatus');
+                    statusElement.innerHTML = `<span class="status ${getEstadoClass(request.status)}">${request.status}</span>`;
+
+                    document.getElementById('modalAssignedUnit').textContent = request.assignedUnit || '-';
+                    document.getElementById('modalRequester').textContent = request.requester;
+
+                    const detallesObj = JSON.parse(request.details);
+                    document.getElementById('modalDetails').textContent = detallesObj.description;
+
+                    const documentsList = document.querySelector('.documents-list');
+                    documentsList.innerHTML = '';
+
+                    if (request.documents && request.documents.length > 0) {
+                        request.documents.forEach(doc => {
+                            const isPDF = doc.type === 'application/pdf';
+                            const iconClass = isPDF ? 'fa-file-pdf' : 'fa-file-image';
+                            const sizeKB = (doc.size / 1024).toFixed(2); // Convierte bytes a KB
+
+                            const docItem = document.createElement('div');
+                            docItem.className = 'document-item';
+                            docItem.innerHTML = `
+                                <i class="fas ${iconClass}"></i>
+                                <span>${doc.originalName} (${sizeKB} KB)</span>
+                            `;
+                            documentsList.appendChild(docItem);
+                        });
+                    } else {
+                        documentsList.innerHTML = '<div class="document-item"><span>No hay documentos adjuntos</span></div>';
+                    }
+
+                    modal.style.display = 'flex';
+
+                })
+                .catch(error => {
+                    console.error('Error al obtener la solicitud:', error);
+                    alert('Error al obtener los datos de la solicitud.');
                 });
-            } else {
-                documentsList.innerHTML = '<div class="document-item"><span>No hay documentos adjuntos</span></div>';
-            }
-            
-            // Mostrar modal
-            modal.style.display = 'flex';
         }
 
         // Cerrar modal
         function closeModal() {
             document.getElementById('requestModal').style.display = 'none';
-        }
-
-        // Convertir códigos de prioridad a texto
-        function getPriorityText(code) {
-            const priorities = {
-                'high': 'Alta',
-                'medium': 'Media',
-                'low': 'Baja'
-            };
-            return priorities[code] || code;
-        }
-
-        // Convertir códigos de estado a texto
-        function getStatusText(code) {
-            const statuses = {
-                'new': 'Nueva',
-                'assigned': 'Asignada',
-                'in-progress': 'En progreso',
-                'resolved': 'Resuelta',
-                'closed': 'Cerrada'
-            };
-            return statuses[code] || code;
         }
 
         // Cerrar modal al hacer clic fuera del contenido
@@ -367,6 +462,187 @@
             if (event.target === modal) {
                 closeModal();
             }
+        }
+
+        // Datos de unidades disponibles organizadas por categorías
+        const availableUnits = [
+            { id: 1, name: "Recursos Académicos", description: "Gestión de aulas, laboratorios y recursos educativos", category: "academic" },
+            { id: 2, name: "Admisiones", description: "Procesos de admisión y registro de nuevos estudiantes", category: "administrative" },
+            { id: 3, name: "Registro Académico", description: "Certificados, actas y registros académicos", category: "academic" },
+            { id: 4, name: "Bienestar Universitario", description: "Actividades extracurriculares y apoyo estudiantil", category: "administrative" },
+            { id: 5, name: "Biblioteca", description: "Gestión de préstamos y recursos bibliográficos", category: "academic" },
+            { id: 6, name: "Tecnología Informática", description: "Soporte técnico y equipos tecnológicos", category: "support" },
+            { id: 7, name: "Financiera", description: "Pagos, matrículas y temas económicos", category: "administrative" },
+            { id: 8, name: "Infraestructura", description: "Mantenimiento de instalaciones y espacios físicos", category: "support" },
+            { id: 9, name: "Internacionalización", description: "Programas de intercambio y convenios internacionales", category: "academic" },
+            { id: 10, name: "Investigación", description: "Proyectos de investigación y publicaciones", category: "academic" }
+        ];
+
+        let currentTicketId = null;
+        let selectedUnitId = null;
+        let currentCategoryFilter = 'all';
+        let currentSearchTerm = '';
+
+        // Función para cargar la lista de unidades con filtros aplicados
+        function loadUnitsList() {
+            const unitsList = document.getElementById('unitsList');
+            unitsList.innerHTML = '';
+            
+            let filteredUnits = availableUnits;
+            
+            // Aplicar filtro de categoría
+            if (currentCategoryFilter !== 'all') {
+                filteredUnits = filteredUnits.filter(unit => unit.category === currentCategoryFilter);
+            }
+            
+            // Aplicar filtro de búsqueda
+            if (currentSearchTerm) {
+                const searchTerm = currentSearchTerm.toLowerCase();
+                filteredUnits = filteredUnits.filter(unit => 
+                    unit.name.toLowerCase().includes(searchTerm) || 
+                    unit.description.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // Mostrar unidades filtradas
+            if (filteredUnits.length === 0) {
+                unitsList.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 20px; color: var(--text-light);">No se encontraron unidades que coincidan con los criterios de búsqueda</div>';
+                return;
+            }
+            
+            filteredUnits.forEach(unit => {
+                const unitItem = document.createElement('div');
+                unitItem.className = 'unit-item';
+                unitItem.dataset.id = unit.id;
+                unitItem.innerHTML = `
+                    <div class="unit-name">${unit.name}</div>
+                    <div class="unit-description">${unit.description}</div>
+                `;
+                
+                unitItem.addEventListener('click', function() {
+                    // Deseleccionar cualquier ítem previamente seleccionado
+                    document.querySelectorAll('.unit-item').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    
+                    // Seleccionar el ítem actual
+                    this.classList.add('selected');
+                    selectedUnitId = unit.id;
+                });
+                
+                unitsList.appendChild(unitItem);
+            });
+        }
+
+        // Función para filtrar unidades por categoría
+        function filterByCategory(category) {
+            currentCategoryFilter = category;
+            
+            // Actualizar botones de categoría activos
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            
+            // Recargar la lista de unidades
+            loadUnitsList();
+        }
+
+        // Función para filtrar unidades por texto de búsqueda
+        function filterUnits() {
+            currentSearchTerm = document.getElementById('unitSearch').value;
+            loadUnitsList();
+        }
+
+
+        // Función para abrir el modal de asignación (se llama al hacer clic en "Asignar")
+        function assignRequest(buttonElement) {
+            const row = buttonElement.closest('tr');
+            currentTicketId = row.querySelector('.ticket-id').textContent;
+            
+            // Cargar la lista de unidades
+            loadUnitsList();
+            
+            // Mostrar el modal
+            document.getElementById('assignmentModal').style.display = 'flex';
+        }
+
+        // Función para cerrar el modal de asignación
+        function closeAssignmentModal() {
+            document.getElementById('assignmentModal').style.display = 'none';
+            selectedUnitId = null;
+            // Resetear filtros
+            currentCategoryFilter = 'all';
+            currentSearchTerm = '';
+            document.getElementById('unitSearch').value = '';
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector('.category-btn').classList.add('active');
+        }
+
+        // Función para confirmar la asignación
+        function confirmAssignment() {
+            if (!selectedUnitId) {
+                showNotification('Por favor selecciona una unidad', 'error');
+                return;
+            }
+
+            const selectedUnit = availableUnits.find(unit => unit.id == selectedUnitId);
+            if (!selectedUnit) {
+                showNotification('Unidad seleccionada no válida', 'error');
+                return;
+            }
+
+            // Enviar ticket y nombre del responsable al backend
+            fetch('/campus_connect/controladores/asignarUnidad.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ticket: currentTicketId,
+                    responsable: selectedUnit.name  // enviamos el nombre aquí
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Actualizar la lista de solicitudes en la UI
+                    actualizarListaSolicitudes();
+                    closeAssignmentModal();
+                    showNotification(`Solicitud ${currentTicketId} asignada a ${selectedUnit.name}`, 'success');
+                } else {
+                    showNotification(data.message || 'Error al asignar la unidad', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Error de conexión con el servidor', 'error');
+            });
+        }
+
+        function actualizarListaSolicitudes() {
+            location.reload();
+        }
+
+        // Función para mostrar notificaciones
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
         }
     </script>
 </body>

@@ -55,7 +55,7 @@
             </div>
             <div class="month-navigator">
                 <button class="nav-button"><i class="fas fa-chevron-left"></i></button>
-                <div class="current-month">Marzo 2023</div>
+                <div class="current-month">Mayo 2025</div>
                 <button class="nav-button"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
@@ -391,7 +391,7 @@
             chatbotBody.scrollTop = chatbotBody.scrollHeight;
         }
         
-        function addBotMessage(text, isHTML = false) {
+        function addBotMessage(text, isHTML = true) {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message bot-message';
             if (isHTML) {
@@ -402,6 +402,17 @@
             chatbotBody.appendChild(messageDiv);
             chatbotBody.scrollTop = chatbotBody.scrollHeight;
         }
+
+        document.addEventListener('click', function(event) {
+            const chatbot = document.getElementById('chatbotContainer');
+            const button = document.getElementById('chatbotButton');
+
+            if (chatbot.style.display === 'flex' &&
+                !chatbot.contains(event.target) &&
+                !button.contains(event.target)) {
+                chatbot.style.display = 'none';
+            }
+        });
         
         function showMainMenu() {
             addBotMessage(`
@@ -417,9 +428,9 @@
             addUserMessage(['Enviar Solicitud', 'Consultar Estado', 'Preguntas Frecuentes', 'Contactar Asesor'][option-1]);
             
             if (option === 1) {
-                showUserTypes();
+                window.location.href = '/campus_connect/vistas/enviar_solicitud.html';
             } else if (option === 2) {
-                addBotMessage("Ingresa tu número de solicitud o documento:");
+                window.location.href = '/campus_connect/vistas/estado_solicitud.html';
             } else if (option === 3) {
                 showFAQ();
             } else {
@@ -427,46 +438,124 @@
             }
         }
         
-        function showUserTypes() {
-            addBotMessage(`
-                <strong>Tipo de Usuario</strong>
-                <div class="menu-option" onclick="selectUserType('Estudiante')"><i class="fas fa-user-graduate icon"></i> Estudiante</div>
-                <div class="menu-option" onclick="selectUserType('Profesor')"><i class="fas fa-chalkboard-teacher icon"></i> Profesor</div>
-                <div class="menu-option" onclick="selectUserType('Administrativo')"><i class="fas fa-briefcase icon"></i> Administrativo</div>
-                <div class="menu-option" onclick="selectUserType('Egresado')"><i class="fas fa-user-tie icon"></i> Egresado</div>
-            `, true);
-        }
-        
-        function selectUserType(type) {
-            addUserMessage(type);
-            addBotMessage(`Has seleccionado: ${type}. Próximamente más opciones...`);
-            setTimeout(showMainMenu, 1500);
-        }
-        
         function showFAQ() {
             addBotMessage(`
-                <strong>Preguntas Frecuentes</strong>
-                <div class="menu-option" onclick="showFAQAnswer('¿Cómo matricularme?')"><i class="fas fa-question-circle icon"></i> ¿Cómo matricularme?</div>
-                <div class="menu-option" onclick="showFAQAnswer('¿Dónde pagar?')"><i class="fas fa-question-circle icon"></i> ¿Dónde pagar?</div>
-                <div class="menu-option" onclick="showFAQAnswer('Horarios de atención')"><i class="fas fa-question-circle icon"></i> Horarios de atención</div>
+                <strong>¿Sobre qué tipo deseas ver preguntas frecuentes?</strong>
+                <div class="menu-option" onclick="showFAQByUserType('aspirante')">👨‍🎓 Aspirante</div>
+                <div class="menu-option" onclick="showFAQByUserType('estudiante')">📚 Estudiante</div>
+                <div class="menu-option" onclick="showFAQByUserType('egresado')">🎓 Egresado</div>
+                <div class="menu-option" onclick="showFAQByUserType('profesor')">👩‍🏫 Profesor</div>
+                <div class="menu-option" onclick="showFAQByUserType('contratista')">🔧 Contratista</div>
+                <div class="menu-option" onclick="showFAQByUserType('externo')">🌐 Persona externa</div>
             `, true);
         }
-        
-        function showFAQAnswer(question) {
-            const answers = {
-                '¿Cómo matricularme?': 'Puedes matricularte en línea a través de nuestro portal o en las oficinas de registro.',
-                '¿Dónde pagar?': 'Los pagos se realizan en la plataforma de pagos en línea o en bancos autorizados.',
-                'Horarios de atención': 'Atención de lunes a viernes de 8:00 am a 5:00 pm.'
+
+        function showFAQByUserType(tipo) {
+            addUserMessage(tipo.charAt(0).toUpperCase() + tipo.slice(1));
+            
+            const preguntas = {
+                aspirante: [
+                    { id: 'asp_requisitos', texto: '¿Cuáles son los requisitos para inscribirme?' },
+                    { id: 'asp_programas', texto: '¿Qué programas académicos ofrecen?' }
+                ],
+                estudiante: [
+                    { id: 'est_consulta', texto: '¿Cómo consultar información básica de mi interés?' }
+                ],
+                egresado: [
+                    { id: 'egr_acta', texto: '¿Cómo puedo obtener mi acta o diploma si no lo he reclamado?' },
+                    { id: 'egr_bolsa', texto: '¿La universidad ofrece bolsa de empleo para egresados?' },
+                    { id: 'egr_correo', texto: '¿Puedo seguir usando el correo institucional como egresado?' }
+                ],
+                profesor: [
+                    { id: 'prof_notas', texto: '¿Cómo ingreso al sistema para cargar notas?' },
+                    { id: 'prof_usuario', texto: '¿Qué hago si tengo inconvenientes con mi usuario institucional?' },
+                    { id: 'prof_electivas', texto: '¿Puedo proponer nuevas electivas o ajustes al plan de estudio?' }
+                ],
+                contratista: [
+                    { id: 'cont_ingreso', texto: '¿Cómo ingreso a las instalaciones con mi carné temporal?' },
+                    { id: 'cont_permiso', texto: '¿Dónde solicito un permiso para realizar actividades dentro del campus?' },
+                    { id: 'cont_servicios', texto: '¿Puedo acceder al comedor universitario o zonas comunes?' }
+                ],
+                externo: [
+                    { id: 'ext_biblioteca', texto: '¿Puedo acceder a la biblioteca como visitante?' },
+                    { id: 'ext_diplomados', texto: '¿La universidad ofrece cursos o diplomados abiertos al público?' },
+                    { id: 'ext_alquiler', texto: '¿Cómo puedo alquilar un auditorio o espacio dentro del campus?' }
+                ]
             };
-            addUserMessage(question);
-            addBotMessage(answers[question]);
-            setTimeout(showFAQ, 1500);
+
+            if (preguntas[tipo]) {
+                let html = `<strong>Preguntas para ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}</strong>`;
+                preguntas[tipo].forEach(p => {
+                    html += `<div class="menu-option" onclick="showFAQAnswer('${p.id}')">${p.texto}</div>`;
+                });
+                html += `<div class="menu-option" onclick="showFAQ()">⬅ Volver al menú anterior</div>`;
+                addBotMessage(html, true);
+            } else {
+                addBotMessage('No hay preguntas frecuentes disponibles para este tipo de usuario.');
+            }
         }
+
+        
+        function showFAQAnswer(questionKey) {
+            const answers = {
+                // Aspirantes
+                'asp_requisitos': `
+                    Debes diligenciar el formulario de inscripción en el portal de la Universidad de Medellín, subir documentos como:<br>
+                    - Cédula<br>
+                    - Acta o diploma de bachiller<br>
+                    - Resultados Saber 11<br>
+                    Luego podrás consultar la entrevista, presentar prueba diagnóstica (obligatoria), pagar matrícula y asistir a inducción.
+                `,
+                'asp_programas': `
+                    <strong>Pregrados:</strong> Ingenierías, Economía, Psicología, Comunicación, Derecho, etc.<br>
+                    <strong>Especializaciones:</strong> Derecho, Ciencia de Datos, etc.<br>
+                    <strong>Maestrías:</strong> Finanzas, Ingeniería, Derecho Penal, Educación, etc.<br>
+                    <strong>Doctorados:</strong> Derecho, Comunicación, Ingeniería, Educación, Administración y Ciencias Sociales.
+                `,
+
+                // Estudiantes
+                'est_consulta': `
+                    Inicia sesión en la plataforma "Consultas y Servicios Académicos". Puedes consultar:<br>
+                    - Horarios<br>
+                    - Notas<br>
+                    - Certificados<br>
+                    - Historial académico<br>
+                    Usuario: tu cédula<br>
+                    Contraseña: tu fecha de nacimiento (sin puntos ni comas).
+                `,
+
+                // Egresados
+                'egr_acta': 'Debes ir a la Oficina de Registro con tu documento de identidad. También puedes contactarlos por correo para alternativas.',
+                'egr_bolsa': 'Sí. Usa tu cédula y correo institucional para acceder a la plataforma de empleabilidad del Centro de Extensión de Graduados.',
+                'egr_correo': 'Sí, el correo institucional permanece activo aunque puede tener algunas restricciones.',
+
+                // Profesores
+                'prof_notas': 'Ingresa al sistema académico con tu usuario y contraseña institucional para registrar calificaciones.',
+                'prof_usuario': 'Contacta al área de soporte técnico o servicios informáticos para restablecer el acceso.',
+                'prof_electivas': 'Puedes proponer nuevas electivas o ajustes en el plan de estudio al Consejo de Facultad, siguiendo los lineamientos del comité curricular.',
+
+                // Contratistas
+                'cont_ingreso': 'Debes registrarte con el área de Seguridad y presentar tu carné temporal en la portería.',
+                'cont_permiso': 'El permiso se solicita a través de la unidad que te contrató y debe validarse con Seguridad.',
+                'cont_servicios': 'Algunos contratistas pueden acceder al comedor o zonas comunes según su contrato. Confirma con Recursos Humanos.',
+
+                // Externos
+                'ext_biblioteca': 'El acceso suele estar restringido. Puedes consultar si existen convenios o permisos especiales.',
+                'ext_diplomados': 'Sí, hay diplomados y cursos abiertos al público. Consulta la oferta académica en la web oficial.',
+                'ext_alquiler': 'Contacta a la Oficina de Eventos o Logística Institucional para solicitar espacios como auditorios. Ellos te informarán tarifas y requisitos.'
+            };
+
+            const question = document.querySelector(`.menu-option[onclick="showFAQAnswer('${questionKey}')"]`);
+            if (question) addUserMessage(question.innerText);
+            
+            addBotMessage(answers[questionKey]);
+            setTimeout(showFAQ, 4000);
+        }
+
         
         function showContactForm() {
             addBotMessage(`
-                <strong>Contactar Asesor</strong>
-                <p>Un asesor se comunicará contigo pronto. ¿Cuál es tu número de teléfono?</p>
+                Un asesor se comunicará contigo pronto. ¿Cuál es tu número de teléfono?
             `);
         }
         

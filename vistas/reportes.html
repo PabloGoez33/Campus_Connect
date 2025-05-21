@@ -100,19 +100,8 @@
                 <p>Resumen completo de todas las solicitudes recibidas, clasificadas por tipo, estado y tiempo de respuesta.</p>
                 <div class="actions">
                     <span class="report-type">Solicitudes</span>
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-eye"></i> Ver
-                    </button>
-                </div>
-            </div>
-            
-            <div class="report-card">
-                <h3>Actividad de Usuarios</h3>
-                <p>Análisis de la actividad de los usuarios en el sistema, incluyendo accesos y acciones realizadas.</p>
-                <div class="actions">
-                    <span class="report-type">Usuarios</span>
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-eye"></i> Ver
+                    <button class="btn btn-secondary" id="btnDescargarReporteSolicitudes">
+                        <i class="fas fa-print"></i> Descargar
                     </button>
                 </div>
             </div>
@@ -123,18 +112,7 @@
                 <div class="actions">
                     <span class="report-type">Unidades</span>
                     <button class="btn btn-secondary">
-                        <i class="fas fa-eye"></i> Ver
-                    </button>
-                </div>
-            </div>
-            
-            <div class="report-card">
-                <h3>Estadísticas Académicas</h3>
-                <p>Datos sobre rendimiento estudiantil, aprobación de cursos y otros indicadores académicos.</p>
-                <div class="actions">
-                    <span class="report-type">Académico</span>
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-eye"></i> Ver
+                        <i class="fas fa-print"></i> Descargar
                     </button>
                 </div>
             </div>
@@ -152,20 +130,6 @@
             </div>
             <div class="chart-placeholder">
                 [Gráfico de solicitudes por estado]
-            </div>
-        </div>
-
-        <div class="chart-container">
-            <div class="chart-header">
-                <h2>Actividad de Usuarios</h2>
-                <select class="filter-select" style="width: auto;">
-                    <option>Últimos 7 días</option>
-                    <option>Últimos 30 días</option>
-                    <option>Este año</option>
-                </select>
-            </div>
-            <div class="chart-placeholder">
-                [Gráfico de actividad de usuarios]
             </div>
         </div>
 
@@ -245,6 +209,16 @@
     </div>
 
     <script>
+        //Descargar reporte de solicitudes
+        document.getElementById('btnDescargarReporteSolicitudes').addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = '/campus_connect/uploads'; 
+            link.download = 'reporte.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
         // Mostrar/ocultar rango de fechas personalizado
         document.getElementById('time-period').addEventListener('change', function() {
             const customDateRange = document.getElementById('custom-date-range');
